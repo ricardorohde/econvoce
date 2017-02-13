@@ -2,23 +2,51 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Vendas extends Admin_Controller {
+  function __construct() {
+    parent::__construct();
+    $this->load->model(array('vendas_model'));
+  }
 
-  public function index() {
+  public function index($mes = null, $ano = null, $page = 1) {
     $data = array(
       'section' => array(
         'title' => 'Vendas',
         'page' => array(
           'one' => 'vendas'
         )
-      )
+      ),
+      'mes' => $mes,
+      'ano' => $ano,
+      'periodos' => $this->vendas_model->obter_vendas_periodos()
     );
+
+    $where = array();
+
+    if($mes){
+      $where['MONTH(data_contrato)'] = $mes;
+    }
+
+    if($ano){
+      $where['YEAR(data_contrato)'] = $ano;
+    }
+
+    $data['vendas'] = $this->vendas_model->obter_vendas(array(
+      'params' => array(
+        'pagination' => array(
+          'limit' => $this->config->item('vendas_limite'),
+          'page' => $page
+        ),
+        'orderby' => 'data_contrato',
+        'where' => $where
+      )
+    ));
+
+    // print_l($data['vendas']);
 
     $this->template->view('admin/master', 'admin/vendas/lista', $data);
   }
 
   public function importar() {
-    $this->load->model(array('vendas_model'));
-
     $data = array(
       'section' => array(
         'title' => 'Importar planilha - Vendas',

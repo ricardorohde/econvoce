@@ -4,67 +4,61 @@
       <div class="col-md-12">
       <a href="<?php echo base_url('admin/vendas/importar'); ?>" class="btn btn-warning">IMPORTAR PLANILHA</a>
         <div class="card">
-          <div class="card-header" data-background-color="gray">
-            
-            <div class="row">
-              <div class="col-xs-6">
-                <ul class="nav nav-sm nav-pills">
-                  <li role="presentation" class="active"><a href="#">Janeiro/2017</a></li>
-                  <li role="presentation"><a href="#">Profile</a></li>
-                  <li role="presentation"><a href="#">Messages</a></li>
-                </ul>
+          <?php
+          if($periodos){
+            ?>
+            <div class="card-header" data-background-color="gray">
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <a class="btn btn-sm"><?php echo isset($vendas['total_rows']) ? ($vendas['total_rows'] == 1 ? 'Foi encontrado 1 registro' : 'Foram encontrados ' . $vendas['total_rows'] . ' registros') : '<strong>Nenhum registro encontrado</strong>'; ?></a>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                  <ul class="nav nav-sm nav-pills">
+                    <?php
+                    foreach ($periodos as $periodo) {
+                      ?>
+                      <li role="presentation" class="<?php echo (isset($mes) && $mes == $periodo['mes'] && isset($ano) && $ano == $periodo['ano']) ? 'active' : ''; ?>"><a href="<?php echo base_url('admin/vendas/' . $periodo['mes'] . '/' . $periodo['ano']); ?>"><?php echo $this->admin->mes($periodo['mes']); ?>/<?php echo $periodo['ano']; ?></a></li>
+                      <?php
+                    }
+                    ?>
+                  </ul>
+                </div>
               </div>
             </div>
+            <?php
+          }
+          ?>
 
-          </div>
           <div class="card-content table-responsive">
             <table class="table">
               <thead class="text-primary">
-                <th>Name</th>
-                <th>Country</th>
-                <th>City</th>
-                <th>Salary</th>
+                <th>Empreendimento</th>
+                <th>Estágio</th>
+                <th>Unidade/Torre</th>
+                <th>Data</th>
+                <th>VGV (L)</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>Dakota Rice</td>
-                  <td>Niger</td>
-                  <td>Oud-Turnhout</td>
-                  <td class="text-primary">$36,738</td>
-                </tr>
-                <tr>
-                  <td>Minerva Hooper</td>
-                  <td>Curaçao</td>
-                  <td>Sinaai-Waas</td>
-                  <td class="text-primary">$23,789</td>
-                </tr>
-                <tr>
-                  <td>Sage Rodriguez</td>
-                  <td>Netherlands</td>
-                  <td>Baileux</td>
-                  <td class="text-primary">$56,142</td>
-                </tr>
-                <tr>
-                  <td>Philip Chaney</td>
-                  <td>Korea, South</td>
-                  <td>Overland Park</td>
-                  <td class="text-primary">$38,735</td>
-                </tr>
-                <tr>
-                  <td>Doris Greene</td>
-                  <td>Malawi</td>
-                  <td>Feldkirchen in Kärnten</td>
-                  <td class="text-primary">$63,542</td>
-                </tr>
-                <tr>
-                  <td>Mason Porter</td>
-                  <td>Chile</td>
-                  <td>Gloucester</td>
-                  <td class="text-primary">$78,615</td>
-                </tr>
+              <?php
+              if(isset($vendas['results']) && !empty($vendas['results'])){
+                foreach ($vendas['results'] as $venda) {
+                  ?>
+                  <tr class="<?php echo isset($venda['parente']) && $venda['parente'] != 0 ? 'warning' : ''; ?>">
+                    <td><?php echo $venda['empreendimento_nome']; ?></td>
+                    <td><?php echo $venda['estagio_nome']; ?></td>
+                    <td><?php echo $venda['unidade'] . (isset($venda['torre']) && $venda['torre'] != '-' ? '/' . $venda['torre'] : ''); ?></td>
+                    <td><?php echo $venda['data_contrato']; ?></td>
+                    <td class="text-primary"><?php echo number_format($venda['vgv_liquido'], 0, ',', '.'); ?></td>
+                  </tr>
+                  <?php
+                }
+              }
+              ?>
               </tbody>
             </table>
           </div>
+
+          <?php echo isset($vendas['pagination']) ? $vendas['pagination'] : ''; ?>
         </div>
       </div>
     </div>

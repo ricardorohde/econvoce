@@ -5,6 +5,11 @@ class Registros_model extends CI_Model {
     parent::__construct();
   }
 
+  public function obter_registros_count($sql){
+    $query = $this->db->query($sql);
+    return $query->num_rows();
+  }
+
   public function obter_registros($table, $params = array(), $row = false, $select = '*', $join = false, $order = false) {
     // SELECT
     $this->db->select($select);

@@ -36,7 +36,7 @@
 
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group  is-empty">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" name="q" placeholder="Buscar">
           <span class="material-input"></span>
         </div>
         <button type="submit" class="btn btn-white btn-round btn-just-icon">

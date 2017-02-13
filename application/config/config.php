@@ -31,6 +31,10 @@ $config['site_versao'] = '17020922';
 
 $config['reais_x_pontos'] = 54;
 
+$config['meses'] = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+
+$config['vendas_limite'] = 100;
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -41,7 +45,7 @@ $config['reais_x_pontos'] = 54;
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
