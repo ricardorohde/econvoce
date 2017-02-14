@@ -224,6 +224,10 @@ class Vendas_model extends CI_Model {
         'torre' => $excel_linha['torre']
       );
 
+      $conta_descricao = $excel_linha['empreendimento'] . ' - ' . $excel_linha['unidade'] . (isset($excel_linha['torre']) && $excel_linha['torre'] != '-' ? '/' . $excel_linha['torre'] : '');
+
+      //$this->db->set('time', 'NOW()', FALSE);
+
       // ESTAGIO
       if(in_array($excel_linha['estagio'], $estagios_array)){
         $estagio = $estagios[array_search($excel_linha['estagio'], $estagios_array)];
@@ -275,6 +279,7 @@ class Vendas_model extends CI_Model {
         $corretor_log = false;
         $corretores_count = count($excel_linha['corretor']);
         $usuario_insert = array();
+        $usuario_conta_insert = array();
 
         foreach ($excel_linha['corretor'] as $corretor_apelido) {
 
@@ -301,17 +306,29 @@ class Vendas_model extends CI_Model {
           if($corretor_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
           if($corretor_log) echo '<hr>';
 
+          $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
+
           $usuario_insert[] = array(
             'venda' => $venda_id,
             'usuario' => $usuario,
             'perfil' => $perfis['corretor']['id'],
-            'pontuacao' => $this->admin->round_points($pontuacao_reais_vs_pontos, 50)
+            'pontuacao' => $pontuacao_final,
+          );
+
+          $usuario_conta_insert[] = array(
+            'usuario' => $usuario,
+            'venda' => $venda_id,
+            'descricao' => $conta_descricao . ' - Corretor',
+            'pontos_adicionados' => $pontuacao_final,
+            'data_acao' => $venda['data_contrato'] . '-00-00-00',
+            'data_criado' => date('Y-m-d H:i:s', time())
           );
 
 
         }
 
         $this->db->insert_batch('vendas_usuarios', $usuario_insert);
+        $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
       }
 
       //GERENTES
@@ -345,17 +362,29 @@ class Vendas_model extends CI_Model {
           if($gerente_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
           if($gerente_log) echo '<hr>';
 
+          $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
+
           $usuario_insert[] = array(
             'venda' => $venda_id,
             'usuario' => $usuario,
             'perfil' => $perfis['gerente']['id'],
-            'pontuacao' => $this->admin->round_points($pontuacao_reais_vs_pontos, 50)
+            'pontuacao' => $pontuacao_final
+          );
+
+          $usuario_conta_insert[] = array(
+            'usuario' => $usuario,
+            'venda' => $venda_id,
+            'descricao' => $conta_descricao . ' - Gerente',
+            'pontos_adicionados' => $pontuacao_final,
+            'data_acao' => $venda['data_contrato'] . '-00-00-00',
+            'data_criado' => date('Y-m-d H:i:s', time())
           );
 
 
         }
 
         $this->db->insert_batch('vendas_usuarios', $usuario_insert);
+        $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
       }
 
       //COORDENADORES
@@ -400,16 +429,28 @@ class Vendas_model extends CI_Model {
             if($coordenador_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
             if($coordenador_log) echo '<hr>';
 
+            $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
+
             $usuario_insert[] = array(
               'venda' => $venda_id,
               'usuario' => $usuario,
               'perfil' => $perfis['coordenador']['id'],
-              'pontuacao' => $this->admin->round_points($pontuacao_reais_vs_pontos, 50)
+              'pontuacao' => $pontuacao_final
             );
+
+            $usuario_conta_insert[] = array(
+            'usuario' => $usuario,
+            'venda' => $venda_id,
+            'descricao' => $conta_descricao . ' - Coordenador',
+            'pontos_adicionados' => $pontuacao_final,
+            'data_acao' => $venda['data_contrato'] . '-00-00-00',
+            'data_criado' => date('Y-m-d H:i:s', time())
+          );
 
           }
 
           $this->db->insert_batch('vendas_usuarios', $usuario_insert);
+          $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
         }
       }
 
