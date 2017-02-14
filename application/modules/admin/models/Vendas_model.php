@@ -24,7 +24,7 @@ class Vendas_model extends CI_Model {
       vendas.id as venda_id,
       vendas.unidade,
       vendas.torre,
-      DATE_FORMAT(data_contrato, '%d/%m/%Y') as data_contrato,
+      DATE_FORMAT(vendas.data_contrato, '%d/%m/%Y') as data_contrato,
       vendas.vgv_liquido,
       vendas.parente,
       vendas.status,
@@ -47,6 +47,13 @@ class Vendas_model extends CI_Model {
       $this->db->where($request['params']['where']);
     }
 
+    // WHERE IN
+    if(isset($request['params']['where_in']) && !empty($request['params']['where_in'])){
+      foreach ($request['params']['where_in'] as $key => $value) {
+        $this->db->where_in($key, $value);
+      }
+    }
+
     // ORDER BY
     if(isset($request['params']['orderby']) && !empty($request['params']['orderby'])){
       switch ($request['params']['orderby']) {
@@ -54,6 +61,10 @@ class Vendas_model extends CI_Model {
           $this->db->order_by('vendas.data_contrato ASC');
         break;
       }
+    }
+
+    if(isset($request['params']['duplicate']) && $request['params']['duplicate']){
+      $this->db->join("vendas vendas_duplicadas", "vendas_duplicadas.parente = vendas.id", "inner"); // Duplicadas
     }
 
     //$this->db->group_by('imoveis.id');
@@ -105,13 +116,82 @@ class Vendas_model extends CI_Model {
         }
       }
 
-      //$return = $this->get_properties_features($return_ids, false, $return);
-      //$return = $this->get_properties_images($return_ids, $return);
+      if(isset($request['params']['duplicate']) && $request['params']['duplicate']){
+        $return = $this->obter_vendas_duplicadas($return_ids, $return);
+      }
+
+      $return = $this->obter_vendas_usuarios($return_ids, $return);
 
       return $return;
     }else{
       return false;
     }
+  }
+
+  public function obter_vendas_usuarios($return_ids, $return) {
+
+    $usuarios = $this->registros_model->obter_registros('vendas_usuarios', array(
+      'where_in' => array(
+        'vendas_usuarios.venda' => $return_ids
+      )
+    ), false, 'vendas_usuarios.venda as venda_id, vendas_usuarios.pontuacao, usuarios.nome as usuario_nome, usuarios.apelido as usuario_apelido, perfis.nome as perfil_nome, perfis.slug as perfil_slug, perfis.sigla as perfil_sigla', array(
+      array('usuarios', 'vendas_usuarios.usuario = usuarios.id', 'inner'),
+      array('perfis', 'vendas_usuarios.perfil = perfis.id', 'inner')
+    ));
+
+
+    if(!empty($usuarios)){
+      if($return){
+        foreach ($usuarios as $usuario) {
+          if(isset($return['results'])){
+            $usuario_key = array_search ($usuario['venda_id'], $return_ids);
+            $return['results'][$usuario_key]['usuarios'][] = $usuario;
+          }else{
+            $return['usuarios'][] = $usuario;
+          }
+        }
+        return $return;
+      }
+
+      return $usuarios;
+    }else{
+      if($return) return $return;
+    }
+
+    return false;
+  }
+
+
+  public function obter_vendas_duplicadas($return_ids, $return) {
+    $vendas = $this->obter_vendas(array(
+      'params' => array(
+        'where_in' => array(
+          'vendas.parente' => $return_ids
+        )
+      )
+    ));
+
+    if(isset($vendas['results']) && !empty($vendas['results'])){
+      if($return){
+        foreach ($vendas['results'] as $venda) {
+
+          if(isset($return['results'])){
+            $venda_key = array_search ($venda['parente'], $return_ids);
+            $return['results'][$venda_key]['duplicados'][] = $venda;
+          }else{
+            $return['duplicados'][] = $venda;
+          }
+        }
+        return $return;
+      }
+
+      return $vendas['results'];
+    }else{
+      if($return) return $return;
+    }
+
+    return false;
+
   }
 
   public function adicionar_pontuacoes($excel_linhas) {
@@ -148,10 +228,10 @@ class Vendas_model extends CI_Model {
       if(in_array($excel_linha['estagio'], $estagios_array)){
         $estagio = $estagios[array_search($excel_linha['estagio'], $estagios_array)];
       }else{
-        $estagio = $this->registros_model->obter_registros('estagios', array('estagios.apelido' => $excel_linha['estagio']), TRUE);
+        $estagio = $this->registros_model->obter_registros('estagios', array('where' => array('estagios.apelido' => $excel_linha['estagio'])), TRUE);
 
         if(!$estagio){
-          $estagio = $this->registros_model->obter_registros('estagios', array('estagios.id' => 1), TRUE);
+          $estagio = $this->registros_model->obter_registros('estagios', array('where' => array('estagios.id' => 1)), TRUE);
         }
 
         $estagios_array[$estagio['id']] = $excel_linha['estagio'];
@@ -164,7 +244,7 @@ class Vendas_model extends CI_Model {
       if(in_array($excel_linha['empreendimento'], $empreendimentos)){
         $empreendimento = array_search($excel_linha['empreendimento'], $empreendimentos);
       }else{
-        if($empreendimento = $this->registros_model->obter_registros('empreendimentos', array('empreendimentos.apelido' => $excel_linha['empreendimento']), 'id')) {
+        if($empreendimento = $this->registros_model->obter_registros('empreendimentos', array('where' => array('empreendimentos.apelido' => $excel_linha['empreendimento'])), 'id')) {
         }else{
           $empreendimento = $this->empreendimentos_model->adicionar_empreendimento(array('nome' => $excel_linha['empreendimento'], 'apelido' => $excel_linha['empreendimento'], 'estagio' => $estagio['id'], 'status' => 2), 'id');
         }
@@ -173,7 +253,7 @@ class Vendas_model extends CI_Model {
       $venda['empreendimento'] = $empreendimento;
 
       //VENDA
-      if($venda_check = $this->registros_model->obter_registros('vendas', $venda, TRUE)) {
+      if($venda_check = $this->registros_model->obter_registros('vendas', array('where' => $venda), TRUE)) {
         $this->db->update('vendas', array('status' => 1), array('id' => $venda_check['id']));
 
         $venda['parente'] = isset($venda_check['parente']) && $venda_check['parente'] ? $venda_check['parente'] : $venda_check['id'];
@@ -201,7 +281,7 @@ class Vendas_model extends CI_Model {
           if(in_array($corretor_apelido, $usuarios)){
             $usuario = array_search($corretor_apelido, $usuarios);
           }else{
-            if($usuario = $this->registros_model->obter_registros('usuarios', array('usuarios.apelido' => $corretor_apelido), 'id')) {
+            if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $corretor_apelido)), 'id')) {
             }else{
               $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $corretor_apelido, 'apelido' => $corretor_apelido, 'perfil' => 1, 'status' => 2), 'id');
             }
@@ -245,7 +325,7 @@ class Vendas_model extends CI_Model {
           if(in_array($gerente_apelido, $usuarios)){
             $usuario = array_search($gerente_apelido, $usuarios);
           }else{
-            if($usuario = $this->registros_model->obter_registros('usuarios', array('usuarios.apelido' => $gerente_apelido), 'id')) {
+            if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $gerente_apelido)), 'id')) {
             }else{
               $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $gerente_apelido, 'apelido' => $gerente_apelido, 'perfil' => 1, 'status' => 2), 'id');
             }
@@ -300,7 +380,7 @@ class Vendas_model extends CI_Model {
             if(in_array($coordenador_apelido, $usuarios)){
               $usuario = array_search($coordenador_apelido, $usuarios);
             }else{
-              if($usuario = $this->registros_model->obter_registros('usuarios', array('usuarios.apelido' => $coordenador_apelido), 'id')) {
+              if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $coordenador_apelido)), 'id')) {
               }else{
                 $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $coordenador_apelido, 'apelido' => $coordenador_apelido, 'perfil' => 1, 'status' => 2), 'id');
               }
@@ -344,16 +424,16 @@ class Vendas_model extends CI_Model {
 
   public function obter_vendas_periodos() {
     // SELECT
-    $this->db->select('MONTH(data_contrato) AS mes, YEAR(data_contrato) AS ano');
+    $this->db->select('MONTH(vendas.data_contrato) AS mes, YEAR(vendas.data_contrato) AS ano');
 
     // FROM
     $this->db->from('vendas');
 
     // ORDER
-    $this->db->order_by('MONTH(data_contrato) DESC, YEAR(data_contrato) DESC');
+    $this->db->order_by('MONTH(vendas.data_contrato) DESC, YEAR(vendas.data_contrato) DESC');
 
     //GROUPBY
-    $this->db->group_by(array('MONTH(data_contrato)','YEAR(data_contrato)'));
+    $this->db->group_by(array('MONTH(vendas.data_contrato)','YEAR(vendas.data_contrato)'));
 
     // LIMIT
     $this->db->limit(3);

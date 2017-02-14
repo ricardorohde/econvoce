@@ -23,9 +23,22 @@ class Site_Controller extends Default_Controller {
 
 // Admin Controller
 class Admin_Controller extends Default_Controller {
+  public $header;
+
   function __construct() {
     parent::__construct();
     $this->load->add_package_path(APPPATH . 'modules/admin/');
     $this->load->library(array('admin'));
+
+    $this->header = array(
+      'header' => array(
+        'notificacoes' => array(
+          array(
+            'label' => 'Existem x vendas duplicadas',
+            'url' => 'admin/vendas/duplicadas'
+          )
+        )
+      )
+    );
   }
 }

@@ -12,7 +12,7 @@ class Usuarios_model extends CI_Model {
     $usuario_id = $this->db->insert_id();
 
     if($usuario_id){
-      return $this->registros_model->obter_registros('usuarios', array('usuarios.id' => $usuario_id), $row);
+      return $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.id' => $usuario_id)), $row);
     }
 
     return false;

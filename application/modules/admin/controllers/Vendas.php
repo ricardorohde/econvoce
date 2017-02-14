@@ -8,7 +8,7 @@ class Vendas extends Admin_Controller {
   }
 
   public function index($mes = null, $ano = null, $page = 1) {
-    $data = array(
+    $data = array_merge($this->header, array(
       'section' => array(
         'title' => 'Vendas',
         'page' => array(
@@ -18,7 +18,8 @@ class Vendas extends Admin_Controller {
       'mes' => $mes,
       'ano' => $ano,
       'periodos' => $this->vendas_model->obter_vendas_periodos()
-    );
+    ));
+
 
     $where = array();
 
@@ -44,6 +45,35 @@ class Vendas extends Admin_Controller {
     // print_l($data['vendas']);
 
     $this->template->view('admin/master', 'admin/vendas/lista', $data);
+  }
+
+  public function duplicadas($page = 1) {
+    $data = array_merge($this->header, array(
+      'section' => array(
+        'title' => 'Vendas duplicadas',
+        'page' => array(
+          'one' => 'vendas',
+          'two' => 'duplicadas'
+        )
+      )
+    ));
+
+    $where = array(
+    );
+
+    $data['vendas'] = $this->vendas_model->obter_vendas(array(
+      'params' => array(
+        'pagination' => array(
+          'limit' => $this->config->item('vendas_limite'),
+          'page' => $page
+        ),
+        'duplicate' => true,
+        'orderby' => 'vendas.data_contrato',
+        'where' => $where
+      )
+    ));
+
+    $this->template->view('admin/master', 'admin/vendas/duplicadas', $data);
   }
 
   public function importar() {

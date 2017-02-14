@@ -25,9 +25,16 @@ class Registros_model extends CI_Model {
     }
 
     // WHERE
-    if($params){
-      foreach($params as $key => $value){
+    if(isset($params['where']) && !empty($params['where'])){
+      foreach($params['where'] as $key => $value){
         $this->db->where($key, $value);
+      }
+    }
+
+    // WHERE IN
+    if(isset($params['where_in']) && !empty($params['where_in'])){
+      foreach ($params['where_in'] as $key => $value) {
+        $this->db->where_in($key, $value);
       }
     }
 

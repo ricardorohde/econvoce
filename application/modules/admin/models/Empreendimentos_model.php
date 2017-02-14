@@ -11,7 +11,7 @@ class Empreendimentos_model extends CI_Model {
     $this->db->insert('empreendimentos', $empreendimento);
     $empreendimento_id = $this->db->insert_id();
     if($empreendimento_id){
-      return $this->registros_model->obter_registros('empreendimentos', array('empreendimentos.id' => $empreendimento_id), $row);
+      return $this->registros_model->obter_registros('empreendimentos', array('where' => array('empreendimentos.id' => $empreendimento_id)), $row);
     }
     return false;
   }
