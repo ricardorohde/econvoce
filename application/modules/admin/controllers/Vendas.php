@@ -145,6 +145,8 @@ class Vendas extends Admin_Controller {
               $linhas_dados = array();
 
               foreach ($linhas as $linha_count => $linha) {
+                print_l($linha);
+                
                 if(!$linha_count){
                   $colunas_valores = array();
                   foreach($linha as $linha_coluna_count => $linha_coluna){
@@ -167,6 +169,8 @@ class Vendas extends Admin_Controller {
                   }
                 }
               }
+
+              print_l($linhas_dados);
 
               $importacao = $this->vendas_model->adicionar_pontuacoes($linhas_dados);
 

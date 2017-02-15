@@ -270,6 +270,8 @@ class Vendas_model extends CI_Model {
       $venda['data_contrato'] = $excel_linha['data_contrato'];
       $venda['vgv_liquido'] = $excel_linha['vgv_liquido'];
 
+      print_l($venda);
+
       $this->db->insert('vendas', $venda);
 
       $venda_id = $this->db->insert_id();
@@ -327,6 +329,9 @@ class Vendas_model extends CI_Model {
 
         }
 
+        echo 'Corretores: <br>';
+        print_l($usuario_insert);
+
         $this->db->insert_batch('vendas_usuarios', $usuario_insert);
         $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
       }
@@ -382,6 +387,9 @@ class Vendas_model extends CI_Model {
 
 
         }
+
+        echo 'Gerentes: <br>';
+        print_l($usuario_insert);
 
         $this->db->insert_batch('vendas_usuarios', $usuario_insert);
         $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
@@ -439,15 +447,18 @@ class Vendas_model extends CI_Model {
             );
 
             $usuario_conta_insert[] = array(
-            'usuario' => $usuario,
-            'venda' => $venda_id,
-            'descricao' => $conta_descricao . ' - Coordenador',
-            'pontos_adicionados' => $pontuacao_final,
-            'data_acao' => $venda['data_contrato'] . '-00-00-00',
-            'data_criado' => date('Y-m-d H:i:s', time())
-          );
+              'usuario' => $usuario,
+              'venda' => $venda_id,
+              'descricao' => $conta_descricao . ' - Coordenador',
+              'pontos_adicionados' => $pontuacao_final,
+              'data_acao' => $venda['data_contrato'] . '-00-00-00',
+              'data_criado' => date('Y-m-d H:i:s', time())
+            );
 
           }
+
+          echo 'Coordenadores: <br>';
+          print_l($usuario_insert);
 
           $this->db->insert_batch('vendas_usuarios', $usuario_insert);
           $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
