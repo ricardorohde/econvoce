@@ -29,16 +29,19 @@ class Admin_Controller extends Default_Controller {
     parent::__construct();
     $this->load->add_package_path(APPPATH . 'modules/admin/');
     $this->load->library(array('admin'));
+    $this->load->model(array('notificacoes_model'));
 
-    $this->header = array(
-      'header' => array(
-        'notificacoes' => array(
-          array(
-            'label' => 'Existem x vendas duplicadas',
-            'url' => 'admin/vendas/duplicadas'
-          )
-        )
-      )
-    );
+    $header = array('header' => array('notificacoes' => array()));
+
+    $notificacoes_duplicadas = $this->notificacoes_model->obter_notificacoes_duplicadas();
+
+    if($notificacoes_duplicadas){
+      $header['header']['notificacoes'][] = array(
+        'label' => ($notificacoes_duplicadas == 1 ? 'Existe '. $notificacoes_duplicadas .' venda duplicada' : 'Existem '. $notificacoes_duplicadas .' vendas duplicadas'),
+        'url' => 'admin/vendas/duplicadas'
+      );
+    }
+
+    $this->header = $header;
   }
 }

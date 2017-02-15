@@ -12,3 +12,7 @@ $route['admin/vendas/(:num)/(:num)/(:num)'] = 'admin/vendas/index/$1/$2/$3';
 $route['admin/vendas/(:num)/(:num)'] = 'admin/vendas/index/$1/$2/1';
 $route['admin/vendas/(:num)'] = 'admin/vendas/index/0/0/$1';
 
+$route['admin/empreendimentos/(:num)'] = 'admin/empreendimentos/index/0/$1';
+$route['admin/empreendimentos/(:any)'] = 'admin/empreendimentos/index/$1';
+$route['admin/empreendimentos/(:any)/(:num)'] = 'admin/empreendimentos/index/$1/$2';
+

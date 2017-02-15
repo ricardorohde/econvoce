@@ -34,7 +34,7 @@ class Vendas extends Admin_Controller {
     $data['vendas'] = $this->vendas_model->obter_vendas(array(
       'params' => array(
         'pagination' => array(
-          'limit' => $this->config->item('vendas_limite'),
+          'limit' => $this->config->item('registros_limite'),
           'page' => $page
         ),
         'orderby' => 'data_contrato',
@@ -64,7 +64,7 @@ class Vendas extends Admin_Controller {
     $data['vendas'] = $this->vendas_model->obter_vendas(array(
       'params' => array(
         'pagination' => array(
-          'limit' => $this->config->item('vendas_limite'),
+          'limit' => $this->config->item('registros_limite'),
           'page' => $page
         ),
         'duplicate' => true,
@@ -73,11 +73,13 @@ class Vendas extends Admin_Controller {
       )
     ));
 
+    // print_l($data['vendas']);
+
     $this->template->view('admin/master', 'admin/vendas/duplicadas', $data);
   }
 
   public function importar() {
-    $data = array(
+    $data = array_merge($this->header, array(
       'section' => array(
         'title' => 'Importar planilha - Vendas',
         'page' => array(
@@ -85,7 +87,7 @@ class Vendas extends Admin_Controller {
           'two' => 'importar',
         )
       )
-    );
+    ));
 
     if($this->input->post('flag')){
       if(isset($_FILES['arquivo']) && $_FILES['arquivo']['size']){
@@ -145,8 +147,6 @@ class Vendas extends Admin_Controller {
               $linhas_dados = array();
 
               foreach ($linhas as $linha_count => $linha) {
-                print_l($linha);
-                
                 if(!$linha_count){
                   $colunas_valores = array();
                   foreach($linha as $linha_coluna_count => $linha_coluna){
@@ -169,8 +169,6 @@ class Vendas extends Admin_Controller {
                   }
                 }
               }
-
-              print_l($linhas_dados);
 
               $importacao = $this->vendas_model->adicionar_pontuacoes($linhas_dados);
 

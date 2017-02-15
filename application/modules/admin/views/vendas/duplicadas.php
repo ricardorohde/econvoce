@@ -43,28 +43,29 @@
                           ?>
                           <tr class="warning">
                             <td colspan="5">
-                              <table class="table table table-condensed">
-                                <thead class="text-primary">
-                                  <th>Usuário</th>
-                                  <th>Perfil na venda</th>
-                                  <th>Pontuação</th>
-                                </thead>
-                                <tbody>
+                              <table width="100%" cellspacing="0" cellpadding="0">
+                                <tr>
                                   <?php
-                                  foreach ($venda['usuarios'] as $usuario) {
+                                  foreach ($venda['usuarios'] as $perfil => $perfis) {
                                     ?>
-                                    <tr>
-                                      <td><?php echo $usuario['usuario_apelido']; ?></td>
-                                      <td><?php echo $usuario['perfil_nome']; ?></td>
-                                      <td><?php echo $usuario['pontuacao']; ?></td>
-                                    </tr>
+                                    <td valign="top" width="33%">
+                                      <strong><?php echo ucfirst($perfil); ?></strong><br />
+                                      <?php
+                                      foreach($perfis as $usuario){
+                                        ?>
+                                        <h6><?php echo $usuario['usuario_apelido']; ?> <small style="text-transform: lowercase;"><?php echo number_format($usuario['pontuacao'], 0, ',', '.'); ?> pontos</small></h6>
+                                        <?php
+                                      }
+                                      ?>
+                                    </td>
                                     <?php
                                   }
                                 ?>
-                                </table>
-                              </td>
-                            </tr>
-                            <?php
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <?php
                         }
                         ?>
 
@@ -72,44 +73,50 @@
                         if(isset($venda['duplicados']) && !empty($venda['duplicados'])){
                           foreach ($venda['duplicados'] as $venda_duplicada) {
                             ?>
-                            <tr class="danger">
+                            <tr class="info">
                               <td><?php echo $venda_duplicada['venda_id']; ?>-<?php echo $venda_duplicada['empreendimento_nome']; ?></td>
                               <td><?php echo $venda_duplicada['estagio_nome']; ?></td>
                               <td><?php echo $venda_duplicada['unidade'] . (isset($venda_duplicada['torre']) && $venda_duplicada['torre'] != '-' ? '/' . $venda_duplicada['torre'] : ''); ?></td>
                               <td><?php echo $venda_duplicada['data_contrato']; ?></td>
                               <td class="text-primary"><?php echo number_format($venda_duplicada['vgv_liquido'], 0, ',', '.'); ?></td>
                             </tr>
-
-                            <?php
-                            if(isset($venda_duplicada['usuarios']) && !empty($venda_duplicada['usuarios'])){
-                              ?>
-                              <tr class="warning">
-                                <td colspan="5">
-                                  <table class="table table table-condensed">
-                                    <thead class="text-primary">
-                                      <th>Usuário</th>
-                                      <th>Perfil na venda</th>
-                                      <th>Pontuação</th>
-                                    </thead>
-                                    <tbody>
+                            <tr class="info">
+                              <td colspan="5">
+                                <table width="100%" cellspacing="0" cellpadding="0">
+                                  <?php
+                                  if(isset($venda_duplicada['usuarios']) && !empty($venda_duplicada['usuarios'])){
+                                    ?>
+                                    <tr>
                                       <?php
-                                      foreach ($venda_duplicada['usuarios'] as $usuario) {
+                                      foreach ($venda_duplicada['usuarios'] as $perfil => $perfis) {
                                         ?>
-                                        <tr>
-                                          <td><?php echo $usuario['usuario_apelido']; ?></td>
-                                          <td><?php echo $usuario['perfil_nome']; ?></td>
-                                          <td><?php echo $usuario['pontuacao']; ?></td>
-                                        </tr>
+                                        <td valign="top" width="33%">
+                                          <strong><?php echo ucfirst($perfil); ?></strong><br />
+                                          <?php
+                                          foreach($perfis as $usuario){
+                                            ?>
+                                            <h6><?php echo $usuario['usuario_apelido']; ?> <small style="text-transform: lowercase;"><?php echo number_format($usuario['pontuacao'], 0, ',', '.'); ?> pontos</small></h6>
+                                            <?php
+                                          }
+                                          ?>
+                                        </td>
                                         <?php
                                       }
                                     ?>
-                                    </table>
-                                  </td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                            <?php
+                                  </tr>
+                                  <?php
+                                  }
+                                  ?>
+                                   <tr>
+                                    <td colspan="3" class="text-center">
+                                      <a href="" class="btn btn-danger btn-xs">Excluir venda</a>
+                                      <a href="" class="btn btn-success btn-xs">Não é duplicada</a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          <?php
                           }
                         }
                         ?>

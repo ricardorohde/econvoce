@@ -40,6 +40,7 @@ class Registros_model extends CI_Model {
 
     //ORDER
     if($order){
+      $orderby = array();
       foreach($order as $key => $value){
         $this->db->order_by($key, $value);
       }

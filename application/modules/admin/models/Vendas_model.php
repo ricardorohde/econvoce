@@ -130,14 +130,24 @@ class Vendas_model extends CI_Model {
 
   public function obter_vendas_usuarios($return_ids, $return) {
 
-    $usuarios = $this->registros_model->obter_registros('vendas_usuarios', array(
-      'where_in' => array(
-        'vendas_usuarios.venda' => $return_ids
+    $usuarios = $this->registros_model->obter_registros(
+      'vendas_usuarios',
+      array(
+        'where_in' => array(
+          'vendas_usuarios.venda' => $return_ids
+        )
+      ),
+      false,
+      'vendas_usuarios.venda as venda_id, vendas_usuarios.pontuacao, usuarios.nome as usuario_nome, usuarios.apelido as usuario_apelido, perfis.nome as perfil_nome, perfis.slug as perfil_slug, perfis.sigla as perfil_sigla',
+      array(
+        array('usuarios', 'vendas_usuarios.usuario = usuarios.id', 'inner'),
+        array('perfis', 'vendas_usuarios.perfil = perfis.id', 'inner')
+      ),
+      array(
+        'perfis.id' => 'ASC',
+        'usuarios.nome' => 'DESC'
       )
-    ), false, 'vendas_usuarios.venda as venda_id, vendas_usuarios.pontuacao, usuarios.nome as usuario_nome, usuarios.apelido as usuario_apelido, perfis.nome as perfil_nome, perfis.slug as perfil_slug, perfis.sigla as perfil_sigla', array(
-      array('usuarios', 'vendas_usuarios.usuario = usuarios.id', 'inner'),
-      array('perfis', 'vendas_usuarios.perfil = perfis.id', 'inner')
-    ));
+    );
 
 
     if(!empty($usuarios)){
@@ -145,9 +155,9 @@ class Vendas_model extends CI_Model {
         foreach ($usuarios as $usuario) {
           if(isset($return['results'])){
             $usuario_key = array_search ($usuario['venda_id'], $return_ids);
-            $return['results'][$usuario_key]['usuarios'][] = $usuario;
+            $return['results'][$usuario_key]['usuarios'][$usuario['perfil_slug']][] = $usuario;
           }else{
-            $return['usuarios'][] = $usuario;
+            $return['usuarios'][$usuario['perfil_slug']][] = $usuario;
           }
         }
         return $return;
@@ -270,8 +280,6 @@ class Vendas_model extends CI_Model {
       $venda['data_contrato'] = $excel_linha['data_contrato'];
       $venda['vgv_liquido'] = $excel_linha['vgv_liquido'];
 
-      print_l($venda);
-
       $this->db->insert('vendas', $venda);
 
       $venda_id = $this->db->insert_id();
@@ -329,9 +337,6 @@ class Vendas_model extends CI_Model {
 
         }
 
-        echo 'Corretores: <br>';
-        print_l($usuario_insert);
-
         $this->db->insert_batch('vendas_usuarios', $usuario_insert);
         $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
       }
@@ -341,6 +346,7 @@ class Vendas_model extends CI_Model {
         $gerente_log = false;
         $gerentes_count = count($excel_linha['gerente']);
         $usuario_insert = array();
+        $usuario_conta_insert = array();
 
         foreach ($excel_linha['gerente'] as $gerente_apelido) {
 
@@ -385,11 +391,7 @@ class Vendas_model extends CI_Model {
             'data_criado' => date('Y-m-d H:i:s', time())
           );
 
-
         }
-
-        echo 'Gerentes: <br>';
-        print_l($usuario_insert);
 
         $this->db->insert_batch('vendas_usuarios', $usuario_insert);
         $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
@@ -411,6 +413,7 @@ class Vendas_model extends CI_Model {
           $coordenador_log = false;
           $coordenadores_count = count($excel_linha['coordenador']);
           $usuario_insert = array();
+          $usuario_conta_insert = array();
 
           foreach ($coordenadores_cleared as $coordenador_apelido) {
 
@@ -456,9 +459,6 @@ class Vendas_model extends CI_Model {
             );
 
           }
-
-          echo 'Coordenadores: <br>';
-          print_l($usuario_insert);
 
           $this->db->insert_batch('vendas_usuarios', $usuario_insert);
           $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
@@ -528,8 +528,4 @@ class Vendas_model extends CI_Model {
   //   return $this->get_pontuacoes($params, $select, $join, true);
   // }
 
-  // public function calcula_pontuacoes($request){
-  //   print_l($request);
-
-  // }
 }
