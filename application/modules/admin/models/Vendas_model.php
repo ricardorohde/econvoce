@@ -214,7 +214,6 @@ class Vendas_model extends CI_Model {
     $estagios = array();
     $estagios_array = array();
     $usuarios = array();
-    $excel_count = 0;
 
     $reais_x_pontos = (int) $this->config->item('reais_x_pontos');
 
@@ -229,6 +228,8 @@ class Vendas_model extends CI_Model {
     }
 
     foreach($excel_linhas as $excel_linha){
+      $venda_processo = true;
+
       $venda = array(
         'unidade' => $excel_linha['unidade'],
         'torre' => $excel_linha['torre']
@@ -268,191 +269,129 @@ class Vendas_model extends CI_Model {
 
       //VENDA
       if($venda_check = $this->registros_model->obter_registros('vendas', array('where' => $venda), TRUE)) {
-        $this->db->update('vendas', array('status' => 1), array('id' => $venda_check['id']));
+        if($venda_check['data_contrato'] == $excel_linha['data_contrato']){
+          $venda_processo = false;
+        }else{
+          $this->db->update('vendas', array('status' => 1), array('id' => $venda_check['id']));
 
-        $venda['parente'] = isset($venda_check['parente']) && $venda_check['parente'] ? $venda_check['parente'] : $venda_check['id'];
-        $venda['status'] = 1;
+          $venda['parente'] = isset($venda_check['parente']) && $venda_check['parente'] ? $venda_check['parente'] : $venda_check['id'];
+          $venda['status'] = 1;
 
-        $vendas_existentes++;
+          $vendas_existentes++;
+        }
       }
 
-      $vendas_inseridas++;
-      $venda['data_contrato'] = $excel_linha['data_contrato'];
-      $venda['vgv_liquido'] = $excel_linha['vgv_liquido'];
+      if($venda_processo){
+        $vendas_inseridas++;
+        $venda['data_contrato'] = $excel_linha['data_contrato'];
+        $venda['vgv_liquido'] = $excel_linha['vgv_liquido'];
 
-      $this->db->insert('vendas', $venda);
+        $this->db->insert('vendas', $venda);
 
-      $venda_id = $this->db->insert_id();
+        $venda_id = $this->db->insert_id();
 
-      //CORRETORES
-      if(isset($excel_linha['corretor']) && (isset($excel_linha['corretor'][0]) && !empty($excel_linha['corretor'][0]))){
-        $corretor_log = false;
-        $corretores_count = count($excel_linha['corretor']);
-        $usuario_insert = array();
-        $usuario_conta_insert = array();
-
-        foreach ($excel_linha['corretor'] as $corretor_apelido) {
-
-          if(in_array($corretor_apelido, $usuarios)){
-            $usuario = array_search($corretor_apelido, $usuarios);
-          }else{
-            if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $corretor_apelido)), 'id')) {
-            }else{
-              $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $corretor_apelido, 'apelido' => $corretor_apelido, 'perfil' => 1, 'status' => 2), 'id');
-            }
-          }
-
-          $pontuacao_perfil = ($perfis['corretor']['percentual'] / 100) * $venda['vgv_liquido'];
-          if($corretor_log) echo 'Perfil: ' . $venda['vgv_liquido'] . ' * ' . $perfis['corretor']['percentual'] . '% = ' . $pontuacao_perfil . '<br>';
-
-          $pontuacao_estagio = ($estagio['percentual'] / 100) * $pontuacao_perfil;
-          if($corretor_log) echo 'Estágio: ' . $pontuacao_perfil . ' * ' . $estagio['percentual'] . '% = ' . $pontuacao_estagio . '<br>';
-
-          $pontuacao_divisao = $pontuacao_estagio / $corretores_count;
-          if($corretor_log) echo 'Divisão: ' . $pontuacao_estagio . ' / ' . $corretores_count . ' = ' . $pontuacao_divisao . '<br>';
-
-          $pontuacao_reais_vs_pontos = $pontuacao_divisao * $reais_x_pontos;
-          if($corretor_log) echo 'Reais vs Pontos: ' . $pontuacao_divisao . ' * ' . $reais_x_pontos . ' = ' . $pontuacao_reais_vs_pontos . '<br>';
-          if($corretor_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
-          if($corretor_log) echo '<hr>';
-
-          $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
-
-          $usuario_insert[] = array(
-            'venda' => $venda_id,
-            'usuario' => $usuario,
-            'perfil' => $perfis['corretor']['id'],
-            'pontuacao' => $pontuacao_final,
-          );
-
-          $usuario_conta_insert[] = array(
-            'usuario' => $usuario,
-            'venda' => $venda_id,
-            'descricao' => $conta_descricao . ' - Corretor',
-            'pontos_adicionados' => $pontuacao_final,
-            'data_acao' => $venda['data_contrato'] . '-00-00-00',
-            'data_criado' => date('Y-m-d H:i:s', time())
-          );
-
-
-        }
-
-        $this->db->insert_batch('vendas_usuarios', $usuario_insert);
-        $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
-      }
-
-      //GERENTES
-      if(isset($excel_linha['gerente']) && (isset($excel_linha['gerente'][0]) && !empty($excel_linha['gerente'][0]))){
-        $gerente_log = false;
-        $gerentes_count = count($excel_linha['gerente']);
-        $usuario_insert = array();
-        $usuario_conta_insert = array();
-
-        foreach ($excel_linha['gerente'] as $gerente_apelido) {
-
-          if(in_array($gerente_apelido, $usuarios)){
-            $usuario = array_search($gerente_apelido, $usuarios);
-          }else{
-            if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $gerente_apelido)), 'id')) {
-            }else{
-              $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $gerente_apelido, 'apelido' => $gerente_apelido, 'perfil' => 1, 'status' => 2), 'id');
-            }
-          }
-
-          $pontuacao_perfil = ($perfis['gerente']['percentual'] / 100) * $venda['vgv_liquido'];
-          if($gerente_log) echo 'Perfil: ' . $venda['vgv_liquido'] . ' * ' . $perfis['gerente']['percentual'] . '% = ' . $pontuacao_perfil . '<br>';
-
-          $pontuacao_estagio = ($estagio['percentual'] / 100) * $pontuacao_perfil;
-          if($gerente_log) echo 'Estágio: ' . $pontuacao_perfil . ' * ' . $estagio['percentual'] . '% = ' . $pontuacao_estagio . '<br>';
-
-          $pontuacao_divisao = $pontuacao_estagio / $gerentes_count;
-          if($gerente_log) echo 'Divisão: ' . $pontuacao_estagio . ' / ' . $gerentes_count . ' = ' . $pontuacao_divisao . '<br>';
-
-          $pontuacao_reais_vs_pontos = $pontuacao_divisao * $reais_x_pontos;
-          if($gerente_log) echo 'Reais vs Pontos: ' . $pontuacao_divisao . ' * ' . $reais_x_pontos . ' = ' . $pontuacao_reais_vs_pontos . '<br>';
-          if($gerente_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
-          if($gerente_log) echo '<hr>';
-
-          $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
-
-          $usuario_insert[] = array(
-            'venda' => $venda_id,
-            'usuario' => $usuario,
-            'perfil' => $perfis['gerente']['id'],
-            'pontuacao' => $pontuacao_final
-          );
-
-          $usuario_conta_insert[] = array(
-            'usuario' => $usuario,
-            'venda' => $venda_id,
-            'descricao' => $conta_descricao . ' - Gerente',
-            'pontos_adicionados' => $pontuacao_final,
-            'data_acao' => $venda['data_contrato'] . '-00-00-00',
-            'data_criado' => date('Y-m-d H:i:s', time())
-          );
-
-        }
-
-        $this->db->insert_batch('vendas_usuarios', $usuario_insert);
-        $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
-      }
-
-      //COORDENADORES
-      if(isset($excel_linha['coordenador']) && (isset($excel_linha['coordenador'][0]) && !empty($excel_linha['coordenador'][0]))){
-        $coordenadores_cleared = $excel_linha['coordenador'];
-
-        if($coordenadores_cleared && isset($excel_linha['corretor']) && (isset($excel_linha['corretor'][0]) && !empty($excel_linha['corretor'][0]))){
-          $coordenadores_cleared = $this->admin->clear_users($coordenadores_cleared, $excel_linha['corretor']);
-        }
-
-        if($coordenadores_cleared && isset($excel_linha['gerente']) && (isset($excel_linha['gerente'][0]) && !empty($excel_linha['gerente'][0]))){
-          $coordenadores_cleared = $this->admin->clear_users($coordenadores_cleared, $excel_linha['gerente']);
-        }
-
-        if(!empty($coordenadores_cleared)){
-          $coordenador_log = false;
-          $coordenadores_count = count($excel_linha['coordenador']);
+        //CORRETORES
+        if(isset($excel_linha['corretor']) && (isset($excel_linha['corretor'][0]) && !empty($excel_linha['corretor'][0]))){
+          $corretor_log = false;
+          $corretores_count = count($excel_linha['corretor']);
           $usuario_insert = array();
           $usuario_conta_insert = array();
 
-          foreach ($coordenadores_cleared as $coordenador_apelido) {
+          foreach ($excel_linha['corretor'] as $corretor_apelido) {
 
-            if(in_array($coordenador_apelido, $usuarios)){
-              $usuario = array_search($coordenador_apelido, $usuarios);
+            if(in_array($corretor_apelido, $usuarios)){
+              $usuario = array_search($corretor_apelido, $usuarios);
             }else{
-              if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $coordenador_apelido)), 'id')) {
+              if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $corretor_apelido)), 'id')) {
               }else{
-                $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $coordenador_apelido, 'apelido' => $coordenador_apelido, 'perfil' => 1, 'status' => 2), 'id');
+                $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $corretor_apelido, 'apelido' => $corretor_apelido, 'perfil' => 1, 'status' => 2), 'id');
               }
             }
 
-            $pontuacao_perfil = ($perfis['coordenador']['percentual'] / 100) * $venda['vgv_liquido'];
-            if($coordenador_log) echo 'Perfil: ' . $venda['vgv_liquido'] . ' * ' . $perfis['coordenador']['percentual'] . '% = ' . $pontuacao_perfil . '<br>';
+            $pontuacao_perfil = ($perfis['corretor']['percentual'] / 100) * $venda['vgv_liquido'];
+            if($corretor_log) echo 'Perfil: ' . $venda['vgv_liquido'] . ' * ' . $perfis['corretor']['percentual'] . '% = ' . $pontuacao_perfil . '<br>';
 
             $pontuacao_estagio = ($estagio['percentual'] / 100) * $pontuacao_perfil;
-            if($coordenador_log) echo 'Estágio: ' . $pontuacao_perfil . ' * ' . $estagio['percentual'] . '% = ' . $pontuacao_estagio . '<br>';
+            if($corretor_log) echo 'Estágio: ' . $pontuacao_perfil . ' * ' . $estagio['percentual'] . '% = ' . $pontuacao_estagio . '<br>';
 
-            $pontuacao_divisao = $pontuacao_estagio / $coordenadores_count;
-            if($coordenador_log) echo 'Divisão: ' . $pontuacao_estagio . ' / ' . $coordenadores_count . ' = ' . $pontuacao_divisao . '<br>';
+            $pontuacao_divisao = $pontuacao_estagio / $corretores_count;
+            if($corretor_log) echo 'Divisão: ' . $pontuacao_estagio . ' / ' . $corretores_count . ' = ' . $pontuacao_divisao . '<br>';
 
             $pontuacao_reais_vs_pontos = $pontuacao_divisao * $reais_x_pontos;
-            if($coordenador_log) echo 'Reais vs Pontos: ' . $pontuacao_divisao . ' * ' . $reais_x_pontos . ' = ' . $pontuacao_reais_vs_pontos . '<br>';
-            if($coordenador_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
-            if($coordenador_log) echo '<hr>';
+            if($corretor_log) echo 'Reais vs Pontos: ' . $pontuacao_divisao . ' * ' . $reais_x_pontos . ' = ' . $pontuacao_reais_vs_pontos . '<br>';
+            if($corretor_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
+            if($corretor_log) echo '<hr>';
 
             $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
 
             $usuario_insert[] = array(
               'venda' => $venda_id,
               'usuario' => $usuario,
-              'perfil' => $perfis['coordenador']['id'],
+              'perfil' => $perfis['corretor']['id'],
+              'pontuacao' => $pontuacao_final,
+            );
+
+            $usuario_conta_insert[] = array(
+              'usuario' => $usuario,
+              'venda' => $venda_id,
+              'descricao' => $conta_descricao . ' - Corretor',
+              'pontos_adicionados' => $pontuacao_final,
+              'data_acao' => $venda['data_contrato'] . '-00-00-00',
+              'data_criado' => date('Y-m-d H:i:s', time())
+            );
+
+
+          }
+
+          $this->db->insert_batch('vendas_usuarios', $usuario_insert);
+          $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
+        }
+
+        //GERENTES
+        if(isset($excel_linha['gerente']) && (isset($excel_linha['gerente'][0]) && !empty($excel_linha['gerente'][0]))){
+          $gerente_log = false;
+          $gerentes_count = count($excel_linha['gerente']);
+          $usuario_insert = array();
+          $usuario_conta_insert = array();
+
+          foreach ($excel_linha['gerente'] as $gerente_apelido) {
+
+            if(in_array($gerente_apelido, $usuarios)){
+              $usuario = array_search($gerente_apelido, $usuarios);
+            }else{
+              if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $gerente_apelido)), 'id')) {
+              }else{
+                $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $gerente_apelido, 'apelido' => $gerente_apelido, 'perfil' => 1, 'status' => 2), 'id');
+              }
+            }
+
+            $pontuacao_perfil = ($perfis['gerente']['percentual'] / 100) * $venda['vgv_liquido'];
+            if($gerente_log) echo 'Perfil: ' . $venda['vgv_liquido'] . ' * ' . $perfis['gerente']['percentual'] . '% = ' . $pontuacao_perfil . '<br>';
+
+            $pontuacao_estagio = ($estagio['percentual'] / 100) * $pontuacao_perfil;
+            if($gerente_log) echo 'Estágio: ' . $pontuacao_perfil . ' * ' . $estagio['percentual'] . '% = ' . $pontuacao_estagio . '<br>';
+
+            $pontuacao_divisao = $pontuacao_estagio / $gerentes_count;
+            if($gerente_log) echo 'Divisão: ' . $pontuacao_estagio . ' / ' . $gerentes_count . ' = ' . $pontuacao_divisao . '<br>';
+
+            $pontuacao_reais_vs_pontos = $pontuacao_divisao * $reais_x_pontos;
+            if($gerente_log) echo 'Reais vs Pontos: ' . $pontuacao_divisao . ' * ' . $reais_x_pontos . ' = ' . $pontuacao_reais_vs_pontos . '<br>';
+            if($gerente_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
+            if($gerente_log) echo '<hr>';
+
+            $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
+
+            $usuario_insert[] = array(
+              'venda' => $venda_id,
+              'usuario' => $usuario,
+              'perfil' => $perfis['gerente']['id'],
               'pontuacao' => $pontuacao_final
             );
 
             $usuario_conta_insert[] = array(
               'usuario' => $usuario,
               'venda' => $venda_id,
-              'descricao' => $conta_descricao . ' - Coordenador',
+              'descricao' => $conta_descricao . ' - Gerente',
               'pontos_adicionados' => $pontuacao_final,
               'data_acao' => $venda['data_contrato'] . '-00-00-00',
               'data_criado' => date('Y-m-d H:i:s', time())
@@ -463,9 +402,75 @@ class Vendas_model extends CI_Model {
           $this->db->insert_batch('vendas_usuarios', $usuario_insert);
           $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
         }
-      }
 
-      $excel_count++;
+        //COORDENADORES
+        if(isset($excel_linha['coordenador']) && (isset($excel_linha['coordenador'][0]) && !empty($excel_linha['coordenador'][0]))){
+          $coordenadores_cleared = $excel_linha['coordenador'];
+
+          if($coordenadores_cleared && isset($excel_linha['corretor']) && (isset($excel_linha['corretor'][0]) && !empty($excel_linha['corretor'][0]))){
+            $coordenadores_cleared = $this->admin->clear_users($coordenadores_cleared, $excel_linha['corretor']);
+          }
+
+          if($coordenadores_cleared && isset($excel_linha['gerente']) && (isset($excel_linha['gerente'][0]) && !empty($excel_linha['gerente'][0]))){
+            $coordenadores_cleared = $this->admin->clear_users($coordenadores_cleared, $excel_linha['gerente']);
+          }
+
+          if(!empty($coordenadores_cleared)){
+            $coordenador_log = false;
+            $coordenadores_count = count($excel_linha['coordenador']);
+            $usuario_insert = array();
+            $usuario_conta_insert = array();
+
+            foreach ($coordenadores_cleared as $coordenador_apelido) {
+
+              if(in_array($coordenador_apelido, $usuarios)){
+                $usuario = array_search($coordenador_apelido, $usuarios);
+              }else{
+                if($usuario = $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.apelido' => $coordenador_apelido)), 'id')) {
+                }else{
+                  $usuario = $this->usuarios_model->adicionar_usuario(array('nome' => $coordenador_apelido, 'apelido' => $coordenador_apelido, 'perfil' => 1, 'status' => 2), 'id');
+                }
+              }
+
+              $pontuacao_perfil = ($perfis['coordenador']['percentual'] / 100) * $venda['vgv_liquido'];
+              if($coordenador_log) echo 'Perfil: ' . $venda['vgv_liquido'] . ' * ' . $perfis['coordenador']['percentual'] . '% = ' . $pontuacao_perfil . '<br>';
+
+              $pontuacao_estagio = ($estagio['percentual'] / 100) * $pontuacao_perfil;
+              if($coordenador_log) echo 'Estágio: ' . $pontuacao_perfil . ' * ' . $estagio['percentual'] . '% = ' . $pontuacao_estagio . '<br>';
+
+              $pontuacao_divisao = $pontuacao_estagio / $coordenadores_count;
+              if($coordenador_log) echo 'Divisão: ' . $pontuacao_estagio . ' / ' . $coordenadores_count . ' = ' . $pontuacao_divisao . '<br>';
+
+              $pontuacao_reais_vs_pontos = $pontuacao_divisao * $reais_x_pontos;
+              if($coordenador_log) echo 'Reais vs Pontos: ' . $pontuacao_divisao . ' * ' . $reais_x_pontos . ' = ' . $pontuacao_reais_vs_pontos . '<br>';
+              if($coordenador_log) echo 'Reais vs Pontos (round): ROUND(' . $pontuacao_reais_vs_pontos . ' / ' . 50 . ') * ' . 50 . ' = ' . $this->admin->round_points($pontuacao_reais_vs_pontos, 50) . '<br>';
+              if($coordenador_log) echo '<hr>';
+
+              $pontuacao_final = $this->admin->round_points($pontuacao_reais_vs_pontos, 50);
+
+              $usuario_insert[] = array(
+                'venda' => $venda_id,
+                'usuario' => $usuario,
+                'perfil' => $perfis['coordenador']['id'],
+                'pontuacao' => $pontuacao_final
+              );
+
+              $usuario_conta_insert[] = array(
+                'usuario' => $usuario,
+                'venda' => $venda_id,
+                'descricao' => $conta_descricao . ' - Coordenador',
+                'pontos_adicionados' => $pontuacao_final,
+                'data_acao' => $venda['data_contrato'] . '-00-00-00',
+                'data_criado' => date('Y-m-d H:i:s', time())
+              );
+
+            }
+
+            $this->db->insert_batch('vendas_usuarios', $usuario_insert);
+            $this->db->insert_batch('usuarios_contas', $usuario_conta_insert);
+          }
+        }
+      }
     }
 
     return array(

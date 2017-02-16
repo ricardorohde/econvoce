@@ -20,6 +20,53 @@ class Vendas extends Admin_Controller {
       'periodos' => $this->vendas_model->obter_vendas_periodos()
     ));
 
+    $array = array(
+      array(
+        'nome' => 'Luciano Souza',
+        'email' => 'lco.souza@gmail.com',
+        'arquivos' => array(
+          'nome' => 'Samanta',
+          'email' => 'xana@teste.com'
+        )
+      ),
+      array(
+        'nome' => 'Roberta Boas',
+        'email' => 'lco.souza@gmail.com'
+      ),
+      array(
+        'nome' => 'Bunda Souza',
+        'email' => 'lco.souza@gmail.com',
+        'noia' => array(
+          'bunda' => 'sonsa',
+          'empreendimento_id' => 2345
+        )
+      ),
+      array(
+        'nome' => 'Mano Brown',
+        'email' => 'lco.souza@gmail.com'
+      ),
+      array(
+        'empreendimento_id' => 1234,
+        'email' => 'lco.souza@gmail.com',
+        'noia' => array(
+          'jana' => 'tonta'
+        )
+      ),
+    );
+
+
+    if($empreendimento = in_multiarray(2345, 'empreendimento_id', $array, true)){
+      print_l($empreendimento);
+    }
+
+    else {
+      echo 'ja era';
+    }
+
+    
+
+    
+
 
     $where = array();
 

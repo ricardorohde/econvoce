@@ -5,20 +5,34 @@ function print_l($_array = null){
 	}
 }
 
-function in_multiarray($elem, $array, $field) {
-    $top = sizeof($array) - 1;
-    $bottom = 0;
-    while($bottom <= $top)
-    {
-        if($array[$bottom][$field] == $elem)
-            return true;
-        else 
-            if(is_array($array[$bottom][$field]))
-                if(in_multiarray($elem, ($array[$bottom][$field])))
-                    return true;
 
-        $bottom++;
-    }        
+function in_multiarray_process($search, $field, $array, $returnindex = null) {
+    if(is_array($array)){
+        foreach($array as $index => $value){
+            if(is_array($value)){
+                if($match = in_multiarray_process($search, $field, $value, ($returnindex !== null ? $returnindex : $index))){
+                    $return = $match;
+                }
+            }else{
+                if($index == $field && $value == $search){
+                    $return = ($returnindex === null ? $index : $returnindex);
+                }
+            }
+            if(isset($return)) return '__' . $return;
+        }
+    }
     return false;
 }
+
+function in_multiarray($search, $field, $array, $return_item = false){
+    $return = in_multiarray_process($search, $field, $array);
+    
+    if(!$return_item){
+        return $return === false ? false : true;
+    }
+
+    return $return === false ? false : $array[str_replace('__', '', $return)];
+}
+
+
 ?>
