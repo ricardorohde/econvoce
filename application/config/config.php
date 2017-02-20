@@ -33,7 +33,7 @@ $config['reais_x_pontos'] = 54;
 
 $config['meses'] = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
 
-$config['registros_limite'] = 30;
+$config['registros_limite'] = 20;
 
 /*
 |--------------------------------------------------------------------------
@@ -390,7 +390,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = 'ci_sessions';
+$config['sess_save_path'] = '/Users/luciano/Projetos/Urbano/econvoce/sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

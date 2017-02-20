@@ -116,4 +116,43 @@ class Admin {
 
     return $this->ci->pagination->create_links();
   }
+
+  public function form_error($erros){
+    $return = array();
+    $erro_item = '';
+    if($erros){
+      foreach($erros as $key => $value){
+        $erro_item .= '&bull; ' . $value . '<br>';
+        $return['erros'][$key] = $value;
+      }
+    }
+
+    $return['alerta'] = array(
+      'type' => 'danger',
+      'message' => $erro_item,
+      'status' => 'visible'
+    );
+
+    return $return;
+  }
+
+  public function alerta_redirect($alertaClass = 'danger', $mensagem = 'Ocorreu um erro inesperado.', $redirect = null, $status = 'visible', $extraClass = array()){
+    $alerta = array(
+      'alerta' => array(
+        'type' => $alertaClass,
+        'message' => $mensagem,
+        'status' => $status,
+        'class' => $extraClass
+      )
+    );
+
+    if($redirect){
+      $this->ci->session->set_flashdata('alerta', $alerta);
+      $redirect = (strpos($redirect, '//') === false) ? base_url($redirect) : $redirect;
+      redirect($redirect, 'location');
+      exit;
+    }
+
+    return $alerta;
+  }
 }

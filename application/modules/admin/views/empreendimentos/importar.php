@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <h2>Importar planilha de vendas</h2>
+        <h2>Importar planilha de empreendimentos</h2>
 
         <?php
         if(isset($importacoes)){
@@ -10,19 +10,20 @@
           <div class="alert alert-warning">
             <?php
             foreach ($importacoes as $key => $value) {
-              if($key == 'vendas_inseridas' && $value){
+              if($key == 'empreendimentos_adicionados' && $value){
                 ?>
                 - <?php echo $value == 1 ? '<strong>'. $value .'</strong> registro inserido' : '<strong>'. $value .'</strong> registros inseridos'; ?>.
                 <br />
                 <?php
-              }else if($key == 'vendas_existentes' && $value){
+              }else if($key == 'empreendimentos_atualizados' && $value){
                 ?>
-                - <strong><?php echo $value; ?></strong> <?php echo $value == 1 ? 'registro' : 'registros'; ?> com o mesmo empreendimento/unidade/torre.<br />
+                - <strong><?php echo $value; ?></strong> <?php echo $value == 1 ? 'empreendimento atualizado' : 'empreendimentos atualizados'; ?>.
                 <?php
-              }else if($key == 'vendas_identicas' && $value){
+              }else if($key == 'nenhum_empreendimento' && $value){
                 ?>
-                - <strong><?php echo $value; ?></strong> <?php echo $value == 1 ? 'registro ignorado por conter' : 'registros ignorados por conterem'; ?> o mesmo empreendimento/unidade/torre e a mesma data de contrato.<br />
+                - <strong>Nenhum</strong> empreendimento importado. Verifique a planilha importada e tente novamente.
                 <?php
+
               }
             }
             ?>
@@ -31,7 +32,7 @@
         }
         ?>
 
-        <form action="<?php echo base_url('admin/vendas/importar'); ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo base_url('admin/empreendimentos/importar'); ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="hidden" name="flag" value="1" />
 

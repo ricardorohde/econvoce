@@ -43,7 +43,7 @@
         </li>
       </ul>
 
-      <form class="navbar-form navbar-right" role="search">
+      <form action="<?php echo isset($section['search_form_action']) ? base_url($section['search_form_action']) : '';?>" class="navbar-form navbar-right" role="search">
         <div class="form-group  is-empty">
           <input type="text" class="form-control" name="q" placeholder="Buscar">
           <span class="material-input"></span>

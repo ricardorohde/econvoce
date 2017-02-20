@@ -64,7 +64,7 @@
                       <td><?php echo $empreendimento['estagio_nome']; ?></td>
                       <td class="text-center"><?php echo $empreendimento['prioridade']; ?></td>
                       <td nowrap="true">
-                        <a class="btn btn-info btn-xs" href="<?php echo base_url('admin/vendas/empreendimento/' . $empreendimento['empreendimento_id']); ?>">Vendas</a>
+                        <a class="btn btn-info btn-xs" href="<?php echo base_url('admin/empreendimentos/' . $empreendimento['empreendimento_id'] . '/vendas'); ?>">Vendas</a>
                         <a class="btn btn-warning btn-xs" href="<?php echo base_url('admin/empreendimentos/' . $empreendimento['empreendimento_id'] . '/editar'); ?>">Editar</a>
                         <a onclick="return confirm('Se você excluir este empreendimento, todas as vendas e pontuações relacionadas a ele também serão excluídas. Deseja continuar?');" class="btn btn-danger btn-xs" href="<?php echo base_url('admin/empreendimentos/' . $empreendimento['empreendimento_id'] . '/excluir'); ?>">Excluir</a>
                       </td>
