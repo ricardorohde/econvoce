@@ -1,0 +1,180 @@
+.page__main {
+  .video-banner {
+    .headline {
+      top: 135px;
+    }
+  }
+
+  // featured
+  .featured-products {
+    position: absolute;
+    width: 100%;
+    margin-top: -225px;
+  }
+
+  // steps
+  .steps {
+    padding-top: 145px;
+  }
+
+  // campaign
+  .campaign {
+    padding: 60px 0;
+    color: $color--white;
+    background: url((asset_path('section-campaign-bg.jpg'))) top center no-repeat;
+    background-size: cover;
+  }
+
+  .why-be-youser__item {
+    @each $screen in index product services checkout {
+      &.screen--#{$screen} {
+        .g_container {
+          &::before {
+            background-image: url((asset_path('why-be-youser-main-#{$screen}.png')));
+          }
+        }
+      }
+    }
+  }
+
+  .campaign_description {
+    margin: 30px 0 50px;
+    font-family: $font-light;
+    color: $color--white;
+  }
+
+  .button-rounded.bt-campaign {
+    min-width: 215px;
+  }
+
+  // benfeitoria
+  .benfeitoria {
+    padding: 60px 0;
+  }
+
+  .benfeitoria__logo {
+    display: inline-block;
+    width: 540px;
+    height: 65px;
+    margin: 50px 0;
+    text-indent: -9999px;
+    background: url((asset_path('logo-youse_benfeitoria.svg'))) no-repeat;
+  }
+
+  .button-rounded.bt-benfeitoria {
+    min-width: 215px;
+    margin-top: 50px;
+  }
+
+  // press
+  .press {
+    padding: 40px 0;
+  }
+
+  .section-title--press {
+    margin-bottom: 20px;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__main {
+    .video-background { display: none;}
+
+    .video-banner {
+      .headline {
+        top: 105px;
+      }
+    }
+
+    .steps {
+      padding-top: 220px;
+    }
+
+    .campaign_description {
+      margin: 15px 0 30px;
+    }
+
+    .benfeitoria {
+      padding: 60px 0;
+    }
+
+    .benfeitoria__logo {
+      width: 540px;
+      height: 60px;
+      margin: 40px 0;
+    }
+
+    .button-rounded.bt-benfeitoria {
+      margin-top: 40px;
+    }
+
+    .press {
+      padding: 40px 0;
+    }
+
+    .section-title--press {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__main {
+    .video-background { display: none;}
+
+    .video-banner {
+      .headline {
+        top: 110px;
+      }
+
+      .bt-banner {
+        margin-top: 20px;
+      }
+    }
+
+    .featured-products {
+      position: relative;
+      margin-top: 0;
+    }
+
+    .steps {
+      padding-top: 30px;
+    }
+
+    .campaign_description {
+      margin: 15px 0 30px;
+    }
+
+    .benfeitoria {
+      padding: 40px 0;
+    }
+
+    .benfeitoria__logo {
+      width: 265px;
+      height: 35px;
+      margin: 50px 0 40px;
+    }
+
+    .button-rounded.bt-benfeitoria {
+      margin-top: 40px;
+    }
+
+    .press {
+      padding: 40px 0;
+    }
+
+    .section-title--press {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  }
+}

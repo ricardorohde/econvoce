@@ -1,0 +1,60 @@
+.banner {
+  min-height: 600px;
+  background-size: cover;
+
+  .headline {
+    position: absolute;
+    top: 260px;
+    z-index: 1;
+    width: 100%;
+    color: $color--white;
+
+    .headline__title {
+      font-family: $font-extra-bold;
+      font-size: rem(55);
+      line-height: rem(58);
+    }
+
+    .headline__description {
+      font-family: $font-light;
+      font-size: rem(30);
+      line-height: rem(33);
+    }
+
+  }
+}
+
+@include media($tablet) {
+  .banner {
+    min-height: 600px;
+
+    .headline {
+      top: 260px;
+      font-size: rem(55);
+      line-height: rem(58);
+    }
+  }
+}
+
+@include media($mobile) {
+  .banner {
+    min-height: 355px;
+
+    .headline {
+      top: 160px;
+      font-size: rem(30);
+      line-height: rem(33);
+
+      .headline__title {
+        font-size: rem(25);
+        line-height: rem(28);
+      }
+
+      .headline__description {
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+
+    }
+  }
+}

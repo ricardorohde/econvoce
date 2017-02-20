@@ -1,0 +1,67 @@
+.page__about {
+  .banner {
+    background-color: $color--battleship-grey;
+    background-image: url((asset_path('banner-about.jpg')));
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
+
+  .text-blocks--inovamos {
+    background: url((asset_path('yousemon__hair-goatee.svg'))) 112% bottom no-repeat;
+    background-size: 40%;
+  }
+
+  .text-blocks--dna {
+    background: $color--gallery-grey;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__about {
+    .text-blocks--inovamos {
+      padding: 30px 0;
+      background: none;
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__about {
+    .banner {
+      background-size: 290%;
+    }
+
+    .text-blocks--inovamos {
+      padding: 30px 0;
+      background: none;
+    }
+  }
+}
+
+//*******
+// Estes breakpoints limitam a altura do Yousemon em resoluções maiores que 1110px;
+//*******
+
+@include media(new-breakpoint(min-width 1110px)) {
+  .page__about {
+    .text-blocks--inovamos {
+      background-size: 455px;
+    }
+  }
+}
+
+@include media(new-breakpoint(min-width 1400px)) {
+  .page__about {
+    .text-blocks--inovamos {
+      background-position: bottom right;
+    }
+  }
+}

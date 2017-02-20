@@ -1,0 +1,33 @@
+.thinline {
+  padding: 65px 0;
+  background: $color--gallery-grey;
+
+  .thinline__title {
+    font-family: $font-light;
+    font-size: rem(40);
+    line-height: rem(43);
+    color: $color--gunmetal;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .thinline {
+    padding: 30px 0;
+
+    .thinline__title {
+      font-size: rem(24);
+      line-height: rem(27);
+    }
+  }
+}

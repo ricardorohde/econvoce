@@ -1,0 +1,116 @@
+.benfeitoria-steps {
+  padding: 60px 0;
+
+  .logo-benfeitoria {
+    max-width: 230px;
+  }
+
+  .benfeitoria-steps__content {
+    margin-top: 20px;
+    font-family: $font-light;
+    font-size: rem(16);
+    line-height: rem(19);
+  }
+
+  .benfeitoria-steps__list {
+    margin-top: 60px;
+  }
+
+  .benfeitoria-steps__item {
+    font-family: $font-light;
+    font-size: rem(16);
+    line-height: rem(19);
+    text-align: center;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: 50px;
+      left: -45px;
+      display: block;
+      width: 66px;
+      height: 25px;
+      background: url((asset_path('about-benfeitoria-arrow.svg'))) center center no-repeat;
+    }
+
+    &.benfeitoria-steps__item--last {
+      &::before {
+        display: none;
+      }
+    }
+
+    .img-responsive-ib {
+      max-width: 140px;
+    }
+
+    .description {
+      margin-top: 20px;
+    }
+  }
+
+  .bt-conheca {
+    margin-top: 30px;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .benfeitoria-steps {
+    .benfeitoria-steps__list {
+      display: block;
+      margin-top: 40px;
+      overflow: hidden;
+    }
+
+    .benfeitoria-steps__item {
+
+      .img-responsive-ib {
+        margin-top: 90px;
+      }
+
+      &::before {
+        content: ' ';
+        position: relative;
+        top: 50px;
+        left: 50%;
+        display: block;
+        width: 66px;
+        height: 25px;
+        background: url((asset_path('about-benfeitoria-arrow.svg'))) center center no-repeat;
+        transform: rotate(90deg) translate(0, 33px);
+      }
+
+      &.benfeitoria-steps__item--last {
+        .img-responsive-ib {
+          margin: 0;
+        }
+      }
+
+      .description {
+        display: inline-block;
+        max-width: 60%;
+      }
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .benfeitoria-steps {
+    .benfeitoria-steps__list {
+      margin-top: 30px;
+    }
+
+    .benfeitoria-steps__item {
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

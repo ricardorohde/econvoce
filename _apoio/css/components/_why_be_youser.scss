@@ -1,0 +1,166 @@
+.why-be-youser {
+  position: relative;
+  height: 720px;
+
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .why-be-youser-title {
+    margin: 170px 0 30px;
+  }
+
+  .why-be-youser__item {
+
+    .g_container {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 100px;
+        display: block;
+        width: 280px;
+        height: 550px;
+        margin-left: 140px;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .title {
+      font-size: rem(23);
+      line-height: rem(26);
+    }
+
+    .description {
+      margin-top: 20px;
+      font-family: $font-light;
+      font-size: rem(16);
+      line-height: rem(19);
+    }
+  }
+
+  .why-be-youser__pagination {
+    position: absolute;
+    top: 335px;
+    width: 100%;
+
+    .swiper-pagination {
+      margin-left: 120px;
+
+      .swiper-pagination-bullet {
+        display: block;
+        margin: 5px 0;
+      }
+    }
+  }
+}
+
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .why-be-youser {
+    height: auto;
+    padding: 50px 0;
+
+    .swiper-container {
+      height: auto;
+    }
+
+    .section-title-container {
+      .section-title {
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -300px;
+          display: block;
+          width: 280px;
+          height: 550px;
+          background: url((asset_path('why-be-youser-main-index.png'))) no-repeat;
+        }
+      }
+    }
+
+    .why-be-youser__list {
+      display: block;
+      overflow: hidden;
+    }
+
+    .why-be-youser__item {
+
+      .g_container {
+        &::before {
+          display: none;
+        }
+      }
+
+      .title {
+        margin-top: 40px;
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+
+      .description {
+        margin-top: 5px;
+      }
+    }
+
+    .why-be-youser-title {
+      margin: 0;
+    }
+
+    .why-be-youser__pagination { display: none; }
+  }
+}
+
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .why-be-youser {
+    height: auto;
+    padding: 30px 0;
+
+    .swiper-container {
+      height: auto;
+    }
+
+    .why-be-youser__list {
+      display: block;
+      overflow: hidden;
+    }
+
+    .why-be-youser__item {
+
+      .g_container {
+        &::before {
+          display: none;
+        }
+      }
+
+      .title {
+        margin-top: 30px;
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+
+      .description {
+        margin-top: 5px;
+      }
+    }
+
+    .why-be-youser-title {
+      margin: 0;
+      text-align: left;
+    }
+
+    .why-be-youser__pagination { display: none; }
+  }
+}

@@ -3,6 +3,7 @@ $data = $this->_ci_cached_vars;
 $show_sidebar = isset($section['hide_sidebar']) && $section['hide_sidebar'] ? false : true;
 $show_header = isset($section['hide_header']) && $section['hide_header'] ? false : true;
 $show_footer = isset($section['hide_footer']) && $section['hide_footer'] ? false : true;
+$hide_all = isset($section['hide_all']) && $section['hide_all'] ? true : false;
 ?><!doctype html>
 <html lang="pt-br">
 <head>
@@ -33,22 +34,22 @@ $show_footer = isset($section['hide_footer']) && $section['hide_footer'] ? false
 
 <body class="<?php echo isset($section["body_class"]) ? (is_array($section["body_class"]) ? implode(" ", $section["body_class"]) : $section["body_class"]) : ''; ?>">
 
-  <div class="wrapper">
+  <div class="<?php echo isset($hide_all) && $hide_all == true ? '' : 'wrapper'; ?>">
     <?php
-    if($show_sidebar){
+    if($show_sidebar && $hide_all == false){
       $this->load->view('admin/includes/sidebar.php', $data);
     }
     ?>
 
-    <div class="main-panel">
+    <div class="<?php echo isset($hide_all) && $hide_all == true ? '' : 'main-panel'; ?>">
       <?php
-      if($show_header){
+      if($show_header && $hide_all == false){
         $this->load->view('admin/includes/header.php', $data);
       }
 
       echo $content;
 
-      if($show_footer){
+      if($show_footer && $hide_all == false){
         $this->load->view('admin/includes/footer.php', $data);
       }
       ?>

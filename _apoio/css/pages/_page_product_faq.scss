@@ -1,0 +1,98 @@
+.page__product-faq,
+.page__product-faq-detail {
+
+  .questions {
+    padding-top: 0;
+  }
+
+  .product-faq-info {
+    min-height: 450px;
+    padding: 0 0 60px;
+
+    .product-faq-info__title {
+      font-family: $font-bold;
+      font-size: rem(40);
+      line-height: rem(43);
+    }
+
+    .product-faq-info__description {
+      margin-top: 30px;
+      font-family: $font-light;
+      font-size: rem(16);
+      line-height: rem(20);
+      color: $color--gunmetal;
+
+      .link {
+        color: $color--gunmetal;
+      }
+    }
+  }
+
+  .related-questions {
+
+    .related-questions__title {
+      margin-bottom: 10px;
+      font-family: $font-bold;
+      font-size: rem(12);
+      line-height: rem(15);
+      text-transform: uppercase;
+    }
+
+    .related-questions__item {
+      display: block;
+      padding: 10px 0;
+      font-family: $font-bold;
+      font-size: rem(14);
+      line-height: rem(16);
+      color: $color--squash;
+      text-decoration: none;
+      border-bottom: 1px solid $color--gallery-grey;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+
+  .related-questions {
+    padding: 60px 0 0;
+  }
+
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+
+  .page__product-faq,
+  .page__product-faq-detail {
+    .questions {
+      padding-top: 60px;
+    }
+
+    .product-faq-info {
+      min-height: auto;
+      padding-top: 60px;
+
+      .product-faq-info__title {
+        font-size: rem(25);
+        line-height: rem(28);
+      }
+    }
+
+    .related-questions {
+      padding: 60px 0 0;
+    }
+  }
+
+}

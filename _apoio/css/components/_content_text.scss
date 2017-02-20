@@ -1,0 +1,33 @@
+.content-text {
+  padding: 60px 0;
+
+  .content-text__content {
+    margin-top: 20px;
+    font-family: $font-light;
+    font-size: rem(16);
+    line-height: rem(19);
+    color: #48535b;
+  }
+
+  .bt-more {
+    margin-top: 20px;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .content-text {
+    padding: 30px 0;
+  }
+}

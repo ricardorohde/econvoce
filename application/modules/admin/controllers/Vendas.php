@@ -8,19 +8,7 @@ class Vendas extends Admin_Controller {
   }
 
   public function index($mes = 0, $ano = 0, $page = 1, $empreendimento_id = 0) {
-    $data = array_merge($this->header, array(
-      'section' => array(
-        'title' => 'Vendas',
-        'page' => array(
-          'one' => 'vendas'
-        ),
-        'search_form_action' => 'admin/vendas'
-      ),
-      'mes' => $mes,
-      'ano' => $ano,
-      'periodos' => $this->vendas_model->obter_vendas_periodos($empreendimento_id ? array('where' => array('vendas.empreendimento' => $empreendimento_id)) : null),
-      'empreendimento_id' => $empreendimento_id
-    ));
+    $this->admin->user_logged();
 
     $where = array();
     $like = array();
@@ -34,8 +22,26 @@ class Vendas extends Admin_Controller {
     }
 
     if($empreendimento_id){
-      $where['empreendimentos.id'] = $empreendimento_id;
+      $this->load->model('empreendimentos_model');
+      $empreendimento = $this->empreendimentos_model->obter_empreendimentos(array('params' => array('empreendimento_id' => $empreendimento_id)), true);
+      if($empreendimento){
+        $data['empreendimento'] = $empreendimento;
+        $where['empreendimentos.id'] = $empreendimento_id;
+      }
     }
+
+    $data = array_merge($this->header, array(
+      'section' => array(
+        'title' => 'Vendas',
+        'page' => array(
+          'one' => 'vendas'
+        ),
+        'search_form_action' => 'admin/vendas'
+      ),
+      'mes' => $mes,
+      'ano' => $ano,
+      'periodos' => $this->vendas_model->obter_vendas_periodos($empreendimento_id ? array('where' => array('vendas.empreendimento' => $empreendimento_id)) : null)
+    ));
 
     if($this->input->get('q')){
       $like['empreendimentos.apelido'] = $this->input->get('q');
@@ -61,6 +67,8 @@ class Vendas extends Admin_Controller {
   }
 
   public function duplicadas($page = 1) {
+    $this->admin->user_logged();
+
     $data = array_merge($this->header, array(
       'section' => array(
         'title' => 'Vendas duplicadas',
@@ -92,6 +100,8 @@ class Vendas extends Admin_Controller {
   }
 
   public function importar() {
+    $this->admin->user_logged();
+
     $data = array_merge($this->header, array(
       'section' => array(
         'title' => 'Importar planilha - Vendas',

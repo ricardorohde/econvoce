@@ -1,0 +1,19 @@
+.page__privacy-policy {
+  .content-text--link {
+    color: $color--gunmetal;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+}

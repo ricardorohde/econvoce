@@ -36,22 +36,29 @@
         ?>
 
         <li>
-          <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="<?php echo base_url('admin/logout'); ?>" class="dropdown-toggle">
             <i class="material-icons">close</i>
-            <p class="hidden-lg hidden-md">Sair</p>
+            Sair
           </a>
         </li>
       </ul>
 
-      <form action="<?php echo isset($section['search_form_action']) ? base_url($section['search_form_action']) : '';?>" class="navbar-form navbar-right" role="search">
-        <div class="form-group  is-empty">
-          <input type="text" class="form-control" name="q" placeholder="Buscar">
-          <span class="material-input"></span>
-        </div>
-        <button type="submit" class="btn btn-white btn-round btn-just-icon">
-          <i class="material-icons">search</i><div class="ripple-container"></div>
-        </button>
-      </form>
+      <?php
+      if(isset($section['search_form_action'])){
+        ?>
+        <form action="<?php echo isset($section['search_form_action']) ? base_url($section['search_form_action']) : '';?>" class="navbar-form navbar-right" role="search">
+          <div class="form-group  is-empty">
+            <input type="text" class="form-control" name="q" placeholder="Buscar">
+            <span class="material-input"></span>
+          </div>
+          <button type="submit" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">search</i><div class="ripple-container"></div>
+          </button>
+        </form>
+        <?php
+      }
+      ?>
+
     </div>
   </div>
 </nav>

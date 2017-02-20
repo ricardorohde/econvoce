@@ -1,0 +1,64 @@
+.page__terms-and-conditions {
+  .content-text--link {
+    color: $color--gunmetal;
+  }
+
+  .downloads__list {
+    margin-top: 10px;
+  }
+
+  .download-item {
+    display: table;
+    width: 100%;
+    padding: 15px;
+    margin: 0 0 5px;
+    text-decoration: none;
+    background: $color--gallery-grey;
+
+    &::before {
+      content: ' ';
+      display: table-cell;
+      width: 20px;
+      height: 20px;
+      margin-top: 7px;
+      vertical-align: middle;
+      background: url((asset_path('icon-download.svg'))) center center no-repeat;
+    }
+
+    .download__description {
+      display: table-cell;
+      padding-left: 10px;
+      vertical-align: middle;
+    }
+
+    .download__version {
+      display: block;
+      font-family: $font-bold;
+      font-size: rem(16);
+      line-height: rem(19);
+      color: $color--gunmetal;
+    }
+
+    .download__duration {
+      display: block;
+      font-family: $font-bold;
+      font-size: rem(13);
+      line-height: rem(16);
+      color: $color--battleship-grey;
+    }
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+}

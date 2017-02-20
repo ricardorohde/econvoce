@@ -1,0 +1,48 @@
+.text-blocks {
+  padding: 60px 0;
+
+  .text-block__item {
+    margin-bottom: 20px;
+
+    .title {
+      font-family: $font-bold;
+      font-size: rem(26);
+      line-height: rem(29);
+    }
+
+    .description {
+      margin-top: 20px;
+      font-family: $font-light;
+      font-size: rem(16);
+      line-height: rem(19);
+    }
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .text-blocks {
+    .text-block__item {
+      .title {
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+
+      .description {
+        font-size: rem(15);
+        line-height: rem(18);
+      }
+    }
+  }
+}

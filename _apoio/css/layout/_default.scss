@@ -1,0 +1,74 @@
+body {
+  font: 16px / 19px $font-regular;
+  color: $color--gunmetal;
+  background: $color--background-grey;
+}
+
+.hidden {
+  display: none;
+}
+
+// leave round image
+.img-circle { border-radius: 50%; }
+
+// Responsive images (ensure images don't scale beyond their parents)
+.img-responsive { @include img-responsive; }
+.img-responsive-ib { @include img-responsive('inline-block'); }
+
+.ml20px { margin-left: 20px; }
+
+.pl30px { padding-left: 30px; }
+
+
+// Set element position:relative
+.is-relative { position: relative; }
+
+.site-wrapper {
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+  background: $color--white;
+  box-shadow: 0 0 25px 1px rgba(0, 0, 0, .1);
+}
+
+//OWL
+.owl-dots {
+  margin-top: 20px;
+  text-align: center;
+
+  .owl-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: darken($color--gallery-grey, 10%);
+    border-radius: 5px;
+
+    &.active {
+      background: darken($color--gallery-grey, 20%);
+    }
+  }
+}
+
+// Swiper
+.swiper-container-horizontal {
+  .swiper-pagination-bullets {
+    position: static;
+    margin-top: 20px;
+  }
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: darken($color--gallery-grey, 10%);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: darken($color--gallery-grey, 20%);
+}
+
+// fix for gtm pixel breaking layout
+body > img[width],
+body > iframe { position: absolute; }

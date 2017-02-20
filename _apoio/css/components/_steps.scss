@@ -1,0 +1,88 @@
+// steps
+.steps {
+  padding: 60px 0;
+  background: $color--gallery-grey;
+
+  .description {
+    font-family: $font-light;
+  }
+}
+
+.steps__list {
+  margin-top: 50px;
+}
+
+.steps__item {
+  .image {
+    min-height: 190px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    margin-bottom: 15px;
+    font-size: rem(23);
+    line-height: rem(26);
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .steps {
+    padding: 40px 0;
+  }
+
+  .title-steps {
+    text-align: center;
+  }
+
+  .steps__item {
+    .image {
+      min-height: 190px;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      margin-bottom: 10px;
+      font-size: rem(20);
+      line-height: rem(23);
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .steps {
+    padding: 30px 0;
+  }
+
+  .title-steps {
+    text-align: center;
+  }
+
+  .steps__list {
+    margin-top: 30px;
+  }
+
+  .steps__item {
+    padding: 0 10px;
+    text-align: center;
+
+    .image {
+      max-width: 160px;
+      min-height: auto;
+      margin: 0 auto 20px;
+    }
+
+    .title {
+      margin-bottom: 10px;
+      font-size: rem(20);
+      line-height: rem(23);
+    }
+  }
+}

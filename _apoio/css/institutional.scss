@@ -1,0 +1,62 @@
+@import 'bourbon/bourbon';
+@import 'neat';
+
+// Settings
+@import 'settings/colors';
+@import 'settings/breakpoints';
+@import 'settings/grid';
+@import 'settings/mixins';
+@import 'settings/fonts';
+
+// Vendor
+@import 'swiper/dist/css/swiper';
+
+// Layout
+@import 'layout/reset';
+@import 'layout/grid';
+@import 'layout/default';
+@import 'layout/typography';
+
+// Components
+@import 'components/header';
+@import 'components/footer';
+@import 'components/buttons';
+@import 'components/content_nav';
+@import 'components/breadcrumb';
+@import 'components/coverage_assistance_info';
+@import 'components/coverage_assistance_buttons';
+@import 'components/stay_tuned';
+@import 'components/other_coverage_assistance';
+@import 'components/included_services';
+@import 'components/coverage_assistance';
+@import 'components/product_banner';
+@import 'components/questions';
+@import 'components/steps';
+@import 'components/testimonials';
+@import 'components/video_banner';
+@import 'components/featured_products';
+@import 'components/why_be_youser';
+@import 'components/banner';
+@import 'components/content_text';
+@import 'components/text_blocks';
+@import 'components/benfeitoria_steps';
+@import 'components/color_headline';
+@import 'components/thinline';
+@import 'components/plan_discovery';
+@import 'components/plan_discovery_banner';
+
+// Pages
+@import 'pages/page_main';
+@import 'pages/page_auto';
+@import 'pages/page_home';
+@import 'pages/page_life';
+@import 'pages/page_life_capitalizacao_regulamento';
+@import 'pages/page_life_capitalizacao_sorteio';
+@import 'pages/page_about';
+@import 'pages/page_product_coverage_assistance';
+@import 'pages/page_product_faq';
+@import 'pages/page_online_insurance';
+@import 'pages/page_terms_and_conditions';
+@import 'pages/page_privacy_policy';
+@import 'pages/page_404';
+@import 'pages/page_product_simulator';

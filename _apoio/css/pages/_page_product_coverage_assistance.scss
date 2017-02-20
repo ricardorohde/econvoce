@@ -1,0 +1,51 @@
+.page__product-coverage-assistance,
+.page__product-coverage-assistance-detail {
+
+  .coverage-assistance {
+    padding-top: 0;
+  }
+
+  .covarage-assistance-info {
+    .covarage-assistance-info__item {
+      float: right;
+    }
+  }
+
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__product-coverage-assistance,
+  .page__product-coverage-assistance-detail {
+
+    .covarage-assistance-info {
+      .covarage-assistance-info__item {
+        float: none;
+      }
+    }
+
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__product-coverage-assistance,
+  .page__product-coverage-assistance-detail {
+
+    .coverage-assistance {
+      padding-top: 60px;
+    }
+
+    .covarage-assistance-info {
+      .covarage-assistance-info__item {
+        float: none;
+      }
+    }
+  }
+}

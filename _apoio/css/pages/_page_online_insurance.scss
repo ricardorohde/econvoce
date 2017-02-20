@@ -1,0 +1,77 @@
+.page__seguro-online {
+
+  .color-headline {
+    background: $color--squash;
+  }
+
+  .featured-products {
+    padding: 60px 0;
+    background: $color--gallery-grey;
+  }
+
+  .featured__list {
+    margin-top: 40px;
+  }
+
+  .steps {
+    background: $color--white;
+  }
+
+  .questions {
+    background: url((asset_path('yousemon__headphone-mustache.svg'))) 112% bottom no-repeat;
+    background-size: 40%;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__seguro-online {
+    .questions {
+      background: none;
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__seguro-online {
+    .featured-products {
+      padding: 30px 0 1px;
+
+      .section-title {
+        padding: 0 20px;
+        text-align: center;
+      }
+    }
+
+    .featured__list {
+      margin-top: 20px;
+    }
+
+    .steps {
+      padding: 30px 0;
+    }
+
+    .questions {
+      background: none;
+    }
+  }
+}
+
+//*******
+// Estes breakpoints limitam a altura do Yousemon em resoluções maiores que 1110px;
+//*******
+
+@include media(new-breakpoint(min-width 1700px)) {
+  .page__seguro-online {
+    .questions {
+      background-position: bottom right;
+    }
+  }
+}

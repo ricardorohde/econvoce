@@ -1,0 +1,22 @@
+.breadcrumb {
+  padding: 80px 0 20px;
+  font-size: rem(14);
+  line-height: rem(17);
+
+  .breadcrumb__item {
+    font-size: rem(14);
+    line-height: rem(17);
+    color: $color--gunmetal;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.active {
+      font-family: $font-bold;
+      color: $color--squash;
+      text-decoration: underline;
+    }
+  }
+}

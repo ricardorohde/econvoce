@@ -284,14 +284,14 @@ class Vendas_model extends CI_Model {
 
           //VGV Líquido
           $venda['vgv_liquido'] = $excel_linha['vgv_liquido'];
-          
+
           $this->db->set('data_criado', 'NOW()', FALSE);
           $this->db->insert('vendas', $venda);
 
           $venda_id = $this->db->insert_id();
 
           if($venda_id){
-            $usuarios_log = true;
+            $usuarios_log = false;
 
             //CORRETORES
             if(isset($excel_linha['corretor']) && (isset($excel_linha['corretor'][0]) && !empty($excel_linha['corretor'][0]))){

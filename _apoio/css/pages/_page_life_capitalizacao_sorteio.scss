@@ -1,0 +1,321 @@
+.page__life_sorteio_capitalizacao {
+  .banner {
+    min-height: 435px;
+    background-color: $color--battleship-grey;
+    background-image: url((asset_path('banner-sorteio-capitalizacacao.jpg')));
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
+
+  .result-draw {
+    padding: 60px 0;
+    background: $color--gallery-grey;
+
+    .result-draw__year {
+      margin-bottom: 30px;
+      font-size: rem(24);
+      line-height: rem(27);
+      color: $color--squash;
+    }
+  }
+
+  .select_label {
+    font-size: rem(14);
+    line-height: rem(17);
+  }
+
+  .select-box {
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    background: $color--white url((asset_path('select-arrow-down.svg'))) right center no-repeat;
+    background-size: 25px 8px;
+    border: 1px solid $color--cloudy-blue;
+    border-radius: 4px;
+
+    .select {
+      width: 100%;
+      height: 40px;
+      padding: 5px;
+      font-family: $font-light;
+      font-size: rem(18);
+      line-height: rem(18);
+      color: $color--cloudy-blue;
+      background: transparent;
+      border: 0;
+      -webkit-appearance: none;
+      outline: none;
+    }
+
+    &.active {
+      border: 1px solid $color--squash;
+
+      .select {
+        color: $color--squash;
+      }
+    }
+  }
+
+  .result-box {
+    padding: 20px 15px;
+    font-family: $font-bold;
+    font-size: rem(20);
+    line-height: rem(23);
+    background: $color--white;
+    border: 2px solid $color--squash;
+    border-radius: 4px;
+
+    .result-box__table {
+      width: 100%;
+      font-size: rem(20);
+      line-height: rem(23);
+    }
+
+    .result-box__item {
+      border-top: 1px solid $color--gallery-grey;
+
+      .date {
+        padding: 28px 0;
+        font-family: $font-bold;
+      }
+
+      .result-number {
+        margin-bottom: 20px;
+        font-family: $font-bold;
+        font-size: rem(30);
+        line-height: rem(33);
+        color: $color--blueberry;
+        text-align: right;
+      }
+    }
+
+    .result-box__item:first-child {
+      border: 0;
+    }
+  }
+
+  .other-draws {
+    padding: 25px 15px;
+    background: $color--white;
+    border-radius: 4px;
+
+    .other-draws__title {
+      margin-bottom: 15px;
+      font-family: $font-bold;
+      font-size: rem(26);
+      line-height: rem(29);
+    }
+
+    .other-draws__table {
+      width: 100%;
+      font-size: rem(20);
+      line-height: rem(23);
+    }
+
+    .other-draws__item {
+      border-top: 1px solid $color--gallery-grey;
+
+      .date {
+        padding: 10px 0;
+        font-family: $font-bold;
+      }
+
+      .result-number {
+        font-family: $font-bold;
+        color: $color--blueberry;
+      }
+    }
+
+    &.other-draws--last {
+      margin-top: 50px;
+
+      .date {
+        width: 200px;
+      }
+
+      .type {
+        width: 200px;
+      }
+
+      .result-number {
+        text-align: right;
+      }
+    }
+
+    &.other-draws--next {
+      .other-draws__title {
+        text-align: center;
+      }
+
+      .schedule {
+        text-align: right;
+      }
+    }
+
+    .other-draws__item:first-child {
+      border: 0;
+    }
+
+    .other-draws__table-title {
+      display: block;
+      margin-bottom: 5px;
+      font-family: $font-light;
+      font-size: rem(26);
+      line-height: rem(29);
+      color: $color--squash;
+      text-align: left;
+
+    }
+  }
+
+  .text-yousemon {
+    min-height: 525px;
+    padding: 60px 0;
+    background: url((asset_path('yousemon__purple-hair-woman--draw.svg'))) 112% bottom no-repeat;
+    background-size: 40%;
+
+    .section-title {
+      margin-top: 100px;
+    }
+
+    .bt-more {
+      margin-top: 50px;
+    }
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__life_sorteio_capitalizacao {
+    .result-draw {
+      padding: 30px 0;
+
+      .result-draw__year {
+        margin-bottom: 10px;
+      }
+    }
+
+    .result-box {
+      padding: 15px;
+
+      .result-number {
+        margin-bottom: 15px;
+      }
+    }
+
+    .other-draws {
+      margin-top: 30px;
+
+      .other-draws__table-title {
+        margin-bottom: 5px;
+      }
+
+      &.other-draws--last {
+        margin-top: 30px;
+
+        .other-draws__title {
+          text-align: center;
+        }
+      }
+    }
+
+    .text-yousemon {
+      min-height: auto;
+      background: $color--gallery-grey;
+
+      .section-title {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__life_sorteio_capitalizacao {
+    .banner {
+      min-height: 235px;
+    }
+
+    .result-draw {
+      padding: 30px 0;
+
+      .result-draw__year {
+        margin-bottom: 10px;
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+    }
+
+    .result-box {
+      padding: 15px;
+      font-size: rem(18);
+      line-height: rem(21);
+
+      .result-number {
+        margin-bottom: 15px;
+        font-size: rem(30);
+        line-height: rem(33);
+      }
+    }
+
+    .other-draws {
+      margin-top: 30px;
+
+      .other-draws__table-title {
+        margin-bottom: 5px;
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+
+      .other-draws__table {
+        font-size: rem(16);
+        line-height: rem(19);
+      }
+
+      &.other-draws--last {
+        margin-top: 30px;
+
+        .date {
+          width: auto;
+        }
+      }
+    }
+
+    .text-yousemon {
+      min-height: auto;
+      padding: 30px 0;
+      background: $color--gallery-grey;
+
+      .section-title {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+//*******
+// Estes breakpoints limitam a altura do Yousemon em resoluções maiores que 1110px;
+//*******
+
+@include media(new-breakpoint(min-width 1110px)) {
+  .page__life_sorteio_capitalizacao {
+    .text-yousemon {
+      background-size: 455px;
+    }
+  }
+}
+
+@include media(new-breakpoint(min-width 1400px)) {
+  .page__life_sorteio_capitalizacao {
+    .text-yousemon {
+      background-position: bottom right;
+    }
+  }
+}

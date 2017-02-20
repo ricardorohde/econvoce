@@ -1,0 +1,86 @@
+.page__product.page__auto {
+  .product-banner {
+    &::before {
+      background-image: url((asset_path('banner-product-auto.jpg')));
+    }
+  }
+
+  .product-banner__content {
+    &::before {
+      width: 330px;
+      height: 390px;
+      background-image: url((asset_path('featured-product-icon-auto.svg')));
+    }
+  }
+
+  .steps {
+    padding-top: 120px;
+    background: $color--white;
+  }
+
+  .questions {
+    background: url((asset_path('yousemon__coil-hair-glasses.svg'))) 112% bottom no-repeat;
+    background-size: 40%;
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__product.page__auto {
+    .questions {
+      background: none;
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__product.page__auto {
+    .product-banner__content {
+      &::before {
+        top: -183px;
+        width: 155px;
+        height: 184px;
+      }
+    }
+
+    .steps {
+      padding-top: 60px;
+    }
+
+    .coverage-assistance {
+      padding: 30px 0;
+    }
+
+    .questions {
+      padding: 30px 0;
+      background: none;
+    }
+  }
+}
+
+//*******
+// Estes breakpoints limitam a altura do Yousemon em resoluções maiores que 1110px;
+//*******
+
+@include media(new-breakpoint(min-width 1110px)) {
+  .page__product.page__auto {
+    .questions {
+      background-size: 455px;
+    }
+  }
+}
+
+@include media(new-breakpoint(min-width 1400px)) {
+  .page__product.page__auto {
+    .questions {
+      background-position: bottom right;
+    }
+  }
+}

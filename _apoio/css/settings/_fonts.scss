@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'FelbridgePro-Thin';
+  src: url(asset_path('FelbridgePro-Thin.eot'));
+  src: url(asset_path('FelbridgePro-Thin.eot?#iefix')) format('embedded-opentype'),
+       url(asset_path('FelbridgePro-Thin.woff')) format('woff'),
+       url(asset_path('FelbridgePro-Thin.ttf'))  format('truetype'),
+       url(asset_path('FelbridgePro-Thin.svg#svgFontName')) format('svg');
+}
+
+@font-face {
+  font-family: 'FelbridgePro-Light';
+  src: url(asset_path('FelbridgePro-Light.eot'));
+  src: url(asset_path('FelbridgePro-Light.eot?#iefix')) format('embedded-opentype'),
+       url(asset_path('FelbridgePro-Light.woff')) format('woff'),
+       url(asset_path('FelbridgePro-Light.ttf'))  format('truetype'),
+       url(asset_path('FelbridgePro-Light.svg#svgFontName')) format('svg');
+}
+
+@font-face {
+  font-family: 'FelbridgePro-Regular';
+  src: url(asset_path('FelbridgePro-Regular.eot'));
+  src: url(asset_path('FelbridgePro-Regular.eot?#iefix')) format('embedded-opentype'),
+       url(asset_path('FelbridgePro-Regular.woff')) format('woff'),
+       url(asset_path('FelbridgePro-Regular.ttf'))  format('truetype'),
+       url(asset_path('FelbridgePro-Regular.svg#svgFontName')) format('svg');
+}
+
+@font-face {
+  font-family: 'FelbridgePro-Bold';
+  src: url(asset_path('FelbridgePro-Bold.eot'));
+  src: url(asset_path('FelbridgePro-Bold.eot?#iefix')) format('embedded-opentype'),
+       url(asset_path('FelbridgePro-Bold.woff')) format('woff'),
+       url(asset_path('FelbridgePro-Bold.ttf'))  format('truetype'),
+       url(asset_path('FelbridgePro-Bold.svg#svgFontName')) format('svg');
+}
+
+@font-face {
+  font-family: 'FelbridgePro-ExtraBold';
+  src: url(asset_path('FelbridgePro-ExtraBold.eot'));
+  src: url(asset_path('FelbridgePro-ExtraBold.eot?#iefix')) format('embedded-opentype'),
+       url(asset_path('FelbridgePro-ExtraBold.woff')) format('woff'),
+       url(asset_path('FelbridgePro-ExtraBold.ttf'))  format('truetype'),
+       url(asset_path('FelbridgePro-ExtraBold.svg#svgFontName')) format('svg');
+}
+
+
+$font-thin: 'FelbridgePro-Thin', sans-serif;
+$font-light: 'FelbridgePro-Light', sans-serif;
+$font-regular: 'FelbridgePro-Regular', sans-serif;
+$font-bold: 'FelbridgePro-Bold', sans-serif;
+$font-extra-bold: 'FelbridgePro-ExtraBold', sans-serif;
+
+$main-font-family: $font-regular, sans-serif;

@@ -1,0 +1,565 @@
+.site-footer {
+  padding: 60px 0;
+  background: $color--blueberry;
+
+  // footer phones
+  .footer-phones {
+    padding: 30px 0;
+    color: $color--white;
+    background: url((asset_path('footer-cloud-bg.png')))  top center no-repeat;
+    background-size: 960px 35px;
+    border-bottom: 1px solid lighten($color--blueberry, 5);
+
+    .phone-item {
+
+      .title {
+        margin: 0 0 20px;
+        font-family: $font-bold;
+        font-size: rem(12);
+        line-height: rem(20);
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .details {
+        padding-left: 10px;
+        border-left: 1px solid $color--white;
+      }
+
+      .telephone {
+        display: block;
+        margin-bottom: 10px;
+        font-family: $font-light;
+        font-size: rem(18);
+        line-height: rem(23);
+        color: $color--white;
+        text-decoration: none;
+
+        &.highlight {
+          font-family: $font-bold;
+          font-size: rem(20);
+          color: $color--orangey-yellow;
+        }
+      }
+
+      .description {
+        font-size: rem(12);
+        line-height: rem(15);
+      }
+    }
+  }
+
+  // footer apps / chat
+  .footer-apps-chat {
+    padding-top: 30px;
+    color: $color--white;
+    border-bottom: 1px solid lighten($color--blueberry, 5);
+
+    .details {
+      float: left;
+      margin-left: 20px;
+
+      .title {
+        margin-bottom: 10px;
+        font-family: $font-bold;
+        font-size: rem(12);
+        line-height: rem(15);
+        color: $color--white;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .description {
+        width: 280px;
+        margin-bottom: 15px;
+        font-family: $font-light;
+        font-size: rem(12);
+        line-height: rem(15);
+      }
+
+    }
+
+    // apps content
+    .apps-content {
+      display: block;
+      overflow: hidden;
+
+      &::before {
+        content: ' ';
+        float: left;
+        width: 125px;
+        height: 130px;
+        background: url((asset_path('footer-apps.png'))) center bottom no-repeat;
+        background-size: 100%;
+      }
+
+      .link-apps {
+        float: left;
+        width: 135px;
+        height: 40px;
+        overflow: hidden;
+        text-indent: -9999px;
+        background-repeat: no-repeat;
+
+        &.google-play { background-image: url((asset_path('footer-store-google.svg'))); }
+
+        &.apple-store {
+          margin-left: 10px;
+          background-image: url((asset_path('footer-store-apple.svg')));
+        }
+      }
+    }
+
+    // chat content
+    .chat-content {
+      display: block;
+      overflow: hidden;
+
+      &::before {
+        content: ' ';
+        display: block;
+        float: left;
+        width: 109px;
+        height: 130px;
+        background: url((asset_path('footer-chat-youser.svg'))) center bottom no-repeat;
+      }
+
+      .button-rounded.bt-chat {
+        height: 30px;
+        font-size: rem(10);
+        line-height: rem(30);
+        border: 1px solid $color--white;
+      }
+    }
+  }
+
+  // footer sitemap
+  .footer-sitemap {
+    min-height: 235px;
+    padding: 30px 0;
+    background: url((asset_path('footer-city-bg.png'))) bottom center no-repeat;
+    background-size: 1920px 225px;
+
+    .sitemap-nav {
+      font-size: rem(12px);
+      line-height: rem(15px);
+
+      a.sitemap-nav__label {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .sitemap-nav__label {
+        display: block;
+        margin-bottom: 15px;
+        font-family: $font-extra-bold;
+        color: $color--white;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .item {
+        margin-bottom: 5px;
+        &:last-child { margin-bottom: 0; }
+      }
+
+      .link {
+        color: $color--white;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  // footer support
+  .footer-support {
+    padding: 30px 0;
+    border-bottom: 1px solid lighten($color--blueberry, 5);
+
+    .youse-logo {
+      float: left;
+      width: 116px;
+      height: 34px;
+      margin-right: 20px;
+      text-indent: -9999px;
+      background: url((asset_path('logo-youse-footer-cs.svg'))) no-repeat;
+    }
+
+  }
+
+  .social-nav__list {
+    float: right;
+    margin-top: 2px;
+
+    .item {
+      float: left;
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .link-social {
+    display: block;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    transition: all .3s ease;
+
+    @each $social in facebook twitter linkedin instagram {
+      &.#{$social} {
+        background-image: url((asset_path('footer-#{$social}-logo.svg')));
+
+        &:hover {
+          background-image: url((asset_path('footer-#{$social}-logo--hover.svg')));
+        }
+      }
+    }
+  }
+
+  // footer copyright
+  .footer-copyright {
+    padding-top: 30px;
+
+    .footer-copyright__text {
+      float: left;
+      max-width: 700px;
+      font-size: rem(12);
+      line-height: rem(15);
+      color: $color--white;
+
+      .link {
+        color: $color--white;
+      }
+    }
+
+    .payment-content {
+      float: right;
+    }
+
+    .payment-cards__list {
+      display: block;
+      margin-bottom: 20px;
+      overflow: hidden;
+
+      .item {
+        float: left;
+        margin-right: 10px;
+        overflow: hidden;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .card {
+      float: left;
+      width: 28px;
+      height: 15px;
+      overflow: hidden;
+      text-indent: -9999px;
+      background-size: 28px 15px;
+
+      @each $card in visa mastercard elo amex diners {
+        &.#{$card} {
+          background-image: url((asset_path('footer-#{$card}-logo.png')));
+        }
+      }
+    }
+
+    .globalsign {
+      float: right;
+      width: 56px;
+      height: 22px;
+      overflow: hidden;
+      text-indent: -9999px;
+      background-image: url((asset_path('footer-globalsign-logo.png')));
+      background-size: 56px 22px;
+    }
+  }
+
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+
+  .site-footer {
+    padding: 60px 0;
+
+    // footer phones
+    .footer-phones {
+      padding: 30px 0;
+      background-position: top center;
+      background-size: 75%;
+
+      .phone-item {
+
+        &.sac,
+        &.vendas {
+          margin-bottom: 30px;
+        }
+
+      }
+    }
+
+    // footer apps / chat
+    .footer-apps-chat {
+      padding: 30px 0;
+    }
+
+    .apps-content {
+      &::before {
+        display: none;
+      }
+
+      .details {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+
+        .description {
+          width: auto;
+        }
+      }
+    }
+
+    // footer sitemap
+    .footer-sitemap {
+      min-height: none;
+      background: url((asset_path('footer-city-bg.png'))) bottom center no-repeat;
+      background-size: 1920px 225px;
+      border-bottom: 1px solid lighten($color--blueberry, 5);
+
+      .sitemap-nav {
+        margin-bottom: 40px;
+      }
+    }
+
+    // support
+    .footer-support {
+      .youse-logo {
+        margin: 0;
+      }
+    }
+
+    // copyright
+    .footer-copyright {
+      padding: 30px 0;
+
+      .footer-copyright__text {
+        float: none;
+        max-width: none;
+      }
+
+      .payment-content {
+        display: block;
+        float: none;
+        width: 180px;
+        margin: 0 auto;
+      }
+
+      .globalsign {
+        display: block;
+        float: none;
+        margin: 0 auto;
+      }
+    }
+
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .site-footer {
+    padding: 70px 0;
+
+    // phones
+    .footer-phones {
+      padding: 0 0 50px;
+      background: none;
+
+      .phone-item {
+        margin-bottom: 30px;
+        text-align: center;
+
+        &.last {
+          margin-bottom: 0;
+        }
+
+        .title {
+          margin: 0 0 10px;
+        }
+
+        .telephone {
+          display: inline-block;
+          height: 40px;
+          padding: 0 30px;
+          margin: 0;
+          line-height: rem(40);
+          border: 1px solid $color--white;
+          border-radius: 20px;
+        }
+
+        .details {
+          padding-left: 0;
+          border-left: 0;
+        }
+      }
+    }
+
+    // footer apps / chat
+    .footer-apps-chat {
+      padding: 50px 0;
+
+      .apps-content {
+        margin: 0 auto;
+
+        &::before {
+          display: none;
+        }
+
+        .details {
+          float: none;
+          width: 100%;
+          margin-left: 0;
+          text-align: center;
+        }
+
+        .link-apps {
+          display: block;
+          float: none;
+          overflow: hidden;
+
+          &.google-play { margin: 0 auto 20px; }
+          &.apple-store { margin: 0 auto;}
+        }
+      }
+    }
+
+    // footer sitemap
+    .footer-sitemap {
+      min-height: auto;
+      padding: 0;
+      background: none;
+      border-bottom: 1px solid lighten($color--blueberry, 5);
+
+      .g_container { padding: 0; }
+
+      .sitemap-nav {
+        border-bottom: 1px solid lighten($color--blueberry, 5);
+
+        &.is-oppened {
+          .sitemap-nav__label::after {
+            background-image: url((asset_path('sitemap-arrow-up.svg')));
+          }
+        }
+
+        &.blogs {
+          margin-bottom: 0;
+          border: 0;
+        }
+
+        .sitemap-nav__label {
+          padding: 0 20px;
+          margin-bottom: 0;
+          font-size: 12px;
+          line-height: 60px;
+
+          &::after {
+            content: ' ';
+            display: block;
+            float: right;
+            width: 9px;
+            height: 6px;
+            margin-top: 24px;
+            background: url((asset_path('sitemap-arrow-down.svg'))) no-repeat;
+          }
+        }
+      }
+
+      .sitemap-nav__list {
+        display: none;
+        padding: 0 20px 20px;
+
+        .link {
+          font-family: $font-light;
+          font-size: 13px;
+          line-height: 16px;
+        }
+      }
+    }
+
+    // support
+    .footer-support {
+
+      .youse-logo {
+        width: 96px;
+        height: 28px;
+        margin-right: 0;
+      }
+
+      .social-nav__list {
+        float: right;
+
+        .item {
+          float: left;
+          margin-right: 10px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    // copyright
+    .footer-copyright {
+      padding: 30px 0;
+
+      .footer-copyright__cards {
+        margin-top: 30px;
+      }
+
+      .footer-copyright__text {
+        float: none;
+        max-width: none;
+        font-size: rem(10);
+        line-height: rem(13);
+        text-align: center;
+      }
+
+      .payment-content {
+        display: block;
+        float: none;
+        width: 180px;
+        margin: 20px auto 0;
+      }
+
+      .globalsign {
+        display: block;
+        float: none;
+        margin: 0 auto;
+      }
+    }
+
+  }
+}

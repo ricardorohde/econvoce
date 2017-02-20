@@ -1,0 +1,93 @@
+.g_container {
+  @include outer-container;
+  padding: 0 10px;
+}
+
+.g_row { @include row; }
+
+@include media($mobile) {
+
+  @for $i from 1 through $grid-mobile-columns - 1 {
+    .g_m_#{$i}-#{$grid-mobile-columns} {
+      @include span-columns($i of $grid-mobile-columns);
+    }
+
+    .g_m_shift_#{$i}-#{$grid-mobile-columns} {
+      @include shift-in-context($i of $grid-mobile-columns);
+    }
+  }
+
+  .g_m_1-3 {
+    @include span-columns(1.33 of 4);
+  }
+
+  .g_m_2-3 {
+    @include span-columns(2.66 of 4);
+  }
+
+  .g_m_first { clear: both; }
+  .g_m_last { margin-right: 0; }
+  .m_hide { display: none !important; }
+  .m_text-center { text-align: center; }
+}
+
+@include media($tablet) {
+
+  @for $i from 1 through $grid-tablet-columns - 1 {
+    .g_t_#{$i}-#{$grid-tablet-columns} {
+      @include span-columns($i of $grid-tablet-columns);
+    }
+
+    .g_t_shift_#{$i}-#{$grid-tablet-columns} {
+      @include shift-in-context($i of $grid-tablet-columns);
+    }
+  }
+
+  .g_t_1-1 {
+    @include span-columns(1 of 1);
+  }
+
+  .g_t_shift_1-3 {
+    @include shift-in-context(1 of 3);
+  }
+
+  .g_t_1-3 {
+    @include span-columns(2.66 of 8);
+  }
+
+  .g_t_shift_2-3 {
+    @include shift-in-context(3 of 3);
+  }
+
+  .g_t_2-3 {
+    @include span-columns(5.32 of 8);
+  }
+
+  .g_t_first { clear: both; }
+  .g_t_last { margin-right: 0; }
+  .t_hide { display: none !important; }
+  .t_text-center { text-align: center; }
+
+}
+
+@include media($desktop) {
+  @for $i from 1 through $grid-desktop-columns - 1 {
+    .g_d_#{$i}-#{$grid-desktop-columns} {
+      @include span-columns($i of $grid-desktop-columns);
+    }
+
+    .g_d_shift_#{$i}-#{$grid-desktop-columns} {
+      @include shift-in-context($i of $grid-desktop-columns);
+    }
+  }
+
+  .g_d_first { clear: both; }
+  .g_d_last { margin-right: 0; }
+  .d_hide { display: none !important; }
+  .d_text-center { text-align: center; }
+
+}
+
+
+
+

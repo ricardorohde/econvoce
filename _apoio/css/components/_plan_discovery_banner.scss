@@ -1,0 +1,391 @@
+.plan-discovery-banner {
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 5;
+    display: block;
+    width: 100%;
+    min-height: 650px;
+    background-color: $color--battleship-grey;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+  }
+
+  .g_container,
+  .g_row {
+    position: relative;
+    z-index: 7;
+  }
+
+  .plan-discovery {
+    margin-top: 100px;
+  }
+}
+
+.plan-discovery-banner__content {
+  position: relative;
+  min-height: 650px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -110px;
+    z-index: 6;
+    display: block;
+    background-repeat: no-repeat;
+  }
+
+  .plan-discovery-banner__info {
+    padding-top: 200px;
+    color: $color--white;
+  }
+
+  .plan-discovery-banner__title {
+    font-size: rem(24);
+    line-height: rem(27);
+  }
+
+  .plan-discovery-banner__description {
+    font-family: $font-bold;
+    font-size: rem(64);
+    line-height: rem(67);
+
+  }
+}
+
+body.page__home {
+  .plan-discovery-banner__content {
+    &::before {
+      width: 350px;
+      height: 470px;
+      background-image: url((asset_path('featured-product-icon-home.svg')));
+    }
+  }
+}
+
+body.page__auto {
+  .plan-discovery-banner__content {
+    &::before {
+      width: 400px;
+      height: 470px;
+      background-image: url((asset_path('featured-product-icon-auto.svg')));
+    }
+  }
+}
+
+body.page__life {
+  .plan-discovery-banner__content {
+    &::before {
+      width: 400px;
+      height: 470px;
+      background-image: url((asset_path('featured-product-icon-life.svg')));
+    }
+  }
+}
+
+.plan-discovery-banner__results {
+  padding: 60px 0;
+  background: $color--blueberry;
+
+  .result-loading__content {
+    font-size: rem(24);
+    line-height: rem(27);
+    color: $color--white;
+
+    .result-loading {
+      margin-bottom: 25px;
+    }
+  }
+
+  .bt-hire {
+    margin-top: 40px;
+  }
+}
+
+.plan-discovery-pricing__result {
+  .title {
+    margin-bottom: 20px;
+    font-family: $font-bold;
+    font-size: rem(24);
+    line-height: rem(27);
+    color: $color--white;
+  }
+
+  .description {
+    margin-bottom: 40px;
+    font-size: rem(16);
+    line-height: rem(19);
+    color: $color--white;
+  }
+}
+
+.plan-discovery-pricing__money {
+  position: relative;
+  display: inline-block;
+
+  .plan-discovery-pricing__currency {
+    position: absolute;
+    top: 10px;
+    left: -30px;
+    font-family: $font-bold;
+    font-size: rem(20);
+    line-height: rem(23);
+    color: $color--squash;
+  }
+
+  .plan-discovery-pricing__whole-number {
+    font-family: $font-bold;
+    font-size: rem(60);
+    line-height: rem(63);
+    color: $color--squash;
+  }
+
+  .plan-discovery-pricing__fractional-part {
+    position: absolute;
+    top: 6px;
+    right: -45px;
+    font-family: $font-bold;
+    font-size: rem(30);
+    line-height: rem(33);
+    color: $color--squash;
+  }
+
+  .plan-discovery-pricing__frequency {
+    position: absolute;
+    right: -72px;
+    bottom: 5px;
+    font-family: $font-extra-bold;
+    font-size: rem(16);
+    font-style: italic;
+    line-height: rem(19);
+    color: $color--white;
+  }
+}
+
+.plan-discovery-pricing__fees-included {
+  margin-top: 5px;
+  font-size: rem(10);
+  line-height: rem(13);
+  color: $color--white;
+}
+
+.plan-discovery-banner__coverages-assistances {
+  padding: 60px 0;
+  background: $color--background-grey;
+
+  .coverages-assistances__title {
+    font-size: rem(24);
+    line-height: rem(27);
+    color: $color--squash;
+    text-align: center;
+  }
+}
+
+.plan-discovery-banner__coverages-assistances--item {
+  background: $color--white;
+  margin-top: 35px;
+
+  &::after {
+    clear: both;
+    content: "";
+    display: block;
+  }
+
+  .coverages-assistances__image {
+    width: 21%;
+    float: left;
+  }
+
+  .coverages-assistances__info {
+    padding: 20px 20px 20px 0;
+    width: 79%;
+    float: left;
+
+    .coverages-assistances__info-header {
+      width: 100%;
+      display: table;
+      margin-bottom: 15px;
+
+      .coverages-assistances__info-header-row {
+        display: table-row;
+      }
+
+      .info--title,
+      .info--price {
+        font-size: rem(20);
+        line-height: rem(23);
+        display: table-cell;
+      }
+
+      .info--title {
+        font-family: $font-bold;
+      }
+
+      .info--price {
+        white-space: nowrap;
+        color: $color--squash;
+        text-align: right;
+      }
+    }
+
+    .coverages-assistances__description {
+      font-size: rem(14);
+      line-height: rem(17);
+    }
+
+    .coverages-assistances__details {
+      margin-top: 5px;
+
+      .details--item {
+        color: $color--squash;
+      }
+    }
+  }
+}
+
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .plan-discovery-banner {
+    &::before {
+      min-height: 780px;
+    }
+
+    .plan-discovery {
+      margin-top: inherit;
+    }
+  }
+
+  .plan-discovery-banner__content {
+    min-height: 780px;
+
+    .plan-discovery-banner__info {
+      padding-top: 100px;
+      text-align: center;
+    }
+
+    .plan-discovery-banner__title {
+      margin-bottom: 10px;
+      font-family: $font-light;
+      font-size: rem(72);
+      line-height: rem(75);
+    }
+
+    .plan-discovery-banner__description {
+      margin-bottom: 30px;
+      font-family: $font-bold;
+      font-size: rem(18);
+      line-height: rem(21);
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .plan-discovery-banner {
+    &::before {
+      min-height: 450px;
+    }
+
+    .plan-discovery {
+      margin-top: 30px;
+    }
+  }
+
+  body.page__home,
+  body.page__auto,
+  body.page__life {
+    .plan-discovery-banner__content {
+      min-height: auto;
+
+      &::before {
+        top: -185px;
+        bottom: inherit;
+        left: -30px;
+        width: 160px;
+        height: 185px;
+      }
+
+      .plan-discovery-banner__info {
+        padding-top: 60px;
+        text-align: center;
+      }
+
+      .plan-discovery-banner__title {
+        margin-bottom: 10px;
+        font-size: rem(20);
+        line-height: rem(23);
+      }
+
+      .plan-discovery-banner__description {
+        font-size: rem(32);
+        line-height: rem(35);
+      }
+
+    }
+  }
+
+  .plan-discovery-banner__coverages-assistances {
+    padding: 0 0 40px;
+    background: $color--blueberry;
+  }
+
+  .plan-discovery-banner__coverages-assistances--item {
+    background: none;
+    border-bottom: 1px dotted $color--white;
+    margin-top: 0;
+    padding: 20px 0;
+
+    &:last-child {
+      border: 0;
+    }
+
+    .coverages-assistances__image { display: none; }
+
+    .coverages-assistances__info {
+      width: 100%;
+      padding: 0;
+
+      .coverages-assistances__info-header {
+        position: relative;
+        padding-right: 15px;
+        cursor: pointer;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 5px;
+          right: 0;
+          display: block;
+          width: 10px;
+          height: 7px;
+          background: url((asset_path('questions-arrow-down.svg'))) no-repeat;
+        }
+
+        .info--title,
+        .info--price {
+          font-size: rem(14);
+          line-height: rem(17);
+        }
+
+        .info--title {
+          padding-right: 10px;
+          color: $color--white;
+        }
+      }
+
+      .coverages-assistances__description {
+        color: $color--white;
+      }
+    }
+  }
+
+}

@@ -26,7 +26,7 @@
                 </div>
 
                 <?php
-                if(isset($estagios)){
+                if(isset($estagios) && !empty($estagios)){
                   ?>
                   <div class="col-xs-12 col-sm-6">
                     <ul class="nav nav-sm nav-pills">
@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
                 <?php
-                
+
                   foreach ($empreendimentos['results'] as $empreendimento) {
                     ?>
                     <tr>
@@ -71,7 +71,7 @@
                     </tr>
                     <?php
                   }
-                
+
                 ?>
                 </tbody>
               </table>

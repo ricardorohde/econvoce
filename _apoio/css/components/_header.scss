@@ -1,0 +1,205 @@
+.site-header {
+  .nav {
+    position: fixed;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    background: $color--white;
+    box-shadow: 0 0 25px 1px rgba(0, 0, 0, .1);
+  }
+
+  .nav__logo {
+    display: block;
+    float: left;
+    width: 116px;
+    height: 34px;
+    margin: 13px 0;
+    overflow: hidden;
+    text-indent: -9999px;
+    background: url((asset_path('logo-youse-primary-cs.svg'))) center center no-repeat;
+  }
+
+  .nav__menu {
+    float: left;
+    margin-left: 20px;
+  }
+
+  .nav__list {
+    display: block;
+    float: left;
+  }
+
+  .nav__item {
+    float: left;
+
+    &.active {
+      background-color: $color--background-light-blue;
+    }
+  }
+
+  .nav__link,
+  .nav__link-account {
+    display: block;
+    padding: 0 20px;
+    font-size: rem(12);
+    line-height: rem(60);
+    color: $color--battleship-grey;
+    text-decoration: none;
+
+    &:hover {
+      color: $color--orangey-yellow;
+    }
+  }
+
+  .nav__link {
+    font-family: $font-bold;
+    text-transform: uppercase;
+  }
+
+  .nav__link-account {
+    float: right;
+  }
+}
+
+.nav-side {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  display: none;
+  width: 320px;
+  height: 100%;
+  overflow-y: auto;
+  background: $color--background-light-blue;
+}
+
+body.nav-side--oppened {
+  overflow: hidden;
+
+  .nav-side { display: block; }
+}
+
+.nav-side__close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  text-indent: -9999px;
+  background: url((asset_path('nav-side-close.svg'))) no-repeat;
+}
+
+.nav-side__name {
+  font-family: $font-light;
+}
+
+.nav-site__list {
+  padding: 60px 10px 40px;
+
+  .item {
+    padding: 15px 50px 10px;
+    border-bottom: 1px solid darken($color--background-light-blue, 10%);
+
+    .label {
+      font-family: $font-bold;
+      font-size: 20px;
+      line-height: 23px;
+      color: $color--gunmetal;
+      text-decoration: none;
+
+      &.is-logged {
+        font-family: $font-light;
+      }
+    }
+
+    .link {
+      font-family: $font-light;
+      font-size: 20px;
+      line-height: 23px;
+      color: $color--gunmetal;
+      text-decoration: none;
+    }
+
+    .sub-item {
+      padding: 5px 0;
+      margin-top: 5px;
+      line-height: 25px;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      &::before {
+        content: ' ';
+        float: left;
+        width: 15px;
+        height: 20px;
+        margin-right: 10px;
+        overflow: hidden;
+      }
+
+      &.sub-item--home::before {
+        background: url((asset_path('featured-product-icon-home.svg'))) no-repeat;
+      }
+
+      &.sub-item--auto::before {
+        background: url((asset_path('featured-product-icon-auto.svg'))) no-repeat;
+      }
+
+      &.sub-item--life::before {
+        background: url((asset_path('featured-product-icon-life.svg'))) no-repeat;
+      }
+    }
+  }
+
+}
+
+@include media($tablet) {
+  .site-header {
+    .nav__menu-toggle {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      width: 30px;
+      height: 20px;
+      text-indent: -9999px;
+      cursor: pointer;
+      background: url((asset_path('header-nav-menu-toggle-icon.svg'))) center center no-repeat;
+    }
+  }
+
+  .nav-side {
+    width: 320px;
+  }
+}
+
+@include media($mobile) {
+  .site-header {
+    .nav__logo {
+      width: 96px;
+      height: 28px;
+      margin: 6px 0;
+    }
+
+    .nav__menu-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 20px;
+      text-indent: -9999px;
+      cursor: pointer;
+      background: url((asset_path('header-nav-menu-toggle-icon.svg'))) center center no-repeat;
+    }
+  }
+
+  .nav-side {
+    width: 100%;
+  }
+
+  .nav-side__close {
+    top: 10px;
+    right: 25px;
+  }
+}

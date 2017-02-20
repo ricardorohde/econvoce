@@ -1,5 +1,7 @@
 <div class="content">
   <div class="container-fluid">
+    <?php $this->load->view('admin/includes/alerts', $this->_ci_cached_vars); ?>
+
     <div class="row">
       <div class="col-md-12">
         <a href="<?php echo base_url('admin/vendas/importar'); ?>" class="btn btn-warning">IMPORTAR PLANILHA</a>
@@ -11,7 +13,15 @@
           <?php
         }
         ?>
-        
+
+        <?php
+        if(isset($empreendimento) && !empty($empreendimento)){
+          ?>
+          <h3><?php echo $empreendimento['apelido']; ?></h3>
+          <?php
+        }
+        ?>
+
         <?php
         if(isset($vendas['results']) && !empty($vendas['results'])){
           ?>
@@ -26,11 +36,11 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                     <ul class="nav nav-sm nav-pills">
-                      <li role="presentation" class="<?php echo (!isset($mes) || (isset($mes) && $mes == 0)) && (!isset($ano) || (isset($ano) && $ano == 0)) ? 'active' : ''; ?>"><a href="<?php echo base_url('admin/vendas' . (isset($empreendimento_id) && $empreendimento_id != 0 ? '/empreendimento/' . $empreendimento_id : '')); ?>">Todos</a></li>
+                      <li role="presentation" class="<?php echo (!isset($mes) || (isset($mes) && $mes == 0)) && (!isset($ano) || (isset($ano) && $ano == 0)) ? 'active' : ''; ?>"><a href="<?php echo base_url('admin/vendas' . (isset($empreendimento) && !empty($empreendimento) ? '/empreendimento/' . $empreendimento['empreendimento_id'] : '')); ?>">Todos</a></li>
                       <?php
                       foreach ($periodos as $periodo) {
                         ?>
-                        <li role="presentation" class="<?php echo (isset($mes) && $mes == $periodo['mes'] && isset($ano) && $ano == $periodo['ano']) ? 'active' : ''; ?>"><a href="<?php echo base_url('admin/vendas/' . $periodo['mes'] . '/' . $periodo['ano'] . (isset($empreendimento_id) && $empreendimento_id != 0 ? '/empreendimento/' . $empreendimento_id : '')); ?>"><?php echo $this->admin->mes($periodo['mes']); ?>/<?php echo $periodo['ano']; ?></a></li>
+                        <li role="presentation" class="<?php echo (isset($mes) && $mes == $periodo['mes'] && isset($ano) && $ano == $periodo['ano']) ? 'active' : ''; ?>"><a href="<?php echo base_url('admin/vendas/' . $periodo['mes'] . '/' . $periodo['ano'] . (isset($empreendimento) && !empty($empreendimento) ? '/empreendimento/' . $empreendimento['empreendimento_id'] : '')); ?>"><?php echo $this->admin->mes($periodo['mes']); ?>/<?php echo $periodo['ano']; ?></a></li>
                         <?php
                       }
                       ?>

@@ -1,0 +1,21 @@
+.page__simulator {
+  .plan-discovery-banner {
+    &::before {
+      background-image: url((asset_path('banner-simulator-life.jpg')));
+    }
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+}

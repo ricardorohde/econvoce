@@ -8,6 +8,8 @@ class Empreendimentos extends Admin_Controller {
   }
 
   public function index($estagio = 0, $page = 1) {
+    $this->admin->user_logged();
+
     $data = array_merge($this->header, array(
       'section' => array(
         'title' => 'Empreendimentos',
@@ -48,6 +50,8 @@ class Empreendimentos extends Admin_Controller {
   }
 
   public function importar() {
+    $this->admin->user_logged();
+
     $data = array_merge($this->header, array(
       'section' => array(
         'title' => 'Importar planilha - Empreendimentos',
@@ -134,7 +138,7 @@ class Empreendimentos extends Admin_Controller {
                       foreach ($colunas_dados as $linha_key => $linha_value) {
                         $linha_processo = false;
 
-                        if(isset($linha[$linha_value]) && !empty(trim($linha[$linha_value]))){
+                        if(isset($linha[$linha_value]) && trim($linha[$linha_value])){
                           $empreendimentos[$empreendimento_count][$linha_key] = $linha[$linha_value];
                           $linha_processo = true;
                         }
@@ -176,6 +180,8 @@ class Empreendimentos extends Admin_Controller {
   } //importar
 
   public function editar($empreendimento_id = null) {
+    $this->admin->user_logged();
+
     $data = array_merge($this->header, array(
       'section' => array(
         'title' => ($empreendimento_id ? 'Editar empreendimento' : 'Cadastrar empreendimento'),

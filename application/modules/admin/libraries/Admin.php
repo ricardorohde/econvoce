@@ -5,21 +5,21 @@ class Admin {
     $this->ci =& get_instance();
   }
 
-  public function user_logged($condition = TRUE, $redirect = NULL, $section = 'usuario_logado'){
+  public function user_logged($condition = false, $redirect = true, $section = 'admin_logado'){
     $login_check = $this->ci->session->userdata($section);
-    $is_logged = $login_check ? TRUE : FALSE;
+    $is_logged = $login_check ? true : false;
 
     if($is_logged == $condition){
       if($redirect){
-        if($redirect === TRUE){
-          $redirect = 'minha-conta/login';
+        if($redirect === true){
+          $redirect = 'admin/login';
         }
         $this->ci->session->set_flashdata('redirect', base_url($this->ci->uri->uri_string()));
         redirect(base_url($redirect), 'location');
       }
-      return TRUE;
+      return true;
     }
-    return FALSE;
+    return false;
   }
 
   public function userinfo($slug, $section = 'usuario_logado'){

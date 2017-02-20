@@ -1,0 +1,79 @@
+.page__life_regulamento_capitalizacao {
+  .content-text--link {
+    color: $color--gunmetal;
+  }
+
+  .table-box {
+    display: inline-block;
+    width: 70%;
+    margin: 30px auto;
+  }
+
+  .table-bordered {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid $color--battleship-grey;
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid $color--battleship-grey;
+
+      &.active {
+        background: rgba(0, 179, 136, .2);
+      }
+    }
+  }
+
+  .table--title {
+    display: block;
+    margin-bottom: 15px;
+    font-family: $font-bold;
+    font-size: rem(20);
+    line-height: rem(23);
+    text-align: left;
+  }
+
+  .table--legend {
+    margin-top: 10px;
+    font-family: $font-light;
+    color: $color--gunmetal;
+    text-align: left;
+  }
+
+  .line {
+    height: 0;
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid $color--gallery-grey;
+  }
+
+  .footline {
+    font-size: rem(14);
+    line-height: rem(17);
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .page__life_regulamento_capitalizacao {
+    .table-box {
+      width: 85%;
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .page__life_regulamento_capitalizacao {
+    .table-box {
+      width: 100%;
+    }
+  }
+}

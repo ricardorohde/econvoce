@@ -1,0 +1,122 @@
+.testimonials {
+  padding: 60px 0;
+  background: $color--gallery-grey;
+}
+
+.title-testimonials {
+  margin-bottom: 65px;
+}
+
+.testimonials__item {
+  .comment-box {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: $color--white;
+    border: 1px solid darken($color--gallery-grey, 2%);
+    border-radius: 1px;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 20%;
+      margin-left: -10px;
+      border-top: 10px solid $color--white;
+      border-right: 15px solid transparent;
+      border-left: 0;
+    }
+
+    &::before {
+      bottom: -12px;
+      margin-left: -11px;
+      border-top: 12px solid;
+      border-top-color: inherit;
+      border-right: 17px solid transparent;
+      border-left: 0;
+    }
+  }
+
+  .comment {
+    margin-bottom: 10px;
+    font-family: $font-light;
+    font-size: rem(14);
+    line-height: rem(17);
+  }
+
+  .stars {
+    height: 20px;
+
+    i {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-left: 3px;
+      overflow: hidden;
+      text-indent: -9999px;
+      background: url((asset_path('testimonials-star.svg'))) no-repeat;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+
+  .author {
+    display: table;
+  }
+
+  .author__image {
+    max-width: 60px;
+  }
+
+  .author__image,
+  .author__info {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .author__name {
+    padding-left: 20px;
+    font-size: rem(16);
+    line-height: rem(19);
+  }
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .testimonials {
+    padding: 40px 0;
+  }
+
+  .title-testimonials {
+    margin-bottom: 65px;
+    text-align: center;
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .testimonials {
+    padding: 40px 0;
+  }
+
+  .title-testimonials {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .testimonials__item {
+    .comment {
+      min-height: auto;
+    }
+  }
+}

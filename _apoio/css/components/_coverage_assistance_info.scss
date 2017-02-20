@@ -1,0 +1,53 @@
+.covarage-assistance-info {
+
+  .covarage-assistance-info__title {
+    font-family: $font-bold;
+    font-size: rem(40);
+    line-height: rem(43);
+  }
+
+  .covarage-assistance-info__description {
+    margin-top: 20px;
+    font-family: $font-light;
+    font-size: rem(23);
+    line-height: rem(26);
+  }
+
+}
+
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+  .covarage-assistance-info {
+    .covarage-assistance-info__item--image {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .covarage-assistance-info {
+    padding-top: 40px;
+
+    .covarage-assistance-info__item--image {
+      margin: 20px 0;
+    }
+
+    .covarage-assistance-info__title {
+      font-family: $font-bold;
+      font-size: rem(25);
+      line-height: rem(28);
+    }
+
+    .covarage-assistance-info__description {
+      font-size: rem(20);
+      line-height: rem(23);
+    }
+  }
+}

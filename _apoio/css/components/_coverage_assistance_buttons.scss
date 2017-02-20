@@ -1,0 +1,18 @@
+//*******
+//TABLET
+//*******
+
+@include media($tablet) {
+
+}
+
+//*******
+//MOBILE
+//*******
+
+@include media($mobile) {
+  .coverage-assistance-buttons {
+    .button-rounded { min-width: 230px; }
+    .m_mt20px { margin-top: 20px; }
+  }
+}

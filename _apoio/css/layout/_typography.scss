@@ -1,0 +1,53 @@
+.section-title {
+  font-family: $font-light;
+}
+
+.section-description {
+  margin: 10px 0 30px;
+  font-family: $font-light;
+  color: $color--gunmetal;
+}
+
+@include media($mobile) {
+  .section-title {
+    font-size: rem(25);
+    line-height: rem(28);
+    text-align: center;
+  }
+
+  .section-description {
+    font-size: rem(20);
+    line-height: rem(23);
+    text-align: center;
+  }
+}
+
+@include media($tablet) {
+  .section-title {
+    font-size: rem(36);
+    line-height: rem(39);
+  }
+
+  .section-description {
+    font-size: rem(20);
+    line-height: rem(23);
+  }
+}
+
+@include media($desktop) {
+  .section-title {
+    font-size: rem(40);
+    line-height: rem(43);
+  }
+
+  .section-description {
+    font-size: rem(23);
+    line-height: rem(26);
+  }
+}
+
+.light { font-family: $font-light; }
+.bold { font-family: $font-bold; }
+.extra-bold { font-family: $font-extra-bold; }
+
+.text-center { text-align: center; }
