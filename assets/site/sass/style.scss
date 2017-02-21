@@ -1,0 +1,12 @@
+$enable-flex: false;
+$enable-grid-classes: true;
+
+@import 'bootstrap/_variables';
+@import 'bootstrap/_mixins';
+@import 'bootstrap/_normalize';
+@import 'bootstrap/_reboot';
+@import 'bootstrap/_grid';
+
+h1 {
+  margin-top: 50px;
+}

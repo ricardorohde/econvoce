@@ -14,7 +14,7 @@ class Admin {
         if($redirect === true){
           $redirect = 'admin/login';
         }
-        $this->ci->session->set_flashdata('redirect', base_url($this->ci->uri->uri_string()));
+        $this->ci->session->set_tempdata('redirect', base_url($this->ci->uri->uri_string()), 180);
         redirect(base_url($redirect), 'location');
       }
       return true;
@@ -154,5 +154,18 @@ class Admin {
     }
 
     return $alerta;
+  }
+
+  public function get_redirect($local = null) {
+    $redirect = base_url($local ? $local : '');
+    if($this->ci->input->post("redirect")) {
+      $redirect = $this->ci->input->post("redirect");
+    }else{
+      if($this->ci->session->tempdata('redirect')) {
+        $redirect = $this->ci->session->tempdata('redirect');
+        $this->ci->session->unset_tempdata('redirect');
+      }
+    }
+    return $redirect;
   }
 }

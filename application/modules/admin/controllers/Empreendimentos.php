@@ -16,7 +16,7 @@ class Empreendimentos extends Admin_Controller {
         'page' => array(
           'one' => 'empreendimentos'
         ),
-        'search_form_action' => 'admin/empreendimentos'
+        'search_form_action' => ($estagio ? 'admin/empreendimentos/' . $estagio : 'admin/empreendimentos')
       ),
       'estagio_slug' => $estagio,
       'estagios' => $this->registros_model->obter_registros('estagios', array('where' => array('estagios.slug !=' => 'nao-informado')))

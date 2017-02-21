@@ -374,7 +374,7 @@ class Vendas_model extends CI_Model {
             }
 
             //COORDENADORES
-            if(isset($excel_linha['gerente']) && (isset($excel_linha['gerente'][0]) && !empty($excel_linha['gerente'][0]))){
+            if(isset($excel_linha['coordenador']) && (isset($excel_linha['coordenador'][0]) && !empty($excel_linha['coordenador'][0]))){
               $coordenadores_cleared = $excel_linha['coordenador'];
               $coordenadores_count = count($excel_linha['gerente']);
               if($usuarios_log) echo '<hr>Coordenadores<br>';

@@ -127,4 +127,46 @@ class Usuarios_model extends CI_Model {
 
     return false;
   }
+
+  public function atualizar_usuario($params = array(), $where = array(), $row = TRUE) {
+    $usuario = $params;
+
+    $this->db->update('usuarios', $usuario, $where);
+
+    return $this->registros_model->obter_registros('usuarios', array('where' => $usuario), $row, 'usuarios.*');
+  }
+
+  public function atualizar_usuarios($usuarios = array(), $insert = true) {
+    $this->db->update('usuarios', array('update' => 1), array('update' => 0));
+
+    $usuarios_adicionados = 0;
+    $usuarios_atualizados = 0;
+    $usuarios_repetidos = 0;
+
+    $usuarios_processados = array();
+
+    if($usuarios){
+      foreach ($usuarios as $item => $usuario) {
+        if(in_array($usuario['apelido'], $usuarios_processados)){
+          $usuarios_repetidos++;
+        }else{
+          $usuarios_processados[] = $usuario['apelido'];
+
+          if($usuario_check = $this->obter_usuarios(array('params' => array('where' => array('usuarios.apelido' => $usuario['apelido']))), TRUE)) {
+            $usuarios_atualizados++;
+            $this->atualizar_usuario(array_merge($usuario, array('status' => 1, 'update' => 0)), array('usuarios.id' => $usuario_check['id']), TRUE);
+          }else{
+            $usuarios_adicionados++;
+            $this->adicionar_usuario(array_merge($usuario, array('status' => 1, 'update' => 0)), TRUE);
+          }
+        }
+      }
+    }
+
+    return array(
+      'usuarios_adicionados' => $usuarios_adicionados,
+      'usuarios_atualizados' => $usuarios_atualizados,
+      'usuarios_repetidos' => $usuarios_repetidos
+    );
+  }
 }

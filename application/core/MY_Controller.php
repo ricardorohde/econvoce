@@ -33,12 +33,19 @@ class Admin_Controller extends Default_Controller {
 
     $header = array('header' => array('notificacoes' => array()));
 
-    $notificacoes_duplicadas = $this->notificacoes_model->obter_notificacoes_duplicadas();
-
-    if($notificacoes_duplicadas){
+    $notificacoes_vendas_duplicadas = $this->notificacoes_model->obter_vendas_duplicadas();
+    if($notificacoes_vendas_duplicadas){
       $header['header']['notificacoes'][] = array(
-        'label' => ($notificacoes_duplicadas == 1 ? 'Existe '. $notificacoes_duplicadas .' venda duplicada' : 'Existem '. $notificacoes_duplicadas .' vendas duplicadas'),
+        'label' => ($notificacoes_vendas_duplicadas == 1 ? 'Existe '. $notificacoes_vendas_duplicadas .' venda duplicada' : 'Existem '. $notificacoes_vendas_duplicadas .' vendas duplicadas'),
         'url' => 'admin/vendas/duplicadas'
+      );
+    }
+
+    $notificacoes_usuarios_incompletos = $this->notificacoes_model->obter_usuarios_incompletos();
+    if($notificacoes_usuarios_incompletos){
+      $header['header']['notificacoes'][] = array(
+        'label' => ($notificacoes_usuarios_incompletos == 1 ? 'Existe '. $notificacoes_usuarios_incompletos .' usuário com dados incompletos' : 'Existem '. $notificacoes_usuarios_incompletos .' usuários com dados incompletos'),
+        'url' => 'admin/usuarios/incompletos'
       );
     }
 

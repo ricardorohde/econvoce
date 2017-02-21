@@ -36,7 +36,7 @@ class Vendas extends Admin_Controller {
         'page' => array(
           'one' => 'vendas'
         ),
-        'search_form_action' => 'admin/vendas'
+        'search_form_action' => ($mes && $ano ? 'admin/vendas/' . $mes . '/' . $ano : 'admin/vendas')
       ),
       'mes' => $mes,
       'ano' => $ano,
@@ -46,6 +46,7 @@ class Vendas extends Admin_Controller {
     if($this->input->get('q')){
       $like['empreendimentos.apelido'] = $this->input->get('q');
       $like['estagios.nome'] = $this->input->get('q');
+      $like['vendas.unidade'] = $this->input->get('q');
       $data['filter'] = true;
     }
 

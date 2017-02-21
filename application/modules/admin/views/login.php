@@ -1,6 +1,7 @@
 <div class="container" style="padding-top:100px;">
   <div class="col-sm-4 col-sm-offset-4">
     <form action="<?php echo base_url('admin/login'); ?>" method="post" id="login-form" class="text-left">
+      <input type="text" name="redirect" value="<?php echo ($this->session->tempdata('redirect') ? $this->session->tempdata('redirect') : ($this->input->post('redirect') ? $this->input->post('redirect') : base_url('admin/login'))); ?>" />
       <?php $this->load->view('admin/includes/alerts', $this->_ci_cached_vars); ?>
       <div class="main-login-form">
         <h5>Acesso restrito</h5>

@@ -16,7 +16,8 @@ class Acesso extends Admin_Controller {
 
     if($this->input->post()){
       if($login = $this->acesso_model->efetuar_login($this->input->post())){
-        $this->admin->alerta_redirect('success', 'Seja bem vindo(a).', 'admin', 'visible');
+        redirect($this->admin->get_redirect('admin'), 'location');
+        //$this->admin->alerta_redirect('success', 'Seja bem vindo(a).', 'admin', 'visible');
       }else{
         $data = array_merge($data, $this->admin->alerta_redirect('danger', 'Login e/ou senha inválidos', false, 'visible'));
       }

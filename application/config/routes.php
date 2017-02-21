@@ -22,8 +22,15 @@ $route['admin/vendas/(:num)/(:num)/(:num)'] = 'admin/vendas/index/$1/$2/$3';
 $route['admin/vendas/(:num)/(:num)'] = 'admin/vendas/index/$1/$2/1';
 $route['admin/vendas/(:num)'] = 'admin/vendas/index/0/0/$1';
 
+$route['admin/usuarios/importar'] = 'admin/usuarios/importar';
+$route['admin/usuarios/cadastrar'] = 'admin/usuarios/editar';
+$route['admin/usuarios/(:num)/editar'] = 'admin/usuarios/editar/$1';
+$route['admin/usuarios/incompletos/(:num)'] = 'admin/usuarios/index/$1/0/1';
+$route['admin/usuarios/incompletos'] = 'admin/usuarios/index/1/0/1';
 $route['admin/usuarios'] = 'admin/usuarios';
 $route['admin/usuarios/(:num)'] = 'admin/usuarios/index/$1';
+$route['admin/usuarios/(:any)'] = 'admin/usuarios/index/1/$1';
+$route['admin/usuarios/(:any)/(:num)'] = 'admin/usuarios/index/$2/$1';
 
 $route['admin/empreendimentos/importar'] = 'admin/empreendimentos/importar';
 $route['admin/empreendimentos/cadastrar'] = 'admin/empreendimentos/editar';
@@ -32,4 +39,3 @@ $route['admin/empreendimentos/(:num)/editar'] = 'admin/empreendimentos/editar/$1
 $route['admin/empreendimentos/(:num)'] = 'admin/empreendimentos/index/0/$1';
 $route['admin/empreendimentos/(:any)'] = 'admin/empreendimentos/index/$1';
 $route['admin/empreendimentos/(:any)/(:num)'] = 'admin/empreendimentos/index/$1/$2';
-
