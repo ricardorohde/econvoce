@@ -5,7 +5,7 @@ class Home extends Site_Controller {
 	public function index() {
     $data = array(
       'section' => array(
-        'body_class' => 'page-home'
+        'hierarchy' => array('home')
       )
     );
 

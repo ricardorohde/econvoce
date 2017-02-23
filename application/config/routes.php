@@ -12,7 +12,13 @@ $route['configjs'] = 'site/tools/configjs';
 
 $route['(login|logout)'] = 'site/acesso/$1';
 
+$route['empreendimentos/(:num)'] = 'site/empreendimentos/index/0/$1';
+$route['empreendimentos/(:any)/(:num)'] = 'site/empreendimentos/index/$1/$2';
+$route['empreendimentos/(:any)'] = 'site/empreendimentos/index/$1';
+$route['empreendimentos'] = 'site/empreendimentos';
 
+$route['ranking/(:num)'] = 'site/ranking/index/$1';
+$route['ranking'] = 'site/ranking';
 
 // ADMIN
 

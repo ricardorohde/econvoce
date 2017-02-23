@@ -44,7 +44,8 @@ $hide_all = isset($section['hide_all']) && $section['hide_all'] ? true : false;
     $LAB
       .script("<?php echo base_url('assets/site/js/jquery-3.1.0.min.js'); ?>").wait()
       .script("<?php echo base_url('assets/site/js/bootstrap.min.js'); ?>").wait()
-      .script("<?php echo base_url('site/configjs?v=' . $this->config->item('site_versao')); ?>").wait()
+      .script("<?php echo base_url('assets/site/js/pace.min.js'); ?>").wait()
+      .script("<?php echo base_url('configjs?v=' . $this->config->item('site_versao')); ?>").wait()
       <?php
       if(isset($assets["scripts"]) && !empty($assets["scripts"])){
         foreach($assets["scripts"] as $index => $script){
