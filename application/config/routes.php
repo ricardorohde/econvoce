@@ -5,9 +5,18 @@ $route['default_controller'] = 'site/home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['configjs'] = 'site/tools/configjs';
-$route['admin/configjs'] = 'admin/tools/configjs';
 
+// SITE
+
+$route['configjs'] = 'site/tools/configjs';
+
+$route['(login|logout)'] = 'site/acesso/$1';
+
+
+
+// ADMIN
+
+$route['admin/configjs'] = 'admin/tools/configjs';
 
 $route['admin'] = 'admin/dashboard';
 $route['admin/(login|logout)'] = 'admin/acesso/$1';

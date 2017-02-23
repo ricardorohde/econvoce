@@ -4,7 +4,7 @@
       asfdfds
     </div>
     <div class="col-sm-7">
-      asdsfsd
+      Home
     </div>
   </div>
 </div>

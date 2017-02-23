@@ -18,7 +18,7 @@ $hide_all = isset($section['hide_all']) && $section['hide_all'] ? true : false;
   <meta name="viewport" content="width=device-width" />
 
   <!--  CSS for Demo Purpose, don't include it in your project     -->
-  <link href="<?php echo base_url('assets/site/css/style.css'); ?>" rel="stylesheet" />
+  <link href="<?php echo base_url('assets/site/css/styles.css?v=' . time()); ?>" rel="stylesheet" />
 
   <!--     Fonts and icons     -->
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -43,6 +43,7 @@ $hide_all = isset($section['hide_all']) && $section['hide_all'] ? true : false;
   <script>
     $LAB
       .script("<?php echo base_url('assets/site/js/jquery-3.1.0.min.js'); ?>").wait()
+      .script("<?php echo base_url('assets/site/js/bootstrap.min.js'); ?>").wait()
       .script("<?php echo base_url('site/configjs?v=' . $this->config->item('site_versao')); ?>").wait()
       <?php
       if(isset($assets["scripts"]) && !empty($assets["scripts"])){
