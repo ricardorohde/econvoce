@@ -1,0 +1,43 @@
+.footer {
+  background: $color-grey-100;
+  min-height: $footer-height;
+
+  .btn-perguntas-frequentes {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .footer__text {
+    text-align: center;
+    padding: 30px 0;
+
+    > .copy {
+      display: inline-block;
+      color: $color-grey-700;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    > .logo-econvoce {
+      width: 71px;
+      height: 17px;
+      display: inline-block;
+      background: image-url('logo-econvoce.png') center center no-repeat;
+      background-size: 100%;
+      text-indent: -9999px;
+    }
+
+
+  }
+
+}
+
+@include respond-to(xs) {
+  .footer {
+    .footer__text {
+      text-align: left;
+    }
+  }
+}

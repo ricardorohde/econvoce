@@ -1,0 +1,42 @@
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 15px 30px;
+  border-radius: 30px;
+  outline: none;
+
+  &.btn-block {
+    display: block;
+    width:100%;
+    box-sizing: border-box;
+  }
+
+  &.btn-blue-dark {
+    background-color: $color-blue-dark;
+    color: $color-white;
+  }
+
+  &.btn-white {
+    background-color: $color-white;
+    color: $color-blue-dark;
+  }
+
+  &.btn-green {
+    background-color: $color-green;
+    color: $color-white;
+  }
+
+  &.btn-grey-500 {
+    background-color: $color-grey-500;
+    color: $color-white;
+  }
+}

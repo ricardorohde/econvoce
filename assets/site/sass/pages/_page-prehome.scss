@@ -1,0 +1,252 @@
+.page-prehome {
+  .card {
+    .prehome-navbar {
+      padding-top: 50px;
+    }
+
+    .btn-ativar {
+      margin-right: 10px;
+    }
+
+    position: relative;
+    background: image-url('prehome-cartao-bg.jpg') center bottom no-repeat;
+    background-size: cover;
+    min-height: 900px;
+
+    &::after {
+      position: absolute;
+      left: 50%;
+      margin-left: -44px;
+      bottom: -33px;
+      content: '';
+      display: block;
+      width: 88px;
+      height: 33px;
+      background: image-url('prehome-cartao-more.jpg') no-repeat;
+    }
+  
+    .card__description {
+      font-weight: 300;
+      font-size: 30px;
+      line-height: 30px;
+      color: $color-white;
+      padding: 50px 0 0;
+    }
+
+    .card__image {
+      margin-top: 30px;
+    }
+  }
+
+
+  .mecanica {
+    position: relative;
+    background: $color-white image-url('prehome-mecanica-bg.jpg') center bottom no-repeat;
+    background-size: cover;
+
+    .mecanica__areautil {
+      text-align: center;
+      padding: 200px 0;
+    }
+
+    .mecanica__title {
+      font-size: 30px;
+      line-height: 33px;
+      color: $color-grey-700;
+      margin-top: 30px;
+    }
+
+    .mecanica__description {
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 500;
+    }
+
+    .btn-ecoins {
+      background-image: image-url('prehome__moeda.png');
+      background-repeat: no-repeat;
+      background-position: 5px center;
+      padding: 23px 30px 23px 75px;
+      border-radius: 35px;
+      text-transform: none;
+      font-size: 25px;
+      font-weight: 300;
+      margin-top: 100px;
+    }
+  }
+
+  .saldo {
+    position: relative;
+    background: $color-white image-url('prehome-saldo-bg.jpg') center center no-repeat;
+    background-size: cover;
+    min-height: 710px;
+
+    .saldo__content {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .saldo__title {
+      font-size: 45px;
+      line-height: 45px;
+      color: $color-white;
+    }
+
+    .btn-saldo {
+      .fa {
+        font-size: 25px;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .cadastro {
+    background: $color-white;
+    padding: 50px 0;
+
+    .cadastro__title {
+      font-size: 40px;
+      line-height: 45px;
+      color: $color-grey-700;
+    }
+
+    .cadastro__description {
+      display: block;
+      font-size: 14px;
+      line-height: 17px;
+      margin-top: 50px;
+      color: $color-grey-600;
+
+      > .link {
+        color: $color-grey-700;
+      }
+    }
+  }
+
+  .footer {
+    background: $color-grey-900;
+
+    .footer__text {
+      > .copy {
+        color: $color-white;
+      }
+
+      > .logo-econvoce {
+        background-image: image-url('logo-econvoce--green.png');
+      }
+
+
+    }
+  }
+}
+
+
+// Desktop
+@include respond-to(md) {
+  .page-prehome {
+    .mecanica {
+      .mecanica__title {
+      }
+
+      .btn-ecoins {
+        margin-top: 50px;
+      }
+    }
+  }
+}
+
+// Tablet
+@include respond-to(sm) {
+  .page-prehome {
+    .card {
+      min-height: auto;
+    }
+
+    .mecanica {
+      .mecanica__areautil {
+        padding: 100px 0;
+      }
+
+      .mecanica__title {
+        font-size: 25px;
+        line-height: 25px;
+      }
+
+      .mecanica__description {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+      }
+    }
+
+    .saldo {
+      min-height: 400px;
+    }
+  }
+}
+
+// Mobile
+@include respond-to(xs) {
+  .page-prehome {
+    .card {
+      min-height: auto;
+
+      .prehome-navbar {
+        padding-top: 30px;
+      }
+  
+      .card__description {
+        font-size: 20px;
+        line-height: 20px;
+      }
+    }
+
+
+    .mecanica {
+      .mecanica__areautil {
+        padding: 60px 0;
+      }
+      
+      .mecanica__title {
+        font-size: 25px;
+        line-height: 25px;
+        margin-top: 0;
+      }
+
+      .mecanica__description {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+      }
+
+      .btn-ecoins {
+        margin-top: 30px;
+      }
+    }
+
+    .saldo {
+      min-height: 400px;
+
+      .saldo__title {
+        font-size: 30px;
+        line-height: 30px;
+      }
+    }
+
+    .cadastro {
+      padding: 30px 0;
+
+      .cadastro__title {
+        font-size: 30px;
+        line-height: 33px;
+      }
+
+      .cadastro__description {
+        margin-top: 30px;
+      }
+    }
+  }
+}

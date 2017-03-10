@@ -1,0 +1,223 @@
+.page-ranking {
+  .search-box {
+    position: relative;
+    margin-top: 20px;
+    
+    .icon {
+      position: absolute;
+      font-size: 30px;
+      color: $color-grey-400;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+        color: $color-red;
+      }
+    }
+
+    .search__input {
+      text-align: center;
+      border: 0;
+      outline: 0;
+      height: 60px;
+      border-bottom: 1px solid $color-grey-400;
+    }
+  }
+
+  .page-icon {
+    text-align: center;
+    margin: 30px;
+  }
+
+  .meses__table {
+    display: table;
+    margin: 10px auto 50px;
+
+    .meses__row {
+      display: table-row;
+
+      .meses__left,
+      .meses__right {
+        display: table-cell;
+        vertical-align: middle;
+        width: 40px;
+        font-size: 25px;
+        color: $color-grey-800;
+
+        &.disabled {
+          opacity: 0;
+        }
+      }
+
+      .meses__middle {
+        display: table-cell;
+        vertical-align: middle;
+        color: $color-grey-800;
+        font-size: 18px;
+        font-weight: 300;
+      }
+    }
+  }
+
+
+  .table {
+    width: 100%;
+    margin-bottom: 70px;
+
+    .thead {
+      .tr {
+        .th {
+          padding-bottom: 60px;
+
+          &.points,
+          &.total {
+            white-space: nowrap;
+            text-transform: uppercase;
+            color: $color-grey-600;
+            padding: 0 10px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .tbody {
+      .tr {
+        .td {
+          font-size: 16px;
+        }
+
+        .rank {
+          padding: 0 10px 0;
+          text-align: center;
+          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
+          border-left: 2px solid transparent;
+          font-weight: 700;
+          width: 5%;
+        }
+
+        .letters,
+        .name,
+        .points {
+          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
+          padding: 5px 5px;
+        }
+
+        .letters {
+          width: 5%;
+        }
+
+        .name {
+          width: 30%;
+        }
+
+        .points {
+        }
+
+        .total {
+          padding: 0 20px 0;
+          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
+          border-right: 2px solid transparent;
+        }
+
+        &:hover {
+            background: $color-grey-50;
+
+            $color--line: $color-grey-100;
+          
+          
+          .rank {
+            border-top: 2px solid $color--line;
+            border-bottom: 2px solid $color--line;
+            border-left: 2px solid $color--line;
+
+            -webkit-border-top-left-radius: 30px;
+            -webkit-border-bottom-left-radius: 30px;
+            -moz-border-radius-topleft: 30px;
+            -moz-border-radius-bottomleft: 30px;
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+
+          }
+
+          .td {
+            border-top: 2px solid $color--line;
+            border-bottom: 2px solid $color--line;
+          }
+
+          .total {
+            border-top: 2px solid $color--line;
+            border-right: 2px solid $color--line;
+            border-bottom: 2px solid $color--line;
+
+            -webkit-border-top-right-radius: 30px;
+            -webkit-border-bottom-right-radius: 30px;
+            -moz-border-radius-topright: 30px;
+            -moz-border-radius-bottomright: 30px;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+          }
+        }
+
+        .th,
+        .td {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    margin-bottom: 80px;
+  }
+
+  .table-initial-letters {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    border-radius: 50%;
+    color: $color-white;
+    text-decoration: none;
+    font-weight: 700;
+    background: $color-grey-600;
+
+    &.small {
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+    }
+
+    &.corretor { background-color: $color--corretor; }
+    &.gerente { background-color: $color--gerente; }
+    &.coordenador { background-color: $color--coordenador; }
+
+    &.dropdown {
+      margin-right: 14px;
+
+      &::after {
+        content: '';
+        display: block;
+        background: image-url('navbar-arrow-down--black.svg') no-repeat;
+        background-size: 100%;
+        width: 9px;
+        height: 6px;
+        position: absolute;
+        top: 50%;
+        margin-top: -3px;
+        right: -14px;
+      }
+    }
+
+  }
+}

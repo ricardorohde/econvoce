@@ -33,7 +33,13 @@ $config['reais_x_pontos'] = 54;
 
 $config['meses'] = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
 
+$config['usuarios_status'] = array('Aguardando moderação', 'Completo', 'Incompleto', 'Reprovado');
+
 $config['registros_limite'] = 50;
+
+$config['site_email_envio'] = 'noreply@89dev.com.br';
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +92,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'portugues';
 
 /*
 |--------------------------------------------------------------------------
@@ -390,8 +396,8 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-// $config['sess_save_path'] = '/Users/luciano/Projetos/Urbano/econvoce/sessions';
-$config['sess_save_path'] = '/Users/amadre/Projetos/econvoce/sessions';
+$config['sess_save_path'] = '/Users/luciano/Projetos/Urbano/econvoce/sessions';
+// $config['sess_save_path'] = '/Users/amadre/Projetos/econvoce/sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

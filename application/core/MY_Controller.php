@@ -15,6 +15,7 @@ class Site_Controller extends Default_Controller {
     parent::__construct();
 
     $this->load->add_package_path(APPPATH . 'modules/site/');
+    $this->load->library(array('site'));
 
     //$this->load->model(array('logs_model'));
     //$this->form_validation->set_error_delimiters('<small class="help-block">', '</small>');

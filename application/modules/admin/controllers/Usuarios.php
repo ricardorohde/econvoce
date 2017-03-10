@@ -37,7 +37,7 @@ class Usuarios extends Admin_Controller {
     }
 
     if($incompletos){
-      $where['usuarios.status'] = 2;
+      $where['usuarios.status !='] = 1;
       $data['filter'] = true;
     }
 
@@ -281,16 +281,24 @@ class Usuarios extends Admin_Controller {
             'required' => 'Você precisa preencher o perfil do usuário.',
             'greater_than' => 'Você precisa preencher o perfil do usuário.'
           )
+        ),
+        array(
+          'field' => 'status',
+          'label' => 'Status',
+          'rules' => 'required|is_natural_no_zero',
+          'errors' => array(
+            'is_natural_no_zero' => 'Informe o status deste usuário.'
+          )
         )
       ));
 
       if($this->form_validation->run() == TRUE){
         if($usuario_id){
-          if($usuario =  $this->usuarios_model->atualizar_usuario(array_merge($data['usuario'], array('status' => 1, 'update' => 0)), array('usuarios.id' => $usuario_id), TRUE)) {
+          if($usuario =  $this->usuarios_model->atualizar_usuario(array_merge($data['usuario'], array('update' => 0)), array('usuarios.id' => $usuario_id), TRUE)) {
             $this->admin->alerta_redirect('success', 'Usuário atualizado com sucesso.', 'admin/usuarios/'. $usuario['id'] .'/editar');
           }
         }else{
-          if($usuario = $this->usuarios_model->adicionar_usuario(array_merge($data['usuario'], array('status' => 1, 'update' => 0)), true)) {
+          if($usuario = $this->usuarios_model->adicionar_usuario(array_merge($data['usuario'], array('update' => 0)), true)) {
             $this->admin->alerta_redirect('success', 'Usuário cadastrado com sucesso.', 'admin/usuarios/'. $usuario['id'] .'/editar');
           }
         }

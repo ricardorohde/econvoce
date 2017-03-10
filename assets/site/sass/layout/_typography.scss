@@ -1,0 +1,19 @@
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.color-green { color: $color-green; }
+.color-green-light { color: $color-green-light; }
+
+.page__title {
+  font-size: 30px;
+  line-height: 33px;
+  color: $color-black;
+}
+
+.light        { font-weight: 300; }
+.regular      { font-weight: 400; }
+.semi-bold    { font-weight: 600; }
+.bold         { font-weight: 700; }
+.extra-bold   { font-weight: 800; }
+
+.italic       { font-style: italic; }

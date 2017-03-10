@@ -1,0 +1,63 @@
+.row {
+  @include grid-container;
+  @include grid-collapse;
+}
+
+.container {
+  @include container-fixed;
+}
+
+@each $breakpoint, $map in $breakpoints-map {
+
+  @if map-has-key($map, gutter) {
+    @if $breakpoint == xs {
+      @for $cols from 1 through $grids-columns {
+        .col-xs-#{$cols} {
+          position: relative;
+          @include grid-column($cols);
+        }
+
+        .col-xs-offset-#{$cols} {
+          @include grid-push($cols);
+        }
+      }
+    } @else {
+      @include grid-media($map) {
+        .container {
+          width: map-get($map, container);
+        }
+
+        @for $cols from 1 through $grids-columns {
+          .col-#{$breakpoint}-#{$cols} {
+            position: relative;
+            @include grid-column($cols);
+          }
+
+          .col-#{$breakpoint}-offset-#{$cols} {
+            @include grid-shift($cols);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra small screen / mobile
+@include respond-to(xs) {
+  .hidden-xs { display: none !important; }
+}
+
+// Small screen / tablet
+@include respond-to(sm) {
+  .hidden-sm { display: none !important; }
+}
+
+// Medium screen / desktop
+@include respond-to(md) {
+  .hidden-md { display: none !important; }
+}
+
+// Large screen / wide desktop
+@include respond-to(lg) {
+  .hidden-lg { display: none !important; }
+}

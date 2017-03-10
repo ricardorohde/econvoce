@@ -3,20 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'site/home';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
 
 
 // SITE
 
 $route['configjs'] = 'site/tools/configjs';
 
-$route['(login|logout)'] = 'site/acesso/$1';
+$route['cadastro/sucesso'] = 'site/acesso/cadastro_sucesso';
+$route['cadastro/confirmar/(:any)'] = 'site/acesso/cadastro_confirmar/$1';
+$route['(login|logout|cadastro|esqueci-minha-senha)'] = 'site/acesso/$1';
 
-$route['empreendimentos/(:num)'] = 'site/empreendimentos/index/0/$1';
-$route['empreendimentos/(:any)/(:num)'] = 'site/empreendimentos/index/$1/$2';
-$route['empreendimentos/(:any)'] = 'site/empreendimentos/index/$1';
-$route['empreendimentos'] = 'site/empreendimentos';
 
+$route['produtos/(:num)'] = 'site/empreendimentos/index/0/$1';
+$route['produtos/(:any)/(:num)'] = 'site/empreendimentos/index/$1/$2';
+$route['produtos/(:any)'] = 'site/empreendimentos/index/$1';
+$route['produtos'] = 'site/empreendimentos';
+
+$route['ranking/(:num)/(:num)/(:num)'] = 'site/ranking/index/$3/$1/$2';
+$route['ranking/(:num)/(:num)'] = 'site/ranking/index/1/$1/$2';
 $route['ranking/(:num)'] = 'site/ranking/index/$1';
 $route['ranking'] = 'site/ranking';
 

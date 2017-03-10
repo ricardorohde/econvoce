@@ -1,18 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Empreendimentos extends Admin_Controller {
+class Empreendimentos extends Site_Controller {
   function __construct() {
     parent::__construct();
     $this->load->model(array('empreendimentos_model'));
   }
 
   public function index($estagio = 0, $page = 1) {
+    $this->site->user_logged();
+    
     $data = array(
       'section' => array(
-        'hierarchy' => array('empreendimentos'),
+        'hierarchy' => array('produtos'),
+        'body_class' => 'page-empreendimentos'
       ),
-      'search_action' => 'empreendimentos' . ($estagio ? '/' . $estagio : ''),
+      'search_action' => 'produtos' . ($estagio ? '/' . $estagio : ''),
       'estagios' => $this->registros_model->obter_registros('estagios', array('where' => array('estagios.slug !=' => 'nao-informado')))
     );
 
@@ -20,6 +23,7 @@ class Empreendimentos extends Admin_Controller {
 
     if($estagio){
       $where['estagios.slug'] = $estagio;
+      $data['estagio_slug'] = $estagio;
     }
 
     $like = array();

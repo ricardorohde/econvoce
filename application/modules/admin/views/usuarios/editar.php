@@ -51,6 +51,25 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <select name="status" class="form-control">
+                      <?php
+                      foreach($this->config->item('usuarios_status') as $key => $value){
+                        ?>
+                        <option <?php echo isset($usuario['status']) && $usuario['status'] == $key ? 'selected="true"' : ''; ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                        <?php
+
+                      }
+                      ?>
+                    </select>
+                </div>
+              </div>
+            </div>
+
+        
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
 

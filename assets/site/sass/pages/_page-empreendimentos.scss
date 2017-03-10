@@ -1,0 +1,136 @@
+.page-empreendimentos {
+  .search-box {
+    position: relative;
+    margin-top: 20px;
+    
+    .icon {
+      position: absolute;
+      font-size: 30px;
+      color: $color-grey-400;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+        color: $color-red;
+      }
+    }
+
+    .search__input {
+      text-align: center;
+      border: 0;
+      outline: 0;
+      height: 60px;
+      border-bottom: 1px solid $color-grey-400;
+    }
+  }
+
+  .page-icon {
+    text-align: center;
+    margin: 30px;
+  }
+
+  .estagios-buttons {
+    width: 100%;
+    margin: 30px 0 50px 0;
+  
+    .btn-estagios {
+      width: 33.33%;
+      border-top: 1px solid $color-grey-300;
+      border-right: 1px solid $color-grey-300;
+      border-bottom: 1px solid $color-grey-300;
+
+      &:first-child {
+        border-left: 1px solid $color-grey-300;
+      }
+
+      a {
+        display: block;
+        padding: 20px 0;
+        text-decoration: none;
+        color: $color-grey-600;
+      }
+
+      &.active {
+        a {
+          background: $color-green;
+          color: $color-white;
+        }
+      }
+    }
+  }
+
+  .empreendimentos__list {
+    margin-bottom: 50px;
+
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+
+  .empreendimento__item {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 30px;
+    border: 1px solid $color-grey-100;
+    margin-bottom: 20px;
+
+    &:hover {
+      -webkit-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.05);
+      -moz-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.05);
+      box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.05);
+    }
+  }
+
+  .pagination {
+    margin-bottom: 80px;
+  }
+
+  .table-initial-letters {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    border-radius: 50%;
+    color: $color-white;
+    text-decoration: none;
+    font-weight: 700;
+    background: $color-grey-600;
+
+    &.small {
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+    }
+
+    &.corretor { background-color: $color--corretor; }
+    &.gerente { background-color: $color--gerente; }
+    &.coordenador { background-color: $color--coordenador; }
+
+    &.dropdown {
+      margin-right: 14px;
+
+      &::after {
+        content: '';
+        display: block;
+        background: image-url('navbar-arrow-down--black.svg') no-repeat;
+        background-size: 100%;
+        width: 9px;
+        height: 6px;
+        position: absolute;
+        top: 50%;
+        margin-top: -3px;
+        right: -14px;
+      }
+    }
+
+  }
+}

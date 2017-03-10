@@ -1,0 +1,290 @@
+.navbar {
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  background: $color-white;
+
+  .navbar-toggle {
+    color: $color-grey-600;
+    float: left;
+    font-size: 24px;
+    margin-top: 43px;
+    margin-right: 10px;
+    border: 1px solid $color-grey-600;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+
+  .navbar-brand {
+    display: block;
+    float: left;
+    background: image-url('logo-econvoce.png') center center no-repeat;
+    background-size: 100%;
+    width: 138px;
+    height: 30px;
+    text-indent: -9999px;
+    padding: 40px 0;
+  }
+
+  .navbar-collapse {
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+
+  .navbar-nav {
+    float: left;
+    margin: 40px 0 0 30px;
+
+    li {
+      display: inline-block;
+      margin-right: -4px;
+      padding: 0 10px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      a {
+        display: block;
+        color: $color-grey-900;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 10px;
+        font-weight: 500;
+      }
+
+      &.active {
+        a {
+          color: $color-grey-600;
+        }
+      }
+    }
+  }
+
+  .navbar-right {
+    float: right;
+    margin-top: 27px;
+
+    li {
+      position: relative;
+      float: left;
+      margin-left: 20px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .navbar-notification {
+    position: relative;
+    display: block;
+    font-size: 35px;
+    line-height: 55px;
+    color: $color-black;
+
+    &.active {
+      &::before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background: $color-red;
+        position: absolute;
+        right: 5px;
+        top: 15px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .navbar-initial-letters {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    border-radius: 50%;
+    color: $color-white;
+    text-decoration: none;
+    font-weight: 700;
+    background: $color-grey-600;
+
+    &.small {
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+    }
+
+    &.corretor { background-color: $color--corretor; }
+    &.gerente { background-color: $color--gerente; }
+    &.coordenador { background-color: $color--coordenador; }
+
+    &.dropdown {
+      margin-right: 14px;
+
+      &::after {
+        content: '';
+        display: block;
+        background: image-url('navbar-arrow-down--black.svg') no-repeat;
+        background-size: 100%;
+        width: 9px;
+        height: 6px;
+        position: absolute;
+        top: 50%;
+        margin-top: -3px;
+        right: -14px;
+      }
+    }
+
+  }
+
+  .navbar-hover-box {
+    position: absolute;
+    right: 14px;
+    min-width: 100px;
+    padding: 20px;
+    color: #000;
+    background: $color-white;
+    border: 1px solid $color-grey-100;
+    border-radius: 6px;
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.05);
+    margin-top: 10px;
+    display: none;
+    z-index: 10;
+
+    &.notification {
+      right: -7px;
+      text-align: center;
+      min-width: 300px;
+      padding: 20px;
+    }
+
+    &::before {
+      top: -6px;
+      right: 19px;
+      bottom: auto;
+      left: auto;
+      border-width: 0 6px 6px;
+      border-color: $color-grey-100 transparent;
+
+      content: '';
+      position: absolute;
+      border-style: solid;
+      display: block;
+      width: 0;
+    }
+
+    &::after {
+      top: -5px;
+      right: 20px;
+      bottom: auto;
+      left: auto;
+      border-width: 0 5px 5px;
+      border-color: $color-white transparent;
+
+      content: '';
+      position: absolute;
+      border-style: solid;
+      display: block;
+      width: 0;
+    }
+  }
+
+  .notification__icon {
+    font-size: 50px;
+    color: $color-green;
+  }
+
+  .notification__content {
+    color: $color-grey-600;
+    margin-top: 15px;
+    font-size: 20px;
+    line-height: 25px;
+
+    > .link {
+      color: $color-green;
+    }
+  }
+
+  .navbar-hover__header {
+    display: table;
+
+    .navbar-hover__header--row {
+      display: table-row;
+
+      .navbar-hover__header--initial-letters,
+      .navbar-hover__header--name {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .navbar-hover__header--initial-letters {
+        padding-right: 10px;
+      }
+
+      .navbar-hover__header--name {
+        > .name {
+          font-size: 18px;
+          line-height: 21px;
+          white-space: nowrap;
+        }
+
+        > .profile {
+          font-size: 14px;
+          line-height: 17px;
+
+          &.corretor { color: $color--corretor; }
+          &.gerente { color: $color--gerente; }
+          &.coordenador { color: $color--coordenador; }
+        }
+      }
+    }
+  }
+
+  .navbar-hover__content {
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+
+    .navbar-hover__content--row {
+      display: table-row;
+
+      .navbar-hover__content--details,
+      .navbar-hover__content--buttons {
+        display: table-cell;
+      }
+
+      .navbar-hover__content--details {
+        vertical-align: top;
+        font-size: 14px;
+        line-height: 20px;
+        color: $color-grey-600;
+        padding-right: 20px;
+      }
+
+      .navbar-hover__content--buttons {
+        vertical-align: bottom;
+        text-align: right;
+        white-space: nowrap;
+
+        a {
+          display: inline-block;
+          background: $color-red;
+          color: $color-white;
+          font-size: 12px;
+          line-height: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          padding: 5px 10px;
+
+          &:hover {
+            background: $color-grey-700;
+          }
+        }
+      }
+    }
+  }
+}

@@ -48,9 +48,10 @@
             <div class="card-content table-responsive">
               <table class="table">
                 <thead class="text-primary">
-                  <th width="50%">Nome</th>
-                  <th width="30%">Apelido</th>
+                  <th width="35%">Nome</th>
+                  <th width="25%">Apelido</th>
                   <th width="20%">Perfil</th>
+                  <th width="20%">Status</th>
                   <th></th>
                 </thead>
                 <tbody>
@@ -61,6 +62,7 @@
                         <td><a href="<?php echo base_url('admin/usuarios?q=' . $usuario['nome'])?>" class="text-muted"><u><?php echo $usuario['nome']; ?></u></a></td>
                         <td><a href="<?php echo base_url('admin/usuarios?q=' . $usuario['apelido'])?>" class="text-muted"><u><?php echo $usuario['apelido']; ?></u></a></td>
                         <td><a href="<?php echo base_url('admin/usuarios?q=' . $usuario['perfil_nome'])?>" class="text-muted"><u><?php echo $usuario['perfil_nome']; ?></u></a></td>
+                        <td><a href="<?php echo base_url('admin/usuarios?q=' . $usuario['status'])?>" class="text-muted"><u><?php echo $this->admin->usuarios_status($usuario['status']); ?></u></a></td>
                         <td nowrap="true">
                           <a class="btn btn-warning btn-xs" href="<?php echo base_url('admin/usuarios/' . $usuario['id'] . '/editar'); ?>">Editar</a>
                           <a onclick="return confirm('Se você excluir este usuário, todas as vendas e pontuações relacionadas a ele também serão excluídas. Deseja continuar?');" class="btn btn-danger btn-xs" href="<?php echo base_url('admin/usuarios/' . $usuario['id'] . '/excluir'); ?>">Excluir</a>

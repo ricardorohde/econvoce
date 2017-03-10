@@ -75,6 +75,17 @@ class Admin {
     return false;
   }
 
+  public function usuarios_status($status){
+      $get_status = $this->ci->config->item('usuarios_status');
+      if(isset($get_status[$status])){
+        return $get_status[$status];
+      }
+
+      return 'Não informado';
+  }
+
+  
+
   public function create_pagination($page = 1, $limit, $total_rows, $base_url, $url_suffix = null){
     $this->ci->load->library('pagination');
 

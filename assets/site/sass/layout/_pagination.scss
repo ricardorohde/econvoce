@@ -1,0 +1,83 @@
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+
+  > li {
+    display: inline; // Remove list-style and block-level defaults
+
+    > a,
+    > span {
+      position: relative;
+      float: left; // Collapse white-space
+      padding: 5px 15px;
+      line-height: 22px;
+      text-decoration: none;
+      color: $color-grey-800;
+      background-color: transparent;
+      margin: 0 1px 0;
+    }
+
+    &:first-child {
+      > a,
+      > span {
+        margin-left: 0;
+      }
+    }
+
+    &:last-child {
+      > a,
+      > span {
+        margin-right: 0;
+      }
+    }
+
+    &.prev,
+    &.first,
+    &.next,
+    &.last {
+      > a {
+        background: $color-grey-400;
+        color: $color-white;
+      }
+
+    }
+  }
+
+  > li > a,
+  > li > span {
+    &:hover,
+    &:focus {
+      z-index: 2;
+      color: $color-black;
+      font-weight: 600;
+    }
+  }
+
+  > .active > a,
+  > .active > span {
+    &,
+    &:hover,
+    &:focus {
+      z-index: 3;
+      color: $color-white;
+      background-color: $color-green;
+      cursor: default;
+    }
+  }
+
+  > .disabled {
+    > span,
+    > span:hover,
+    > span:focus,
+    > a,
+    > a:hover,
+    > a:focus {
+      color: #ff00cc;
+      background-color: #787654;
+      cursor: #cc00aa;
+    }
+  }
+}

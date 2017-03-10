@@ -1,0 +1,68 @@
+.form-group {
+  margin-bottom: 10px;
+}
+
+.input-text {
+  background: $color-white;
+  border: 1px solid $color-grey-400;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 15px 30px;
+  border-radius: 30px;
+  outline: none;
+  color: $color-grey-600;
+
+
+  @include placeholder {
+    color: $color-grey-400;
+  }
+
+  &:focus {
+    border: 1px solid $color-grey-600;
+  }
+}
+
+.select-box {
+  background: $color-white;
+  border: 1px solid $color-grey-400;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 47px;
+  padding: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  background: image-url('navbar-arrow-down--gray.svg') 95% center no-repeat;
+  background-size: 13px;
+
+  select {
+    padding: 0 30px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    color: $color-grey-400;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
+  &.active {
+    select {
+      color: $color-grey-600;
+    }
+  }
+}
+
+@for $cols from 1 through $grids-columns {
+  .input-#{$cols} {
+    box-sizing: border-box;
+    width: (100 / $grids-columns * $cols) + unquote('%');
+  }
+}

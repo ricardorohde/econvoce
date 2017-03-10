@@ -1,0 +1,117 @@
+// Typography
+// ------------------------------------------------------
+
+$font-regular: 'Raleway', Arial, sans-serif;
+$main-font-family: $font-regular, sans-serif;
+
+// Layout
+$footer-height:             80px !default;
+
+//== Tables
+// ------------------------------------------------------
+
+//** Padding for `<th>`s and `<td>`s.
+$table-cell-padding:            8px !default;
+//** Padding for cells in `.table-condensed`.
+$table-condensed-cell-padding:  5px !default;
+
+//** Default background color used for all tables.
+$table-bg:                      transparent !default;
+//** Background color used for `.table-striped`.
+$table-bg-accent:               #f9f9f9 !default;
+//** Background color used for `.table-hover`.
+$table-bg-hover:                #f5f5f5 !default;
+$table-bg-active:               $table-bg-hover !default;
+
+//** Border color for table and cell borders.
+$table-border-color:            #ddd !default;
+
+
+// Responsive Breakpoints
+// ------------------------------------------------------
+
+// Number of columns in the grid system
+$grids-columns:              12;
+
+// Padding, to be divided by two and applied to the left and right of all columns
+$gutter:                     20px !default;
+
+// Extra small screen / mobile
+$screen-xs:                   480px !default;
+
+// Small screen / tablet
+$screen-sm:                   768px !default;
+$container-tablet:            (720px + $gutter) !default;
+$container-sm:                $container-tablet !default;
+
+// Medium screen / desktop
+$screen-md:                   992px !default;
+$container-desktop:           (940px + $gutter) !default;
+$container-md:                $container-desktop !default;
+
+// Large screen / wide desktop
+$screen-lg:                   1200px !default;
+$container-large-desktop:     (1140px + $gutter) !default;
+$container-lg:                $container-large-desktop !default;
+
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm - 1) !default;
+$screen-sm-max:              ($screen-md - 1) !default;
+$screen-md-max:              ($screen-lg - 1) !default;
+
+
+$max-width:                   1400px !default;
+
+
+$breakpoints-map: (
+  xs: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: $screen-xs
+  ),
+  sm: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: $screen-sm,
+    container: $container-sm
+  ),
+  md: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: $screen-md,
+    container: $container-md
+  ),
+  lg: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: $screen-lg,
+    container: $container-lg
+  )
+);
+
+$breakpoints-map-media: (
+  xs: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: 'only screen and (max-width: #{$screen-xs-max})'
+  ),
+  sm: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: 'only screen and (min-width: #{$screen-sm}) and (max-width: #{$screen-sm-max})',
+    container: $container-sm
+  ),
+  md: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: 'only screen and (min-width: #{$screen-md}) and (max-width: #{$screen-md-max})',
+    container: $container-md
+  ),
+  lg: (
+    columns: $grids-columns,
+    gutter: $gutter,
+    media: 'only screen and (min-width: #{$screen-lg})',
+    container: $container-lg
+  )
+);

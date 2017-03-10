@@ -10,7 +10,7 @@ class Notificacoes_model extends CI_Model {
   }
 
   public function obter_usuarios_incompletos(){
-    return $this->registros_model->obter_registros_count('SELECT id FROM usuarios WHERE usuarios.status = 2');
+    return $this->registros_model->obter_registros_count('SELECT id FROM usuarios WHERE usuarios.status != 1');
   }
 
 }
