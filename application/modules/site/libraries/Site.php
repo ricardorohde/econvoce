@@ -4,7 +4,7 @@ class Site {
   function __construct(){
     $this->ci =& get_instance();
   }
- 
+
   public function user_logged($condition = false, $redirect = true, $section = 'site_logado'){
     $login_check = $this->ci->session->userdata($section) || $this->ci->session->tempdata($section);
     $is_logged = $login_check ? true : false;
@@ -177,9 +177,16 @@ class Site {
   public function send_mail($to, $subject, $template, $params = array(), $header = false){
     $template = $this->obter_email_template($template, $params);
 
-    // Inicia class de envio de e-mail
     $this->ci->load->library('email');
-    $this->ci->email->initialize(array('mailtype'=>'html'));
+
+    $this->ci->email->initialize(array(
+      'mailtype' => 'html',
+      'smtp_host' => 'smtplw.com.br',
+      'smtp_port' => '587',
+      'smtp_user' => $this->ci->config->item('site_email_envio'),
+      'smtp_pass' => 'Rs2@34ft',
+      'protocol' => 'smtp'
+    ));
 
     $this->ci->email->from($this->ci->config->item('site_email_envio'), $this->ci->config->item('site_nome'), $this->ci->config->item('site_email_envio'));
     $this->ci->email->to($to);
@@ -187,7 +194,11 @@ class Site {
     $this->ci->email->subject($subject);
     $this->ci->email->message($template);
 
-   //return $this->ci->email->send();
+    $send = $this->ci->email->send();
+
+    echo $this->ci->email->print_debugger();
+
+    return $send;
   }
 
   public function round_points($value, $nearest) {
