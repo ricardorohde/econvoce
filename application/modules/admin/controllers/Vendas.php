@@ -130,7 +130,7 @@ class Vendas extends Admin_Controller {
         $file_type = $_FILES['arquivo']['type'];
         $file_ext = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
 
-        $file_path = FCPATH . '/assets/uploads/' . $file_name;
+        $file_path = FCPATH . '/assets/uploads/vendas/' . $file_name;
 
         $extensions= array("xlsx");
 
@@ -154,6 +154,8 @@ class Vendas extends Admin_Controller {
             $objReader = PHPExcel_IOFactory::createReader($file_type);
             $objPHPExcel = $objReader->load($file_path);
             $sheets = array();
+
+            $empreendimentos = array();
 
             $colunas = array(
               'mes' => 'MÊS',
@@ -195,6 +197,14 @@ class Vendas extends Admin_Controller {
                         $linhas_dados[$linha_count][$field] = $linha[$column];
                       }
                     }
+
+                    if(!in_multiarray($linhas_dados[$linha_count]['empreendimento'], 'nome', $empreendimentos, false)){
+                      $empreendimentos[] = array(
+                        'nome' => $linhas_dados[$linha_count]['empreendimento'],
+                        'vgv_liquido' => $linhas_dados[$linha_count]['vgv_liquido']
+                      );
+                    }
+
                   }
                 }
 
@@ -204,6 +214,8 @@ class Vendas extends Admin_Controller {
                 }
               }
             }
+
+            $this->vendas_model->atualizar_vgv($empreendimentos);
 
             $data['importacoes'] = $importacoes;
           } catch (Exception $e) {

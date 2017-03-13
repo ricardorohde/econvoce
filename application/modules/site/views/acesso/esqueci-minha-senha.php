@@ -13,14 +13,16 @@
 
       <div class="form-group">
         <label for="email" class="sr-only">E-mail</label>
-        <input type="email" required class="input-text input-12" id="email" name="email" placeholder="Seu E-mail" value="<?php echo $this->input->post('email'); ?>">
+        <input type="email" required class="input-text input-12" id="email" name="email" placeholder="Seu e-mail" value="<?php echo $this->input->post('email'); ?>">
       </div>
 
       <button type="submit" class="btn btn-block btn-blue-dark btn-entrar">
         Clique para entrar
       </button>
 
-      <a href="<?php echo base_url('login'); ?>" class="btn btn-block btn-green btn-esqueci-login">Faça seu Login</a>
+      <hr>
+
+      <a href="<?php echo base_url('login'); ?>" class="btn btn-block btn-green">Faça seu Login</a>
 
     </form>
   </div>

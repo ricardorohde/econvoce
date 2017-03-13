@@ -49,6 +49,10 @@ $hide_all = isset($section['hide_all']) && $section['hide_all'] ? true : false;
   }
   ?>
 
+  <?php
+  $this->load->view('site/regulamento.php', $data);
+  ?>
+
   <script src="<?php echo base_url('assets/site/js/LAB.min.js'); ?>"></script>
   <script>
     $LAB

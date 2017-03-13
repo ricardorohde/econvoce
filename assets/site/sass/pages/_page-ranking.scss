@@ -131,13 +131,13 @@
         &:hover {
             background: $color-grey-50;
 
-            $color--line: $color-grey-100;
+            $color-line: $color-grey-100;
           
           
           .rank {
-            border-top: 2px solid $color--line;
-            border-bottom: 2px solid $color--line;
-            border-left: 2px solid $color--line;
+            border-top: 2px solid $color-line;
+            border-bottom: 2px solid $color-line;
+            border-left: 2px solid $color-line;
 
             -webkit-border-top-left-radius: 30px;
             -webkit-border-bottom-left-radius: 30px;
@@ -149,14 +149,14 @@
           }
 
           .td {
-            border-top: 2px solid $color--line;
-            border-bottom: 2px solid $color--line;
+            border-top: 2px solid $color-line;
+            border-bottom: 2px solid $color-line;
           }
 
           .total {
-            border-top: 2px solid $color--line;
-            border-right: 2px solid $color--line;
-            border-bottom: 2px solid $color--line;
+            border-top: 2px solid $color-line;
+            border-right: 2px solid $color-line;
+            border-bottom: 2px solid $color-line;
 
             -webkit-border-top-right-radius: 30px;
             -webkit-border-bottom-right-radius: 30px;
@@ -198,9 +198,9 @@
       line-height: 45px;
     }
 
-    &.corretor { background-color: $color--corretor; }
-    &.gerente { background-color: $color--gerente; }
-    &.coordenador { background-color: $color--coordenador; }
+    &.corretor { background-color: $color-corretor; }
+    &.gerente { background-color: $color-gerente; }
+    &.coordenador { background-color: $color-coordenador; }
 
     &.dropdown {
       margin-right: 14px;

@@ -86,7 +86,7 @@ class Usuarios extends Admin_Controller {
         $file_type = $_FILES['arquivo']['type'];
         $file_ext = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
 
-        $file_path = FCPATH . '/assets/uploads/' . $file_name;
+        $file_path = FCPATH . '/assets/uploads/usuarios/' . $file_name;
 
         $extensions= array("xlsx");
 

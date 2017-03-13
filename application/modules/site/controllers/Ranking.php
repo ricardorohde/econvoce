@@ -10,6 +10,12 @@ class Ranking extends Site_Controller {
   public function index($page = 1, $mes = 0, $ano = 0) {
     $this->site->user_logged();
 
+    if($this->session->userdata('notificacao_ranking') == 1){
+      $this->load->model(array('acesso_model'));
+      $this->acesso_model->adicionar_usuario(array('novidades' => 0), $this->site->userinfo('id'), true);
+      $this->session->set_userdata('notificacao_ranking', 0);
+    }
+
     $per_page = 12;
 
     $periodos = $this->ranking_model->obter_vendas_periodos();
@@ -22,7 +28,7 @@ class Ranking extends Site_Controller {
       $ranking_ano = $ano;
     }
 
-    $data = array(
+    $data = array_merge($this->header, array(
       'section' => array(
         'hierarchy' => array('ranking'),
         'body_class' => 'page-ranking'
@@ -30,7 +36,7 @@ class Ranking extends Site_Controller {
       'search_action' => 'ranking' . ($mes && $ano ? '/' . $mes .'/'. $ano : ''),
       'mes' => $ranking_mes,
       'ano' => $ranking_ano
-    );
+    ));
 
     $like = array();
     if($this->input->get('q')){

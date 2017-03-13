@@ -2,6 +2,16 @@
   margin-bottom: 10px;
 }
 
+.label {
+  font-size: 18px;
+  color: $color-black;
+}
+
+.label-description {
+  font-size: 16px;
+  color: $color-grey-600;
+}
+
 .input-text {
   background: $color-white;
   border: 1px solid $color-grey-400;
@@ -59,6 +69,38 @@
     }
   }
 }
+
+.checkbox {
+  position: relative;
+  padding-left: 20px;
+
+  input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 1px;
+  }
+
+}
+
+.has-error {
+  .input-text,
+  .select-box {
+    background: lighten($color-red, 40%);
+    border: 1px solid lighten($color-red, 30%);
+    color: lighten($color-red, 10%);
+  }
+}
+
+.has-warning {
+  .input-text,
+  .select-box {
+    background: lighten($color-warning, 35%);
+    border: 1px solid $color-warning;
+    color: $color-warning;
+  }
+}
+
+
 
 @for $cols from 1 through $grids-columns {
   .input-#{$cols} {

@@ -33,6 +33,12 @@
       'slug' => 'empreendimentos',
       'name' => 'Empreendimentos',
       'url' => 'admin/empreendimentos',
+    ),
+    array(
+      'icon' => 'credit_card',
+      'slug' => 'recargas',
+      'name' => 'Recargas',
+      'url' => 'admin/recargas',
     )
   );
   ?>

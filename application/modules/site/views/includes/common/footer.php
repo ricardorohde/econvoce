@@ -5,7 +5,7 @@
         <?php
         if($this->site->user_logged(true, false)){
           ?>
-          <a href="<?php echo base_url('perguntas-frequentes'); ?>" class="btn btn-blue-dark btn-perguntas-frequentes"><span class="hidden-xs">Perguntas frequentes</span><span class="hidden-sm hidden-md hidden-lg">FAQ</span></a>
+          <a href="javascript: void(0);" class="btn btn-blue-dark btn-perguntas-frequentes btn-abrir-regulamento">Regulamento</a>
           <?php
         }else{
           ?>

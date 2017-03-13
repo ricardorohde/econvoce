@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+
 $root = "http://".$_SERVER['HTTP_HOST'];
 $root .= dirname($_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $root;
@@ -39,6 +40,20 @@ $config['registros_limite'] = 50;
 
 $config['site_email_envio'] = 'noreply@89dev.com.br';
 
+
+$config['perfis_cores'] = array(
+  'nao-informado' => '#666',
+  'corretor' => '#f1c40f',
+  'coordenador' => '#9b59b6',
+  'gerente' => '#2ecc71'
+);
+
+$config['estagios_cores'] = array(
+  'nao-informado' => '#666',
+  'pronto' => '#ff1520',
+  'remanescente' => '#e8d600',
+  'lancamento' => '#269270'
+);
 
 
 /*

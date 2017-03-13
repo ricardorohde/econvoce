@@ -11,14 +11,31 @@ class Default_Controller extends MX_Controller {
 
 // Site Controller
 class Site_Controller extends Default_Controller {
+  public $header;
+
   function __construct() {
     parent::__construct();
-
     $this->load->add_package_path(APPPATH . 'modules/site/');
     $this->load->library(array('site'));
+    $this->load->model(array('notificacoes_model'));
 
-    //$this->load->model(array('logs_model'));
-    //$this->form_validation->set_error_delimiters('<small class="help-block">', '</small>');
+    $header = array('header' => array('notificacoes' => array()));
+
+    if(!$this->session->has_userdata('notificacao_ranking')){
+      if($notificacao_vendas = $this->notificacoes_model->obter_novidades_vendas()){
+        $this->session->set_userdata('notificacao_ranking', 1);
+      }else{
+        $this->session->set_userdata('notificacao_ranking', 0);
+      }
+    }
+
+    if($this->session->userdata('notificacao_ranking') == 1){
+      $header['header']['notificacoes'] = array(
+        'label' => 'Houveram mudanças nas pontuações, <a href="'. base_url('ranking') .'" class="link">veja o ranking</a>.'
+      );
+    }
+
+    $this->header = $header;
   }
 }
 

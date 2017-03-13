@@ -118,9 +118,9 @@
       line-height: 45px;
     }
 
-    &.corretor { background-color: $color--corretor; }
-    &.gerente { background-color: $color--gerente; }
-    &.coordenador { background-color: $color--coordenador; }
+    &.corretor { background-color: $color-corretor; }
+    &.gerente { background-color: $color-gerente; }
+    &.coordenador { background-color: $color-coordenador; }
 
     &.dropdown {
       margin-right: 14px;
@@ -236,9 +236,9 @@
           font-size: 14px;
           line-height: 17px;
 
-          &.corretor { color: $color--corretor; }
-          &.gerente { color: $color--gerente; }
-          &.coordenador { color: $color--coordenador; }
+          &.corretor { color: $color-corretor; }
+          &.gerente { color: $color-gerente; }
+          &.coordenador { color: $color-coordenador; }
         }
       }
     }

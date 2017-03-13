@@ -6,11 +6,17 @@ $color-red:             #ff1520;
 $color-green:           #269270;
 $color-green-light:     #6eb521;
 $color-blue-dark:       #071047;
+$color-warning:         #e8d600;
 
 
-$color--corretor:       #f1c40f;
-$color--coordenador:    #9b59b6;
-$color--gerente:        #2ecc71;
+$color-corretor:       #f1c40f;
+$color-coordenador:    #9b59b6;
+$color-gerente:        #2ecc71;
+
+
+$color-pronto:         $color-red;
+$color-remanescente:   $color-warning;
+$color-lancamento:     $color-green;
 
 
 $color-grey-50:          #FAFAFA;

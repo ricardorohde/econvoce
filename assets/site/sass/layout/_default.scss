@@ -32,9 +32,12 @@ body {
   }
 }
 
-.block { display: block; }
+.page-bottom { padding-bottom: 100px; }
+
+.block { display: block !important; }
 
 .no-margin-left { margin-left: 0; }
+.no-margin { margin: 0 !important; }
 
 .img-responsive { @include img-responsive; }
 
@@ -43,6 +46,49 @@ body {
 .hidden { display: none; }
 
 .clearfix { clear: both; }
+
+hr {
+  border: 0;
+  border-top: 1px solid $color-grey-300;
+  margin: 0
+}
+
+.regulamento-fullscreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.6);
+  z-index: 100;
+  overflow: auto;
+  display: none;
+  top: 0;
+  left: 0;
+
+  .regulamento-areautil {
+    padding: 100px 0;
+
+    .regulamento-box {
+      background: $color-white;
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+
+      .btn-close {
+        position: absolute;
+        right: -15px;
+        top: -15px;
+        font-size: 30px;
+        color: $color-white;
+        background: $color-black;
+        border-radius: 20px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+      }
+    }
+  }
+}
 
 // // leave round image
 // .img-circle { border-radius: 50%; }
@@ -63,7 +109,7 @@ body {
 //   position: relative;
 //   max-width: 1920px;
 //   margin: 0 auto;
-//   background: $color--white;
+//   background: $color-white;
 //   box-shadow: 0 0 25px 1px rgba(0, 0, 0, .1);
 // }
 
@@ -77,11 +123,11 @@ body {
 //     width: 10px;
 //     height: 10px;
 //     margin: 0 5px;
-//     background: darken($color--gallery-grey, 10%);
+//     background: darken($color-gallery-grey, 10%);
 //     border-radius: 5px;
 
 //     &.active {
-//       background: darken($color--gallery-grey, 20%);
+//       background: darken($color-gallery-grey, 20%);
 //     }
 //   }
 // }
@@ -97,12 +143,12 @@ body {
 // .swiper-pagination-bullet {
 //   width: 10px;
 //   height: 10px;
-//   background: darken($color--gallery-grey, 10%);
+//   background: darken($color-gallery-grey, 10%);
 //   opacity: 1;
 // }
 
 // .swiper-pagination-bullet-active {
-//   background: darken($color--gallery-grey, 20%);
+//   background: darken($color-gallery-grey, 20%);
 // }
 
 // // fix for gtm pixel breaking layout

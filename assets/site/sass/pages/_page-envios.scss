@@ -1,0 +1,185 @@
+.page-envios {
+  .page-icon {
+    text-align: center;
+    margin: 30px;
+  }
+
+  .estagios-buttons {
+    width: 100%;
+    margin: 30px 0 50px 0;
+  
+    .btn-estagios {
+      width: 33.33%;
+      border-top: 1px solid $color-grey-300;
+      border-right: 1px solid $color-grey-300;
+      border-bottom: 1px solid $color-grey-300;
+
+      &:first-child {
+        border-left: 1px solid $color-grey-300;
+      }
+
+      span {
+        display: block;
+        padding: 20px 0;
+        text-decoration: none;
+        color: $color-grey-400;
+        background: $color-grey-50;
+        position: relative;
+
+        .fa {
+          position: absolute;
+          font-size: 25px;
+          top: 50%;
+          transform: translateY(-50%);
+          margin-left: -30px;
+        }
+      }
+
+      &.active {
+        span {
+          background: $color-green;
+          color: $color-white;
+        }
+      }
+    }
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 20px
+  }
+
+  .select-box {
+    background-position: 98% center;
+  }
+
+  .emails__list {
+    margin-top: 10px;
+  }
+
+  .email-preview {
+    margin-top: 30px;
+  }
+
+  .table {
+    .cliente-item {
+      .td {
+        &.nome,
+        &.email { width: 50%; padding-right: 20px; }
+
+        .btn-adicionar-cliente { display: none; }
+      }
+
+      &:last-child {
+        .td {
+          .btn-remover-cliente { display: none; }
+          .btn-adicionar-cliente { display: inline-block; }
+        }
+      }
+    }
+  }
+
+  hr {
+    margin: 30px 0;
+  }
+
+  .area__title {
+    font-size: 22px;
+    line-height: 25px;
+    color: $color-black;
+  }
+
+  .area__description {
+    font-size: 16px;
+    line-height: 19px;
+    color: $color-grey-600;
+    margin-top: 5px;
+  }
+
+  .cliente-email__item {
+    position: relative;
+    padding: 8px 8px 8px 38px;
+    background: $color-grey-200;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 5px 0;
+
+    .fa {
+      left: 5px;
+      @include vertical-align;
+      position: absolute;
+      font-size: 30px;
+      color: $color-green;
+    }
+  }
+
+  .envio-status {
+    text-align: center;
+
+    &.enviado {
+      display: none;
+    }
+
+    .icon {
+      font-size: 50px;
+      height: 60px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 41px;
+      font-weight: 300;
+    }
+
+    &.enviando {
+      .fa,
+      h1 {
+        color: $color-grey-600;
+      }
+    }
+
+    &.enviado {
+      .fa,
+      h1 {
+        color: $color-green;
+      }
+    }
+
+    .table.centering {
+      margin: 30px auto 0;
+      text-align: center;
+
+      .disparo__item {
+        padding: 0 20px 0;
+        color: $color-grey-500;
+  
+        .quantidade {
+          display: block;
+          font-size: 45px;
+          line-height: 48px;
+          color: $color-black;
+        }
+      }
+
+    }
+  }
+}
+
+// Tablet
+@include respond-to(sm) {
+  .page-envios {
+    .select-box {
+      background-position: 97% center;
+    }
+  }
+}
+
+// Mobile
+@include respond-to(xs) {
+  .page-envios {
+    .select-box {
+      background-position: 95% center;
+    }
+  }
+}

@@ -435,6 +435,17 @@ class Vendas_model extends CI_Model {
       $this->db->insert_batch('vendas_usuarios', $venda_usuarios);
     }
 
+    if($usuarios){
+      $usuarios_novidades = array();
+      foreach ($usuarios as $usuario) {
+        $usuarios_novidades[] = array(
+          'id' => $usuario['id'],
+          'novidades' => 1
+        );
+      }
+      $this->db->update_batch('usuarios', $usuarios_novidades, 'id');
+    }
+
     return array(
       'vendas_inseridas' => $vendas_inseridas,
       'vendas_existentes' => $vendas_existentes,
@@ -473,33 +484,18 @@ class Vendas_model extends CI_Model {
     return false;
   }
 
-  // public function get_vendas($params = array(), $select = '*', $join = array(), $row = false){
-  //
-  //   $this->db->select($select);
+  public function atualizar_vgv($empreendimentos = array()) {
+    $this->load->model(array('empreendimentos_model'));
 
-  //
-  //   $this->db->from('vendas');
+    if(!empty($empreendimentos)){
+      foreach ($empreendimentos as $empreendimento) {
+        if($empreendimento_check = $this->registros_model->obter_registros('empreendimentos', array('where' => array('empreendimentos.apelido' => $empreendimento['nome'])), true)) {
+          $this->empreendimentos_model->atualizar_empreendimento(array('vgv_liquido' => $empreendimento['vgv_liquido']), array('empreendimentos.id' => $empreendimento_check['id']), FALSE);
+        }
+      }
+    }
 
-  //   // JOIN
-  //   if($join){
-
-  //     foreach($join as $join_item){
-  //       $this->db->join($join_item[0], $join_item[1], $join_item[2]);
-  //     }
-  //   }
-
-  //   // WHERE
-  //   if($params){
-  //     foreach($params as $key => $value){
-  //       $this->db->where($key, $value);
-  //     }
-  //   }
-
-
-  // }
-
-  // public function get_pontuacao($params = array(), $select = '', $join = array()){
-  //   return $this->get_pontuacoes($params, $select, $join, true);
-  // }
+    return true;
+  }
 
 }

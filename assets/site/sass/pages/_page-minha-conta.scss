@@ -1,0 +1,22 @@
+.page-minha-conta {
+
+  .page__title {
+    margin: 50px 0 30px;
+  }
+
+  hr {
+    margin: 30px 0;
+  }
+}
+
+// Desktop
+@include respond-to(md) {
+}
+
+// Tablet
+@include respond-to(sm) {
+}
+
+// Mobile
+@include respond-to(xs) {
+}

@@ -14,6 +14,15 @@
   border-radius: 30px;
   outline: none;
 
+  &.btn-round {
+    padding: 0;
+    width: 47px;
+    height: 47px;
+    line-height: 47px;
+
+    font-size: 25px;
+  }
+
   &.btn-block {
     display: block;
     width:100%;
@@ -32,6 +41,21 @@
 
   &.btn-green {
     background-color: $color-green;
+    color: $color-white;
+  }
+
+  &.btn-transparent {
+    border: 1px solid $color-grey-400;
+    color: $color-green;
+  }
+
+  &.btn-grey-transparent {
+    border: 1px solid $color-grey-400;
+    color: $color-grey-400;
+  }
+
+  &.btn-red {
+    background-color: $color-red;
     color: $color-white;
   }
 

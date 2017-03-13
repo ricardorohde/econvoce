@@ -35,7 +35,7 @@
             if(isset($estagios) && !empty($estagios)){
               foreach ($estagios as $key => $estagio) {
                 ?>
-                <div class="td btn-estagios <?php echo isset($estagio_slug) && $estagio_slug == $estagio['slug'] ? 'active' : ''; ?>">
+                <div class="td btn-estagios <?php echo $estagio['slug']; ?> <?php echo isset($estagio_slug) && $estagio_slug == $estagio['slug'] ? 'active' : ''; ?>">
                   <a href="<?php echo base_url('produtos/' . $estagio['slug']); ?>"><?php echo $estagio['nome']; ?></a>
                 </div>
                 <?php

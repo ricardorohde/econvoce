@@ -27,7 +27,7 @@ class Acesso extends Admin_Controller {
   }
 
   public function logout() {
-    session_destroy();
+    $this->session->unset_userdata('admin_logado');
     redirect(base_url('admin/login'), 'location');
 
   }

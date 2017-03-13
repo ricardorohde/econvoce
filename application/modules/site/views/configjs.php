@@ -75,6 +75,14 @@ var navbar_open_timeout = 0;
 			$('.navbar-hover-box').on('mouseover', function(){
 				clearTimeout(navbar_open_timeout);
 			});
+
+			$('.btn-fechar-regulamento').on('click', function(){
+				$('.regulamento-fullscreen').scrollTop(0).fadeOut('fast');
+			});
+
+			$('.btn-abrir-regulamento').on('click', function(){
+				$('.regulamento-fullscreen').fadeIn('fast');
+			});
 		}
 	};
 

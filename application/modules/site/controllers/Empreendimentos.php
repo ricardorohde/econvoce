@@ -10,14 +10,14 @@ class Empreendimentos extends Site_Controller {
   public function index($estagio = 0, $page = 1) {
     $this->site->user_logged();
     
-    $data = array(
+    $data = array_merge($this->header, array(
       'section' => array(
         'hierarchy' => array('produtos'),
         'body_class' => 'page-empreendimentos'
       ),
       'search_action' => 'produtos' . ($estagio ? '/' . $estagio : ''),
       'estagios' => $this->registros_model->obter_registros('estagios', array('where' => array('estagios.slug !=' => 'nao-informado')))
-    );
+    ));
 
     $where = array();
 

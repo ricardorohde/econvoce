@@ -55,10 +55,29 @@
         color: $color-grey-600;
       }
 
+
+
       &.active {
         a {
-          background: $color-green;
           color: $color-white;
+        }
+
+        &.lancamento {
+          a {
+            background: $color-lancamento;
+          }
+        }
+
+        &.remanescente {
+          a {
+            background: $color-remanescente;
+          }
+        }
+
+        &.pronto {
+          a {
+            background: $color-pronto;
+          }
         }
       }
     }
@@ -111,9 +130,9 @@
       line-height: 45px;
     }
 
-    &.corretor { background-color: $color--corretor; }
-    &.gerente { background-color: $color--gerente; }
-    &.coordenador { background-color: $color--coordenador; }
+    &.corretor { background-color: $color-corretor; }
+    &.gerente { background-color: $color-gerente; }
+    &.coordenador { background-color: $color-coordenador; }
 
     &.dropdown {
       margin-right: 14px;

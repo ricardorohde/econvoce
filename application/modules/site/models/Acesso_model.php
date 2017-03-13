@@ -25,6 +25,8 @@ class Acesso_model extends CI_Model {
       )
     )) {
       if($usuario['status'] == 1){
+        $nome_explode = explode(' ', $usuario['nome']);
+        $usuario['nome_sobrenome'] = count($nome_explode) == 1 ? $nome_explode[0] : $nome_explode[0] . ' ' . $nome_explode[(count($nome_explode) - 1)];
         $this->session->set_userdata('site_logado', $usuario);
         return array('result' => true);
       }else{
@@ -35,13 +37,11 @@ class Acesso_model extends CI_Model {
     }
   }
 
-  public function adicionar_usuario($params = array(), $row = TRUE) {
+  public function adicionar_usuario($params = array(), $usuario_id = null, $row = TRUE) {
     $usuario = array();
 
-    $usuario['guid'] = uniqid();
-
     foreach($params as $key => $value){
-      if(in_array($key, array('guid', 'nome', 'email', 'senha', 'cpf', 'apelido', 'telefone', 'creci', 'perfil', 'estagiario'))){
+      if(in_array($key, array('guid', 'nome', 'email', 'senha', 'cpf', 'apelido', 'telefone', 'creci', 'perfil', 'estagiario', 'novidades'))){
         if($key == 'senha'){
           $usuario[$key] = md5($value);
         }else if($key == 'cpf'){
@@ -52,10 +52,14 @@ class Acesso_model extends CI_Model {
       }
     }
 
-    $this->db->insert('usuarios', $usuario);
-    $usuario_id = $this->db->insert_id();
-
-    $this->site->send_mail($usuario['email'], 'Confirmação de Cadastro', 'cadastro', $usuario);
+    if(!$usuario_id){
+      $usuario['guid'] = uniqid();
+      $this->db->insert('usuarios', $usuario);
+      $usuario_id = $this->db->insert_id();
+      $this->site->send_mail($usuario['email'], 'Confirmação de Cadastro', 'cadastro', $usuario);
+    }else{
+      $this->db->update('usuarios', $usuario, array('id' => $usuario_id));
+    }
 
     if($usuario_id){
       return $this->registros_model->obter_registros('usuarios', array('where' => array('usuarios.id' => $usuario_id)), $row);
@@ -65,8 +69,6 @@ class Acesso_model extends CI_Model {
   }
 
   public function esqueci_senha($params = array()) {
-    print_l($params);
-
     $usuario = $this->registros_model->obter_registros(
       'usuarios',
       array(
@@ -81,7 +83,21 @@ class Acesso_model extends CI_Model {
       )
     );
 
-    print_l($usuario);
+    if($usuario){
+      $usuario['guid'] = uniqid();
+
+      $nome_explode = explode(' ', $usuario['nome']);
+      $usuario['nome_sobrenome'] = count($nome_explode) == 1 ? $nome_explode[0] : $nome_explode[0] . ' ' . $nome_explode[(count($nome_explode) - 1)];
+
+      $this->acesso_model->adicionar_usuario(array('guid' => $usuario['guid']), $usuario['id'], true);
+
+      $this->site->send_mail($usuario['email'], 'Esqueci minha senha - Econ Você', 'esqueci-minha-senha', $usuario);
+
+      return true;
+    }else{
+      return false;
+    }
+
   }
 
   public function confirmar_cadastro($guid) {
@@ -89,8 +105,7 @@ class Acesso_model extends CI_Model {
       'usuarios',
       array(
         'where' => array(
-          'usuarios.guid' => $guid,
-          'usuarios.status' => 0
+          'usuarios.guid' => $guid
         )
       ),
       true,
@@ -104,6 +119,27 @@ class Acesso_model extends CI_Model {
     }
 
     return array('result' => false, 'message' => 'Essa confirmação não foi encontrada.');
+  }
+
+  public function redefinir_senha($guid, $senha) {
+    $usuario = $this->registros_model->obter_registros(
+      'usuarios',
+      array(
+        'where' => array(
+          'usuarios.guid' => $guid
+        )
+      ),
+      true,
+      'usuarios.*'
+    );
+
+    if($usuario){
+      $guid = uniqid();
+      $this->db->update('usuarios', array('guid' => $guid, 'senha' => md5($senha)), array('id' => $usuario['id']));
+      return $this->efetuar_login(array('usuarios.id' => $usuario['id']));
+    }
+
+    return array('result' => false, 'message' => 'Essa redefinição não foi encontrada.');
   }
 
 }

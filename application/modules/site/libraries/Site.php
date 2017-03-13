@@ -152,9 +152,9 @@ class Site {
     return $return;
   }
 
-  public function send_mail($to, $subject, $template, $params = array(), $header = false){
-    // Inicia helper de acesso ao template do e-mail
+  public function obter_email_template($template, $params = array()) {
     $this->ci->load->helper('file');
+
     $template_path = "assets/site/emails/" . $template;
     $template = read_file($template_path . '/template.html');
 
@@ -170,6 +170,12 @@ class Site {
     $template = str_replace("{{data_hora}}", date("d/m/Y H:i", time()), $template);
     $template = str_replace("{{template_url}}", base_url($template_path), $template);
     $template = str_replace("{{base_url}}", base_url(), $template);
+
+    return $template;
+  }
+
+  public function send_mail($to, $subject, $template, $params = array(), $header = false){
+    $template = $this->obter_email_template($template, $params);
 
     // Inicia class de envio de e-mail
     $this->ci->load->library('email');

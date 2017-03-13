@@ -54,5 +54,5 @@
 <section class="cadastro text-center">
   <p class="cadastro__title">Participe do programa<br><strong class="color-green-light">Econ Você!</strong></p>
   <a href="<?php echo base_url('cadastro')?>" class="btn btn-blue-dark btn-cadastro">Participar</a>
-  <p class="cadastro__description">Concorda com os <a href="#" class="link">Termos de Serviços</a> da Econ Você?</p>
+  <p class="cadastro__description">Concorda com os <a href="javascript: void(0);" class="btn-abrir-regulamento link">Termos de Serviços</a> da Econ Você?</p>
 </section>

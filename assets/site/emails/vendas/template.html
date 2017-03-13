@@ -1,0 +1,182 @@
+<html>
+  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <table width="600" cellpadding="0" cellspacing="0" border="0" align="center">
+      <tr>
+        <td bgcolor="#f4f4f4">
+          <table width="100%" cellpadding="20" cellspacing="0" border="0">
+            <tr>
+              <td>
+                <font face="Arial" size="4"><strong>{{usuario_nome}}</strong></font><br>
+                <font face="Arial" color="{{usuario_perfil_cor}}" size="3">{{usuario_perfil_nome}}</font><br>
+              </td>
+              <td align="right">
+                <table cellpadding="2" cellspacing="0" border="0" align="right">
+                  <tr>
+                    <td><a href="mailto:{{usuario_email}}" style="text-decoration:none;"><font face="Arial" color="#5e5e5e" size="3">{{usuario_email}}</font></a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <font face="Arial" color="#5e5e5e" size="3"><strong>{{usuario_telefone}}</strong></font>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td height="30"></td>
+      </tr>
+
+      <tr>
+        <td>
+          <font face="Arial" color="#808080" size="3">
+            Olá <font color="#666">{{cliente_nome}}</font>,<br>
+            <br>
+            Conforme combinamos, segue o material explicativo com mais informações sobre o empreendimento {{empreendimento_nome}} sobre o qual conversamos.<br>
+            <br>
+            Agradeço a sua atenção e me coloco à disposição para esclarecer quaisquer dúvidas sobre o imóvel.<br>
+            <br>
+            Atenciosamente,
+          </font>
+        </td>
+      </tr>
+
+      <tr>
+        <td height="30"></td>
+      </tr>
+
+      <tr>
+        <td>
+          <table width="600" cellpadding="20" cellspacing="0" border="0">
+            <tr>
+              <td align="center" bgcolor="{{estagio_cor}}">
+                <font face="Arial" color="#fff" size="5">
+                  {{estagio_nome}}
+                </font>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td bgcolor="#f4f4f4">
+          <table width="600" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td colspan="5" height="20"></td>
+            </tr>
+            <tr>
+              <td width="20"></td>
+              <td width="290" valign="top"><img src="{{base_url}}assets/uploads/empreendimentos/imagens/{{empreendimento_imagem}}" alt="{{empreendimento_nome}}" style="display: inline-block;" /></td>
+              <td width="20"></td>
+              <td width="250" valign="top" align="left">
+
+                <table width="250" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td><font face="Arial" color="#000" size="4"><strong>{{empreendimento_nome}}</strong></font></td>
+                  </tr>
+                  <tr>
+                    <td height="30"></td>
+                  </tr>
+
+                  <tr>
+                    <td><font face="Arial" color="#8c8e90" size="2">ENDEREÇO</font></td>
+                  </tr>
+                  <tr>
+                    <td height="5"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <font face="Arial" color="#333333" size="3"><strong>{{empreendimento_endereco}}</strong></font>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30"></td>
+                  </tr>
+
+                  <tr>
+                    <td><font face="Arial" color="#8c8e90" size="2">LAZER</font></td>
+                  </tr>
+                  <tr>
+                    <td height="5"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <font face="Arial" color="#333333" size="3"><strong>{{empreendimento_lazer}}</strong></font>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+              <td width="20"></td>
+            </tr>
+             <tr>
+              <td colspan="5" height="20"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <table cellpadding="20" cellspacing="0" border="0">
+            <tr>
+              <td>
+                <table cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td><font face="Arial" color="#8c8e90" size="2">DORMITÓRIOS</font></td>
+                    <td width="20"></td>
+                    <td><font face="Arial" color="#8c8e90" size="2">SUÍTE(S)</font></td>
+                    <td width="20"></td>
+                    <td><font face="Arial" color="#8c8e90" size="2">VAGAS</font></td>
+                    <td width="20"></td>
+                    <td><font face="Arial" color="#8c8e90" size="2">ÁREA (M²)</font></td>
+                  </tr>
+                  <tr>
+                    <td colspan="7" height="5"></td>
+                  </tr>
+                  <tr>
+                    <td><font face="Arial" color="#000" size="5">{{empreendimento_dormitorios}}</font></td>
+                    <td></td>
+                    <td><font face="Arial" color="#000" size="5">{{empreendimento_suites}}</font></td>
+                    <td></td>
+                    <td><font face="Arial" color="#000" size="5">{{empreendimento_vagas}}</font></td>
+                    <td></td>
+                    <td><font face="Arial" color="#000" size="5">{{empreendimento_area}}</font></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td height="1" bgcolor="#ededed">
+        </td>
+      </tr>
+
+      <tr>
+        <td height="10"></td>
+      </tr>
+
+      <tr>
+        <td>
+          <table cellpadding="10" cellspacing="0" border="0" align="center">
+            <tr>
+              <td>
+                <a href="{{empreendimento_url}}" target="_blank" style="text-decoration: none;">
+                  <font face="Arial" color="#000" size="4">Saiba mais sobre o empreendimento</font>
+                </a>
+              </td>
+              <td align="right"><a href="{{empreendimento_url}}" target="_blank"><img src="{{template_url}}/img/btn-vermais.gif" alt="Saiba mais sobre o empreendimento"></a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

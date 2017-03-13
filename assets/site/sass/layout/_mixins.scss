@@ -33,3 +33,8 @@
   &::-moz-placeholder          {@content}
   &:-ms-input-placeholder      {@content}  
 }
+
+@mixin vertical-align {
+  top: 50%;
+  transform: translateY(-50%);
+}

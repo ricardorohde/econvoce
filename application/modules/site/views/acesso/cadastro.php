@@ -65,6 +65,17 @@
         <input type="text" class="input-text input-12" id="creci" name="creci" placeholder="CRECI" value="<?php echo $this->input->post('creci'); ?>">
       </div>
 
+      <div class="esqueci-senha">
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" <?php echo isset($usuario['regulamento']) && $usuario['regulamento'] == 1 ? 'checked' : ''; ?> name="regulamento" value="1">
+              Li e aceito os termos do <a href="javascript: void(0);" class="btn-abrir-regulamento color-green">Regulamento</a>?
+            </label>
+          </div>
+        </div>
+      </div>
+
 
       <button type="submit" class="btn btn-block btn-blue-dark btn-cadastrar">
         Clique para cadastrar
